@@ -1,1 +1,74 @@
-Hello World!
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Mike Toscano</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123758185-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-123758185-1');
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="" crossorigin="anonymous"/>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/typed.min.js"></script>
+
+</head>
+
+<body>
+    <div id="bar">
+        <div id="red">
+        </div>
+        <div id="yellow">
+        </div>
+        <div id="green">
+        </div>
+        <div id="terminal-title">
+            MIKE TOSCANO - ENGINEERING LEADER
+        </div>
+    </div>
+    <div id="tabbar">
+        <div onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div onclick="showTab(this, 'flappybird');" class="tab"><div class="innertab">~/flappy-bird - run</div></div><!--<div  class="tab"><div class="innertab">~/usr - caffeinate -dm</div></div>-->
+    </div>
+    <div id="home" class="screen active">
+        <div class="innerscreen">
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> <span class="command" id="ls"></span></p>
+            <div id="folders" class="font flexcontainer" style="display:none;align-items:center;justify-content:center;padding-left:10px;padding-right:10px;">
+                <div class="flex5"><img src="img/csc.png" class="logo" alt="CSC"></div>
+                <div class="flex5"><img src="img/capital_one.png" class="logo flex3" alt="Capital One"></div>
+                <div class="flex5"><img src="img/paylocity.png" class="logo flex3" alt="Paylocity"></div>
+                <div class="flex5"><a target='_blank' href='https://bcert.me/splcelejy'><img class="grow" style='width:75px;' alt='CSM' src='img/badge-7227 (1).png' /></a></div>
+                <div class="flex5"><a target='_blank'  href='https://www.docker.com/captains/mike-toscano/'><img class="grow" style='width:75px;' alt='CSM' src='img/docker_captain.png' /></a></div>
+            </div>
+            <p id="catline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$</span> <span id="cat"></span></p>
+            <p id="summary" class="font"></p>
+            <div id="social" class="flexcontainer" style="margin-top:35px;"></div>
+            <p id="finalline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
+        </div>
+    </div>
+    <div id="flappybird" class="screen">
+        <div class="innerscreen">
+            <p id="finalline" class="font">
+                <span class="prompt">root@miketoscano.com:~$</span><span> sh ~/flappy-bird/run</span>
+                <div style="width:100%;height:500px;">
+                    <iframe src="https://www.miketoscano.com/flappy-bhatt/" style="border:none;width:100%;height:500px;"></iframe>
+                </div>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>

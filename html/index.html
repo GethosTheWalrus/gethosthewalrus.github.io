@@ -1,0 +1,565 @@
+<html>
+
+<head>
+
+    <title>Mike Toscano</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123758185-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-123758185-1');
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="" crossorigin="anonymous"/>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/typed.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="head"> MIKE TOSCANO </div>
+    <div class="subhead"> SOFTWARE AND SYSTEMS ENGINEER </div>
+    <div id="social">
+        <a title="Resume" target="_blank" href="files/Mike Toscano Resume 2023 v2.pdf"><span class="fa fa-file-pdf"></span></a>
+        <a target="_blank" href="https://www.linkedin.com/in/michael-toscano/"><span class="fab fa-linkedin"></span></a>
+        <a target="_blank" href="https://github.com/GethosTheWalrus"><span class="fab fa-github"></span></a>
+        <a target="_blank" href="https://stackoverflow.com/users/1717357/mike"><span class="fab fa-stack-overflow"></span></a>
+    </div>
+    <div id="bar">
+        <div id="red">
+        </div>
+        <div id="yellow">
+        </div>
+        <div id="green">
+        </div>
+    </div>
+    <div id="tabbar">
+        <div onclick="showTab(this, 'home');" class="tab active"><div class="innertab">Home</div></div><div onclick="showTab(this, 'experience');" class="tab"><div class="innertab">Experience</div></div><div onclick="showTab(this, 'skills');" class="tab"><div class="innertab">Skills</div></div><!--<div onclick="showTab(this, 'portfolio');" class="tab"><div class="innertab">Portfolio</div></div>-->
+    </div>
+    <div id="home" class="screen active">
+        <div class="innerscreen">
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> <span class="command" id="ls"></span></p>
+            <div id="folders" class="font flexcontainer" style="display:none;">
+                <div id="experiencefolder" class="flex3">work_experience.txt</div>
+                <div id="skillsfolder" class="flex3">skills.txt</div>
+                <div id="summarytxt" class="flex3">summary.txt</div>
+            </div>
+            <p id="catline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$</span> <span id="cat"></span></p>
+            <p id="summary" class="font"></p>
+            <p id="badge"></p>
+            <p id="finalline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
+        </div>
+    </div>
+    <div id="experience" class="screen">
+        <div class="innerscreen">
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cat work_experience.txt</p>
+            <!-- <div class="font flexcontainer">
+                <div class="directory flex3">CSC Global Financial Markets</div>
+                <div class="directory flex3">PEF Services LLC</div>
+                <div class="directory flex3">The Jayson Company</div>
+            </div> -->
+            <!-- <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cd "CSC Global Financial Markets" &amp;&amp; ls</p>
+            <div class="font flexcontainer">
+              <div class="flex3">Technology Manager</div>
+            </div> -->
+            <!-- <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cat Capital One</p> -->
+            <p class="font">
+                <span class="position">Software Engineering Manager</span>
+                <span class="prompt mobile-block"> Capital One</span>
+                <span class="date">February, 2023 - Present</span>
+                <ul class="font prompt">
+                    <li>
+                        Led an engineering team to success in building and delivering to production a business travel portal providing travel benefits to business card holders (e.g. Spark)
+                    </li>
+                    <li>
+                        Spearheaded the design and development of new microservices used for orchestrating benefits content and eligibility status across verticals (Travel, Dining, Entertainment, etc.)
+                    </li>
+                    <li>
+                        Architected solutions based on product partners’ requirements and designs for the travel portal and the EASE web platform
+                    </li>
+                    <li>
+                        Evangelized agile/scrum methodologies leading to a 10-20% (on average) increase in team velocity and capacity
+                    </li>
+                    <li>
+                        Seamlessly integrated new backend services into a large ecosystem of financial and cardholder benefits-related platforms
+                    </li>
+                </ul>
+            </p>
+            <p class="font">
+                <span class="position">Software Engineering Manager</span>
+                <span class="prompt mobile-block"> CSC Global Financial Markets</span>
+                <span class="date">June, 2021 - February, 2023</span>
+                <ul class="font prompt">
+                    <li>
+                        Led a team of software engineers and quality assurance analysts who developed and maintained a globally utilized suite of investor and investment management applications
+                    </li>
+                    <li>
+                        Provided architectural and cybersecurity-related guidance to engineers
+                    </li>
+                    <li>
+                        Integrated applications obtained via acquisition into the existing company ecosystem
+                    </li>
+                    <li>
+                        Redesigned the technology department’s SDLC, reducing the percent of defects from 30% to below 10% while maintaining velocity 
+                    </li>
+                    <li>
+                        Managed and mentored other leaders
+                    </li>
+                </ul>
+            </p>
+            <p class="font">
+                <span class="position">Technology Manager</span>
+                <span class="prompt mobile-block"> PEF Services LLC.</span>
+                <span class="date">August, 2020 - June, 2021</span>
+                <ul class="font prompt">
+                    <li>
+                        Architected and designed scalable, resilient, and distributed IT hardware, networking, and software systems
+                    </li>
+                    <li>
+                        Designed and engineered an investor/investment management portal from the ground up including application source code, infrastructure, security controls, and integration with on-premises systems
+                    </li>
+                    <li>
+                        Managed a team of developers of varying experience levels working across multiple products and platforms
+                    </li>
+                    <li>
+                        Engaged with executive stakeholders to obtain buy-in on the product roadmap and the necessary resources to realize it
+                    </li>
+                    <li>
+                        Acted as the primary point of contact for annual SOC audits performed by third party auditors
+                    </li>
+                </ul>
+            </p>
+            <p class="font">
+                <span class="position">Lead Software Developer</span>
+                <span class="prompt mobile-block"> PEF Services LLC.</span>
+                <span class="date">October, 2018 - August, 2020</span>
+                <ul class="font prompt">
+                    <li>
+                        Manage a team of developers of varying skill levels on a team working with many different development tools and platforms. Communicate with stakeholders and manage team resources while individually contributing to projects.
+                    </li>
+                </ul>
+            </p>
+            <p class="font">
+                <span class="position">Software Developer (various)</span>
+                <span class="prompt mobile-block"> PEF Services LLC.</span>
+                <span class="date">May, 2014 - October, 2018</span>
+            </p>
+            <!-- <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cd "../PEF Services LLC" &amp;&amp; ls</p>
+            <div class="font flexcontainer">
+                <div class="flex3">Manager of Technology</div>
+                <div class="flex3">Lead Software Developer</div>
+                <div class="flex3">Systems Administrator</div>
+                <div class="flex3">Software Developer</div>
+                <div class="flex3">Jr. PHP Developer</div>
+                <div class="flex3"></div>
+            </div>
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cat "Manager of Technology"</p>
+            <p class="font">
+                Take the initiative in thought leadership, innovation and creativity. Identify, compare, select and implement technology solutions to meet current and future needs. Create overall technology standards and practices and ensure adherence within other departments.
+            </p>
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cat "Lead Software Developer"</p>
+            <p class="font">
+                Manage a team of developers of varying skill levels on a team working with many different development tools and platforms. Communicate with stakeholders and manage team resources while individually contributing to projects.
+            </p>
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cd "../The Jason Company" &amp;&amp; ls</p>
+            <div class="font flexcontainer">
+                <div class="flex3">HVAC Installer</div>
+            </div> -->
+            <p class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
+        </div>
+    </div>
+    <div id="skills" class="screen">
+        <div class="innerscreen">
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cat skills.txt</p>
+            <p class="font mobile-center">
+                <span class="position">Programming Languages and Frameworks</span>
+                <ul class="font col2">
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-database"></i> MySQL
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Masterful">
+                                    <span class="value" style="width:95%;"></span>
+                                </div>
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-js-square"></i> JavaScript
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Masterful">
+                                    <span class="value" style="width:95%;"></span>
+                                </div>
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-js-square"></i> TypeScript
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Masterful">
+                                    <span class="value" style="width:90%;"></span>
+                                </div>
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-node"></i> Node
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Masterful">
+                                    <span class="value" style="width:90%;"></span>
+                                </div>  
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-python"></i> Python
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:80%;"></span>
+                                </div> 
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-python"></i> Flask
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:80%;"></span>
+                                </div>  
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-google"></i> Golang
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div> 
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-php"></i> PHP
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div> 
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-vuejs"></i> Vue
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:70%;"></span>
+                                </div>   
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-css3"></i> CSS
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:65%;"></span>
+                                </div>   
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-linux"></i> Linux Shell
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:65%;"></span>
+                                </div>    
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-java"></i> Java
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Proficient">
+                                    <span class="value" style="width:55%;"></span>
+                                </div>   
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-php"></i> Laravel
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Proficient">
+                                    <span class="value" style="width:50%;"></span>
+                                </div>    
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-java"></i> Spring
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Work Exposure">
+                                    <span class="value" style="width:45%;"></span>
+                                </div>     
+                            </div>
+                        </div>   
+                    </li>
+                </ul> 
+            </p>
+            <p class="font mobile-center">
+                <span class="position">Database Systems</span>
+                <ul class="font col2">
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-database"></i> SQL
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Masterful">
+                                    <span class="value" style="width:90%;"></span>
+                                </div> 
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-database"></i> RDBMS
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:85%;"></span>
+                                </div>  
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-aws"></i> Amazon RDS
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div>  
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-microsoft"></i> Azure Database
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div> 
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-microsoft"></i> MS SQL Server
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div>
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-object-ungroup"></i> NoSQL DMS
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:60%;"></span>
+                                </div>    
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-object-ungroup"></i> MongoDB
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:60%;"></span>
+                                </div>       
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-aws"></i> DynamoDB
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:60%;"></span>
+                                </div>       
+                            </div>
+                        </div>   
+                    </li>
+                </ul> 
+            </p>
+            <p class="font mobile-center">
+                <span class="position">Platforms</span>
+                <ul class="font col2">
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-aws"></i> AWS
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:85%;"></span>
+                                </div>   
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fab fa-microsoft"></i> Azure
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div> 
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-shield-alt"></i> Checkpoint
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Highly Skilled">
+                                    <span class="value" style="width:75%;"></span>
+                                </div> 
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-desktop"></i> VMWare
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:60%;"></span>
+                                </div>    
+                            </div>
+                        </div>  
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-desktop"></i> Hyper-V
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Skilled">
+                                    <span class="value" style="width:60%;"></span>
+                                </div> 
+                            </div>
+                        </div>   
+                    </li>
+                    <li>
+                        <div class="flexcontainer">
+                            <div class="flex2 mobile-friendly">
+                                <i class="fas fa-network-wired"></i> Cisco
+                            </div>
+                            <div class="flex2">
+                                <div class="progress" data-label="Proficient">
+                                    <span class="value" style="width:50%;"></span>
+                                </div>
+                            </div>
+                        </div>    
+                    </li>
+                </ul> 
+            </p>
+            <p class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
+        </div>
+    </div>
+    <!-- <div id="portfolio" class="screen">
+        <div class="innerscreen">
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> ls</p>
+            <div class="font flexcontainer">
+                <div class="directory flex3">links</div>
+                <div class="flex3">instructions.txt</div>
+                <div class="directory flex3"></div>
+            </div>
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> cat instructions.txt</p>
+            <p class="font">
+                Click on the links below to view each portfolio item. Hovering over an item will show a brief description of the project.
+            </p>
+            <p class="font"><span class="prompt">root@miketoscano.com:~$</span> ls links</p>
+            <div class="font flexcontainer">
+                <div class="flex3 tool" data-tip="Tech demo for a point and click projectile game"><a target="_blank" rel="noopener noreferrer" href="/web/20210507033741/https://miketoscano.com/archer-game"><i class="fas fa-gamepad"></i> Archer</a></div>
+                <div class="flex3 tool" data-tip="Recreation of the popular 'Flappy Bird' game, but with my coworker's face instead of the bird"><a target="_blank" rel="noopener noreferrer" href="/web/20210507033741/https://miketoscano.com/flappy-bhatt"><i class="fas fa-gamepad"></i> Flappy Bhatt</a></div>
+                <div class="flex3 tool" data-tip="Website for an NJ based HVAC company"><a target="_blank" rel="noopener noreferrer" href="https://web.archive.org/web/20210507033741/https://www.piperhc.com/"><i class="fas fa-window-maximize"></i> piperhc.com</a></div>
+                <div class="flex3 tool" data-tip="Some coding problems and solutions from Google's FooBar challenge"><a target="_blank" rel="noopener noreferrer" href="https://web.archive.org/web/20210507033741/https://github.com/GethosTheWalrus/foobar"><i class="fab fa-python"></i> FooBar</a></div>
+                <div class="flex3 tool" data-tip="(Unfinished) Custom programming language used to draw html shapes"><a target="_blank" rel="noopener noreferrer" href="https://web.archive.org/web/20210507033741/https://github.com/GethosTheWalrus/painter"><i class="fas fa-file-code"></i> Painter</a></div>
+                <div class="flex3 tool" data-tip="From scratch implementation of a hash map data structure"><a target="_blank" rel="noopener noreferrer" href="https://web.archive.org/web/20210507033741/https://github.com/GethosTheWalrus/hashmap"><i class="fab fa-java"></i> Hash Map</a></div>
+            </div>
+        </div>
+    </div> -->
+
+</body>
+
+</html>
