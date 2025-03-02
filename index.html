@@ -32,7 +32,7 @@
         </div>
     </div>
     <div id="tabbar">
-        <div onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div onclick="showTab(this, 'flappybird');" class="tab"><div class="innertab">~/flappy-bird - run</div></div><!--<div  class="tab"><div class="innertab">~/usr - caffeinate -dm</div></div>-->
+        <div onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div onclick="showTab(this, 'flappybird');" class="tab"><div class="innertab">~/flappy-bird - run</div></div><div onclick="showTab(this, 'blog');"  class="tab"><div class="innertab">Blog</div></div>
     </div>
     <div id="home" class="screen active">
         <div class="innerscreen">
@@ -59,7 +59,29 @@
                 </div>
             </p>
         </div>
-
+    </div>
+    <div id="blog" class="screen">
+        <div class="innerscreen">
+            <p class="font"><span class="prompt">root@miketoscano.com:~/posts$</span> <span class="command">ls</span></p>
+            <div class="font flexcontainer" style="display:flex;align-items:center;justify-content:center;padding-left:10px;padding-right:10px;">
+                <div class="tree">
+                    <ul>
+                      <li><i class="fa fa-folder-open"></i> Blog Posts
+                        <ul style="padding:0;">
+                            <li><i class="fa fa-file"></i> <a href="/blog/?post=docker-scout-image-security">Maintaining Docker Image Security With Docker Scout</a> <span>- Nov 25, 2024</span>
+                            <li><i class="fa fa-file"></i> <a href="/blog/?post=pixel-ai-companion">Pixel - Your Tiny, Offline AI Assistant</a> <span>- Aug 21, 2024</span>
+                            <li><i class="fa fa-file"></i> <a href="/blog/?post=oracle-oci-flappy-bird">Deploying Flappy Bird To OCI With 3 Short Commands</a> <span>- Jun 8, 2024</span>
+                            <li><i class="fa fa-file"></i> <a href="/blog/?post=terraform-nodejs-oci-aws">Terraforming An Application Onto OCI And AWS</a> <span>- Dec 8, 2023</span>
+                            <li><i class="fa fa-file"></i> <a href="/blog/?post=oracle-advanced-queue-flappy-bird">Express, TypeScript, And Oracle Advanced Queue</a> <span>- Nov 25, 2023</span>
+                            <li><i class="fa fa-file"></i> <a href="/blog/?post=json-relational-duality-oracle-flappy-bird">Full Stack JavaScript App Utilizing JSON-Relational Duality Views</a> <span>- Nov 15, 2023</span>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+            </div>
+            <p id="finalline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
+        </div>
+    </div>
 </body>
 
 </html>
