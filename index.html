@@ -16,6 +16,26 @@
     <!-- Scripts -->
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/typed.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event){
+            const urlParams = new URLSearchParams(window.location.search);
+            const tab = urlParams.get('tab');
+
+            if (tab == "home" || tab == "flappybird" || tab == "blog") {
+                var elems = document.querySelectorAll(".active");
+
+                [].forEach.call(elems, function(el) {
+                    el.classList.remove("active");
+                });
+
+                tabElement = document.getElementById(tab+"-tab");
+                screenElement = document.getElementById(tab);
+
+                tabElement.classList.add("active");
+                screenElement.classList.add("active");
+            }
+        });
+    </script>
 
 </head>
 
@@ -32,7 +52,7 @@
         </div>
     </div>
     <div id="tabbar">
-        <div onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div onclick="showTab(this, 'flappybird');" class="tab"><div class="innertab">~/flappy-bird - run</div></div><div onclick="showTab(this, 'blog');"  class="tab"><div class="innertab">Blog</div></div>
+        <div id="home-tab" onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div id="flappybird-tab" onclick="showTab(this, 'flappybird');" class="tab"><div class="innertab">~/flappy-bird - run</div></div><div id="blog-tab" onclick="showTab(this, 'blog');"  class="tab"><div class="innertab">Blog</div></div>
     </div>
     <div id="home" class="screen active">
         <div class="innerscreen">
