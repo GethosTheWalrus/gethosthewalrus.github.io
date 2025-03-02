@@ -533,16 +533,28 @@ ul {
         height: 15px;
     }
     }
+
+    span {
+        position: relative;
+        top: -5px;
+    }
     
     a {
-    cursor: pointer;
-    
-    &:hover {
-        text-decoration: none;
-    }
+        cursor: pointer;
+        top: -5px;
+        position: relative;
+        
+        &:hover {
+            text-decoration: none;
+        }
     }
     a:hover {
         color:#007bff;
     }
 }
+}
+
+.blog-icon {
+    display: inline-block;
+    width: 20px;
 }
