@@ -451,3 +451,14 @@ html {
     display: flex;
 
 }
+
+.article-img-container {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.article-img-container img {
+    max-width: 100%;
+    border-radius: 15px;
+}

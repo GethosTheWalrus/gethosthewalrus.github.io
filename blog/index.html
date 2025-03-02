@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
+        <link rel="stylesheet" href="/css/style.css" />
+        <script>
+          document.addEventListener("DOMContentLoaded", function(event){
+            const urlParams = new URLSearchParams(window.location.search);
+            const post = urlParams.get('post');
+            document.getElementById('post').setAttribute('src', post+'.md');
+            document.getElementById('header-image').setAttribute('src', '/img/blog/'+post+'.png')
+          });
+        </script>
+    </head>
+    <body>
+      <div id="bar">
+        <div id="red">
+        </div>
+        <div id="yellow">
+        </div>
+        <div id="green">
+        </div>
+        <div id="terminal-title">
+            MIKE TOSCANO - ENGINEERING LEADER
+        </div>
+    </div>
+    <div id="tabbar">
+        <div onclick="window.location.href='https://miketoscano.com'" class="tab"><div class="innertab">About Mike</div></div><div class="tab"><div onclick="window.location.href='https://miketoscano.com'" class="innertab">~/flappy-bird - run</div></div><div  class="tab active"><div class="innertab">Blog</div></div>
+    </div>
+    <div id="blog" class="screen active">
+        <div class="innerscreen" style="padding:15px;">
+          <div style="margin:0 auto;width:90%;">
+            <div class="article-img-container">
+              <img id="header-image" src="#" />
+            </div>
+            <div style="height:150;padding:15px">
+              <img style="display:inline-block;border-radius:50px;width: 100px;" src="/img/blog/Captain-headshot-Michael-Toscano.avif" />
+              <div style="display:inline-block;vertical-align:top;padding-top:25px;padding-left:5px;">
+                <p style="margin:0;color:white;font-size:24px;font-weight:bold;">Mike Toscano</p>
+                <p style="margin:0;color:white;opacity:0.5;font-size:16px">&#128011; Docker Captain | Engineering Leader | Open-Source Enthusiast</p>
+              </div>
+            </div>
+            <zero-md id="post" src="loading.md">
+                <template data-append>
+                    <style>
+                      div {
+                        max-width: 800px;
+                        margin: 0 auto !important;
+                      }
+                      p {
+                        font-size: 20px;
+                        text-align: justify;
+                      }
+                      div, p {
+                        background: #404040 !important;
+                        background-color: #404040 !important;
+                      }
+                      .blog-content-block {
+                        margin: 0 auto !important;
+                        text-align: center !important;
+                        vertical-align: middle !important;
+                        width: 100% !important;
+                        padding-bottom: 20px !important;
+                      }
+                    </style>
+                </template>
+            </zero-md>
+          </div>
+        </div>
+    </div>
+    </body>
+</html>
