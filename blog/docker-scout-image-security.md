@@ -60,9 +60,12 @@ Conclusion
 Without Docker Scout, we may have discovered these vulnerabilities in our application when they were exploited by bad actors, rather than during development. 
 
 Application security is often overlooked, forcing our firewalls, IPS devices, etc. to work constant overtime. With tools like Docker Scout, you can bring a unique and coveted security-first mentality to your next company and/or team.
-Follow up topics
 
-    Docker Scout CLI
-    Docker Scout for organizations
-    Integrating with CI/CD pipelines 
+<hr>
+
+## Follow up topics
+
+* Docker Scout CLI
+* Docker Scout for organizations
+* Integrating with CI/CD pipelines 
 
