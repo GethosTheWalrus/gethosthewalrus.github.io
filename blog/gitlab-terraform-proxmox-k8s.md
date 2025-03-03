@@ -1,4 +1,4 @@
-# Deploying A Kubernetes Cluster To PVE Using GitLab CI <span style="opacity:0.5;margin:0;padding:0;font-size:14px;">- March 4, 2025</span>
+# Deploying A Kubernetes Cluster To PVE Using GitLab CI <span style="opacity:0.5;margin:0;padding:0;font-size:14px;">- March 3, 2025</span>
 
 This guide will show you how to deploy a Kubernetes cluster onto two or more virtual machines hosted within a [PVE](https://pve.proxmox.com/wiki/Main_Page) homelab environment. We will leverage Terraform and GitLab CI to automate this process, ensuring that any changes to the infrastructure can be painlessly tracked and propagated. By the end of this article, you will have learned how to: 
 
