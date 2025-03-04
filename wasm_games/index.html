@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WASM Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #404040;
+        }
+        canvas {
+            border: 2px solid #a0a0a0;
+            background-color: #404040;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="game-canvas"></canvas>
+    <script type="module">
+        import init, { FlappyBird, SnakeGame, PacmanGame } from './pkg/wasm_games.js';
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const keyState = { ArrowUp: false, ArrowDown: false, ArrowLeft: false, ArrowRight: false };
+
+        document.addEventListener('keydown', (e) => {
+            if (keyState.hasOwnProperty(e.key)) {
+                keyState[e.key] = true;
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (keyState.hasOwnProperty(e.key)) {
+                keyState[e.key] = false;
+            }
+        });
+
+        function handlePacmanMovement(game) {
+            if (keyState['ArrowUp']) game.change_direction(0, -1);
+            else if (keyState['ArrowDown']) game.change_direction(0, 1);
+            else if (keyState['ArrowLeft']) game.change_direction(-1, 0);
+            else if (keyState['ArrowRight']) game.change_direction(1, 0);
+            else game.change_direction(0, 0);
+        }
+
+        async function run() {
+            await init();
+            const gameType = getQueryParam('game');
+            const canvas = document.getElementById('game-canvas');
+            let game;
+
+            if (gameType === 'snake') {
+                canvas.width = 400;
+                canvas.height = 400;
+                game = new SnakeGame(canvas);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowUp') game.change_direction(0, -1);
+                    if (e.key === 'ArrowDown') game.change_direction(0, 1);
+                    if (e.key === 'ArrowLeft') game.change_direction(-1, 0);
+                    if (e.key === 'ArrowRight') game.change_direction(1, 0);
+                });
+
+            } else if (gameType === 'pacman') {
+                canvas.width = 560;
+                canvas.height = 620;
+                game = new PacmanGame(canvas);
+            } else {
+                canvas.width = 400;
+                canvas.height = 600;
+                game = new FlappyBird(canvas);
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space') {
+                        game.flap();
+                    }
+                });
+
+                canvas.addEventListener('mousedown', () => {
+                    game.flap();
+                });
+            }
+
+            function loop() {
+                if (gameType === 'pacman') {
+                    handlePacmanMovement(game);
+                }
+                game.update();
+                game.render();
+                requestAnimationFrame(loop);
+            }
+
+            loop();
+        }
+
+        run();
+    </script>
+</body>
+</html>

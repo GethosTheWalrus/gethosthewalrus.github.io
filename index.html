@@ -21,7 +21,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const tab = urlParams.get('tab');
 
-            if (tab == "home" || tab == "flappybird" || tab == "blog") {
+            if (tab == "home" || tab == "games" || tab == "blog") {
                 var elems = document.querySelectorAll(".active");
 
                 [].forEach.call(elems, function(el) {
@@ -34,6 +34,11 @@
                 tabElement.classList.add("active");
                 screenElement.classList.add("active");
             }
+
+            document.getElementById("gameSelect").addEventListener("change", (e) => {
+                game = e.target.value;
+                document.getElementById("gameFrame").setAttribute("src", "/wasm_games/?game="+game);
+            });
         });
     </script>
 
@@ -52,7 +57,7 @@
         </div>
     </div>
     <div id="tabbar">
-        <div id="home-tab" onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div id="flappybird-tab" onclick="showTab(this, 'flappybird');" class="tab"><div class="innertab">~/flappy-bird - run</div></div><div id="blog-tab" onclick="showTab(this, 'blog');"  class="tab"><div class="innertab">Blog</div></div>
+        <div id="home-tab" onclick="showTab(this, 'home');" class="tab active"><div class="innertab">About Mike</div></div><div id="blog-tab" onclick="showTab(this, 'blog');"  class="tab"><div class="innertab">Blog</div></div><div id="games-tab" onclick="showTab(this, 'games');" class="tab"><div class="innertab">WASM Games</div></div>
     </div>
     <div id="home" class="screen active">
         <div class="innerscreen">
@@ -70,12 +75,19 @@
             <p id="finalline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
         </div>
     </div>
-    <div id="flappybird" class="screen">
+    <div id="games" class="screen">
         <div class="innerscreen">
             <p id="finalline" class="font">
-                <span class="prompt">root@miketoscano.com:~$</span><span> sh ~/flappy-bird/run</span>
+                <span class="prompt">root@miketoscano.com:~$</span><span> 
+                    sh ~/games/
+                    <select id="gameSelect" class="font" style="border:none;background:transparent;padding:0;margin:0;position:relative;left:-8px;cursor:pointer;">
+                        <option value="flappy">Flappy Bird</option>
+                        <option value="snake">Snake</option>
+                        <option value="pacman">Pacman</option>
+                    </select>
+                </span>
                 <div style="width:100%;height:500px;">
-                    <iframe src="https://www.miketoscano.com/flappy-bhatt/" style="border:none;width:100%;height:500px;"></iframe>
+                    <iframe id="gameFrame" src="/wasm_games/" style="border:none;width:100%;height:500px;"></iframe>
                 </div>
             </p>
         </div>
