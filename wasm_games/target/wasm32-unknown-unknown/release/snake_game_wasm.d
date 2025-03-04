@@ -1,1 +1,0 @@
-/home/mike/Projects/snake_game_wasm/target/wasm32-unknown-unknown/release/snake_game_wasm.wasm: /home/mike/Projects/snake_game_wasm/src/flappy.rs /home/mike/Projects/snake_game_wasm/src/lib.rs /home/mike/Projects/snake_game_wasm/src/snake.rs /home/mike/Projects/snake_game_wasm/src/utils.rs

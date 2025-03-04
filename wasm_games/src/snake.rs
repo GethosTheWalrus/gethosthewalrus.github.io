@@ -5,9 +5,11 @@ use std::f64;
 const GRID_SIZE: f64 = 20.0;
 const WIDTH: u32 = 20;
 const HEIGHT: u32 = 20;
+const SNAKE_MOVE_INTERVAL: f64 = 0.15; // ✅ Move every 150ms
 
 #[wasm_bindgen]
 pub struct SnakeGame {
+    last_update_time: f64, // ✅ Track last movement time
     snake: Vec<(u32, u32)>,
     direction: (i32, i32),
     food: (u32, u32),
@@ -28,6 +30,7 @@ impl SnakeGame {
             .unwrap();
 
         SnakeGame {
+            last_update_time: 0.0,
             snake: vec![(10, 10)],
             direction: (0, 0),
             food: (5, 5),
@@ -38,15 +41,16 @@ impl SnakeGame {
     }
 
     #[wasm_bindgen]
-    pub fn update(&mut self) {
+    pub fn update(&mut self, delta_time: f64) {
         if !self.running {
             return;
         }
 
-        self.tick_counter += 1;
-        if self.tick_counter % 10 != 0 {
-            return;
+        self.last_update_time += delta_time;
+        if self.last_update_time < SNAKE_MOVE_INTERVAL {
+            return; // ✅ Skip updates until enough time has passed
         }
+        self.last_update_time = 0.0;
 
         let (dx, dy) = self.direction;
         if dx == 0 && dy == 0 {
@@ -63,7 +67,7 @@ impl SnakeGame {
 
         if new_head == self.food {
             self.food = ((js_sys::Math::random() * WIDTH as f64) as u32,
-                         (js_sys::Math::random() * HEIGHT as f64) as u32);
+                        (js_sys::Math::random() * HEIGHT as f64) as u32);
         } else {
             self.snake.pop();
         }

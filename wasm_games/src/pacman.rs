@@ -12,9 +12,13 @@ const HEIGHT: usize = 31;
 const NUM_GHOSTS: usize = 4;
 const PACMAN_SPEED: u32 = 8;
 const GHOST_SPEED: u32 = 12;
+const PACMAN_MOVE_INTERVAL: f64 = 0.12; // ✅ Move every 120ms
+const GHOST_MOVE_INTERVAL: f64 = 0.25; // ✅ Move every 250ms
 
 #[wasm_bindgen]
 pub struct PacmanGame {
+    last_pacman_update: f64,
+    last_ghost_update: f64,
     pacman: (usize, usize),
     direction: (i32, i32),
     next_direction: (i32, i32),
@@ -46,6 +50,8 @@ impl PacmanGame {
         let ghost_directions = vec![(0, 1), (0, -1), (1, 0), (-1, 0)];
 
         PacmanGame {
+            last_pacman_update: 0.0,
+            last_ghost_update: 0.0,
             pacman: pacman_start,
             direction: (0, 0),
             next_direction: (0, 0),
@@ -55,7 +61,7 @@ impl PacmanGame {
             tick_counter: 0,
             context,
             grid,
-        }
+        }              
     }
 
     /// ✅ Generates a maze-like grid with configurable openness
@@ -132,28 +138,12 @@ impl PacmanGame {
     }
 
     #[wasm_bindgen]
-    pub fn update(&mut self) {
-        self.tick_counter += 1;
+    pub fn update(&mut self, delta_time: f64) {
+        // ✅ Ghosts should always move independently
+        self.last_ghost_update += delta_time;
+        if self.last_ghost_update >= GHOST_MOVE_INTERVAL {
+            self.last_ghost_update = 0.0;
 
-        // ✅ Move Pac-Man every `PACMAN_SPEED` ticks
-        if self.tick_counter % PACMAN_SPEED == 0 && !self.stopped {
-            let (dx, dy) = self.next_direction;
-            let new_x = (self.pacman.0 as i32 + dx) as usize;
-            let new_y = (self.pacman.1 as i32 + dy) as usize;
-
-            if self.grid[new_y][new_x] != 1 {
-                self.pacman = (new_x, new_y);
-                self.direction = self.next_direction;
-
-                // Eat pellet
-                if self.grid[new_y][new_x] == 2 {
-                    self.grid[new_y][new_x] = 0;
-                }
-            }
-        }
-
-        // ✅ Move ghosts every `GHOST_SPEED` ticks using BFS pathfinding
-        if self.tick_counter % GHOST_SPEED == 0 {
             let mut new_positions = Vec::new();
             let mut new_directions = Vec::new();
 
@@ -167,6 +157,30 @@ impl PacmanGame {
 
             self.ghosts = new_positions;
             self.ghost_directions = new_directions;
+        }
+
+        // ✅ Pac-Man only moves when an arrow key is actively pressed
+        if self.stopped {
+            return; // ❌ Stop Pac-Man but keep ghosts moving
+        }
+
+        self.last_pacman_update += delta_time;
+        if self.last_pacman_update >= PACMAN_MOVE_INTERVAL {
+            self.last_pacman_update = 0.0;
+
+            let (dx, dy) = self.direction;
+            let new_x = (self.pacman.0 as i32 + dx) as usize;
+            let new_y = (self.pacman.1 as i32 + dy) as usize;
+
+            if self.grid[new_y][new_x] != 1 {
+                self.pacman = (new_x, new_y);
+                // Eat pellet
+                if self.grid[new_y][new_x] == 2 {
+                    self.grid[new_y][new_x] = 0;
+                }
+            } else {
+                self.stopped = true; // ✅ Stop Pac-Man if he hits a wall
+            }
         }
 
         // ✅ Check for collisions with ghosts
@@ -335,10 +349,11 @@ impl PacmanGame {
     #[wasm_bindgen]
     pub fn change_direction(&mut self, dx: i32, dy: i32) {
         if dx == 0 && dy == 0 {
-            self.stopped = true;
+            self.stopped = true;  // ✅ Stop Pac-Man when no key is pressed
         } else {
             self.next_direction = (dx, dy);
-            self.stopped = false;
+            self.direction = (dx, dy); // ✅ Update direction immediately
+            self.stopped = false;      // ✅ Resume movement when key is pressed
         }
     }
 
