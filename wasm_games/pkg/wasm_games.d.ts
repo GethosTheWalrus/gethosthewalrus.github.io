@@ -4,7 +4,7 @@ export function start(): void;
 export class FlappyBird {
   free(): void;
   constructor(canvas: HTMLCanvasElement);
-  update(): void;
+  update(delta_time: number): void;
   render(): void;
   flap(): void;
   reset(): void;
@@ -12,7 +12,7 @@ export class FlappyBird {
 export class PacmanGame {
   free(): void;
   constructor(canvas: HTMLCanvasElement);
-  update(): void;
+  update(delta_time: number): void;
   render(): void;
   change_direction(dx: number, dy: number): void;
   reset(): void;
@@ -20,7 +20,7 @@ export class PacmanGame {
 export class SnakeGame {
   free(): void;
   constructor(canvas: HTMLCanvasElement);
-  update(): void;
+  update(delta_time: number): void;
   render(): void;
   change_direction(dx: number, dy: number): void;
   reset(): void;
@@ -32,19 +32,19 @@ export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly __wbg_flappybird_free: (a: number, b: number) => void;
   readonly flappybird_new: (a: any) => number;
-  readonly flappybird_update: (a: number) => void;
+  readonly flappybird_update: (a: number, b: number) => void;
   readonly flappybird_render: (a: number) => void;
   readonly flappybird_flap: (a: number) => void;
   readonly flappybird_reset: (a: number) => void;
   readonly __wbg_pacmangame_free: (a: number, b: number) => void;
   readonly pacmangame_new: (a: any) => number;
-  readonly pacmangame_update: (a: number) => void;
+  readonly pacmangame_update: (a: number, b: number) => void;
   readonly pacmangame_render: (a: number) => void;
   readonly pacmangame_change_direction: (a: number, b: number, c: number) => void;
   readonly pacmangame_reset: (a: number) => void;
   readonly __wbg_snakegame_free: (a: number, b: number) => void;
   readonly snakegame_new: (a: any) => number;
-  readonly snakegame_update: (a: number) => void;
+  readonly snakegame_update: (a: number, b: number) => void;
   readonly snakegame_render: (a: number) => void;
   readonly snakegame_change_direction: (a: number, b: number, c: number) => void;
   readonly snakegame_reset: (a: number) => void;

@@ -86,16 +86,34 @@
                 });
             }
 
-            function loop() {
-                if (gameType === 'pacman') {
-                    handlePacmanMovement(game);
+            let lastTime = performance.now();
+            const FIXED_TIMESTEP = 1 / 60; // ✅ 60 updates per second (in seconds)
+            const MAX_DELTA_TIME = 0.1; // ✅ Prevent big time jumps
+
+            let accumulatedTime = 0;
+
+            function loop(now) {
+                let deltaTime = (now - lastTime) / 1000; // ✅ Convert ms to seconds
+                lastTime = now;
+
+                // ✅ Prevent large delta time jumps (e.g., if the tab was inactive)
+                deltaTime = Math.min(deltaTime, MAX_DELTA_TIME);
+
+                accumulatedTime += deltaTime;
+
+                while (accumulatedTime >= FIXED_TIMESTEP) {
+                    if (gameType === 'pacman') {
+                        handlePacmanMovement(game);
+                    }
+                    game.update(FIXED_TIMESTEP); // ✅ Update at fixed intervals
+                    accumulatedTime -= FIXED_TIMESTEP;
                 }
-                game.update();
+
                 game.render();
                 requestAnimationFrame(loop);
             }
 
-            loop();
+            requestAnimationFrame(loop);
         }
 
         run();

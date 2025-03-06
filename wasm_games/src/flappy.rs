@@ -40,46 +40,57 @@ impl FlappyBird {
     }
 
     #[wasm_bindgen]
-    pub fn update(&mut self) {
+    pub fn update(&mut self, delta_time: f64) {
         if !self.running {
             return;
         }
-
-        self.bird_velocity += GRAVITY;
-        self.bird_y += self.bird_velocity;
-
-        for pipe in &mut self.pipes {
-            pipe.0 -= 2.0;
+    
+        let time_scale = delta_time * 1000.0 / 16.67;  // ✅ Normalize updates to 60 FPS
+    
+        // ✅ Adjust gravity effect based on time scaling
+        self.bird_velocity += GRAVITY * time_scale;
+        if self.bird_velocity > 10.0 {
+            self.bird_velocity = 10.0; // ✅ Clamp fall speed
         }
-
+        self.bird_y += self.bird_velocity * time_scale;
+    
+        // ✅ Move pipes left based on deltaTime
+        let pipe_speed = 2.0 * time_scale; // ✅ Speed up pipe movement
+        for pipe in &mut self.pipes {
+            pipe.0 -= pipe_speed;
+        }
+    
+        // ✅ Generate new pipes with correct spacing
         if let Some(&(last_x, _)) = self.pipes.last() {
-            if last_x < WIDTH - 200.0 {
+            if last_x < WIDTH - 250.0 { // ✅ Increased spacing to 250px
                 let gap_y = (js_sys::Math::random() * (HEIGHT - PIPE_GAP)) as f64;
                 self.pipes.push((WIDTH, gap_y));
             }
         }
-
+    
+        // ✅ Remove offscreen pipes
         self.pipes.retain(|&(x, _)| x > -PIPE_WIDTH);
-
+    
+        // ✅ Collision detection
         let mut collision = false;
-        for i in 0..self.pipes.len() {
-            let (pipe_x, gap_y) = self.pipes[i];
-
+        for &(pipe_x, gap_y) in &self.pipes {
             if (pipe_x < 50.0 && pipe_x + PIPE_WIDTH > 30.0) &&
-                (self.bird_y - BIRD_RADIUS/2.0 < gap_y || self.bird_y + BIRD_RADIUS/2.0 > gap_y + PIPE_GAP) {
+               (self.bird_y - BIRD_RADIUS / 2.0 < gap_y || self.bird_y + BIRD_RADIUS / 2.0 > gap_y + PIPE_GAP) {
                 collision = true;
                 break;
             }
         }
-
+    
+        // ✅ Check for ground and ceiling collision
         if self.bird_y < 0.0 || self.bird_y > HEIGHT {
             collision = true;
         }
-
+    
+        // ✅ Reset if collision detected
         if collision {
-            self.reset();  // <-- This line caused the issue
+            self.reset();
         }
-    }
+    }    
 
     #[wasm_bindgen]
     pub fn render(&self) {

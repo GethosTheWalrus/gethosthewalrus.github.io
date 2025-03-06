@@ -197,8 +197,11 @@ export class FlappyBird {
         FlappyBirdFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
-    update() {
-        wasm.flappybird_update(this.__wbg_ptr);
+    /**
+     * @param {number} delta_time
+     */
+    update(delta_time) {
+        wasm.flappybird_update(this.__wbg_ptr, delta_time);
     }
     render() {
         wasm.flappybird_render(this.__wbg_ptr);
@@ -237,8 +240,11 @@ export class PacmanGame {
         PacmanGameFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
-    update() {
-        wasm.pacmangame_update(this.__wbg_ptr);
+    /**
+     * @param {number} delta_time
+     */
+    update(delta_time) {
+        wasm.pacmangame_update(this.__wbg_ptr, delta_time);
     }
     render() {
         wasm.pacmangame_render(this.__wbg_ptr);
@@ -281,8 +287,11 @@ export class SnakeGame {
         SnakeGameFinalization.register(this, this.__wbg_ptr, this);
         return this;
     }
-    update() {
-        wasm.snakegame_update(this.__wbg_ptr);
+    /**
+     * @param {number} delta_time
+     */
+    update(delta_time) {
+        wasm.snakegame_update(this.__wbg_ptr, delta_time);
     }
     render() {
         wasm.snakegame_render(this.__wbg_ptr);
