@@ -100,6 +100,51 @@ In interactive mode, you can freely chat with your chosen model. Type your messa
 
 <hr>
 
+💡 Interact with the Model Runner via OpenAI API
+
+Once a model is running, you can also use OpenAI-compatible APIs.
+
+🔗 From inside another container:
+```
+curl http://ml.docker.internal/ml/llama.cpp/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "ignaciolopezluna020/llama3.2:1b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant."
+      },
+      {
+        "role": "user",
+        "content": "Please write 500 words about the fall of Rome."
+      }
+    ]
+  }'
+```
+
+🔌 From the host using a Unix socket:
+```
+curl --unix-socket $HOME/.docker/run/docker.sock \
+  localhost/exp/vDD4.40/ml/llama.cpp/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "ignaciolopezluna020/llama3.2:1b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant."
+      },
+      {
+        "role": "user",
+        "content": "Please write 500 words about the fall of Rome."
+      }
+    ]
+  }'
+```
+
+<hr>
+
 ## 🧹 Remove a model
 ```
 docker model rm ignaciolopezluna020/llama3.2:1b
