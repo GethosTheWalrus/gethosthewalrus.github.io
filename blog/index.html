@@ -1,12 +1,20 @@
 <html>
     <head>
+        <title>Mike Toscano | Blog</title>
+        <meta property="og:title" content="Mike Toscano | Blog" />
+        <meta property="og:description" content="Learn about tech and software engineering with Mike Toscano" />
+        <meta property="og:url" content="https://miketoscano.com/blog/?post='+post+'" />
         <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
         <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
         <link rel="stylesheet" href="/css/style.css" />
         <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const post = urlParams.get('post');
+          let meta = document.createElement('meta');
+          meta.setAttribute('og:image', name);
+          meta.setAttribute('content', '/img/blog/'+post+'.png');
+          document.getElementsByTagName('head')[0].appendChild(meta);
           document.addEventListener("DOMContentLoaded", function(event){
-            const urlParams = new URLSearchParams(window.location.search);
-            const post = urlParams.get('post');
             document.getElementById('post').setAttribute('src', post+'.md');
             document.getElementById('header-image').setAttribute('src', '/img/blog/'+post+'.png')
           });
