@@ -21,7 +21,7 @@ const template = (post) => `
 </html>
 `;
 
-const outputDir = path.join(__dirname, 'public', 'blog');
+const outputDir = path.join(__dirname, 'blog');
 
 fs.mkdirSync(outputDir, { recursive: true });
 
