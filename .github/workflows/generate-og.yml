@@ -24,16 +24,23 @@ jobs:
           curl -H "Authorization: token ${{ secrets.ACTIONS_PAT }}" https://api.github.com/repos/${{ github.repository }}
       
 
-      - name: Commit and push
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-      
-          # Replace the default origin remote with a token-authenticated one
-          git remote set-url origin https://x-access-token:${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}.git
-      
-          git add blog/*.html
-          git commit -m "Generate OG pages" || echo "No changes to commit"
-          git push origin main
+          - name: Commit and push
+          run: |
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+        
+            echo "🔍 BEFORE remote URL:"
+            git remote -v
+        
+            echo "🔧 Setting remote URL to use PAT"
+            git remote set-url origin https://x-access-token:${{ secrets.ACTIONS_PAT }}@github.com/${{ github.repository }}
+        
+            echo "🔍 AFTER remote URL:"
+            git remote -v
+        
+            git add blog/*.html
+            git commit -m "Generate OG pages" || echo "No changes to commit"
+            git push origin main
+        
       
       
