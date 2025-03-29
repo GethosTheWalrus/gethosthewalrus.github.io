@@ -1,6 +1,6 @@
 # Terraforming a Node.js application onto OCI and AWS <span style="opacity:0.5;margin:0;padding:0;font-size:14px;">- December 8, 2023</span>
 
- This article describes how to deploy a Node.js application and its required infrastructure to the cloud. The final outcome of this guide is:
+This article describes how to deploy a Node.js application and its required infrastructure to the cloud. The final outcome of this guide is:
 
 * A series of [Terraform](https://www.terraform.io/) modules used to create the app and its infrastructure
 * A traditional deployment option on [OCI](https://www.oracle.com/cloud/) utilizing [compute instances](https://docs.oracle.com/en-us/iaas/Content/Compute/Concepts/computeoverview.htm) and [Autonomous Database](https://www.oracle.com/autonomous-database/)
