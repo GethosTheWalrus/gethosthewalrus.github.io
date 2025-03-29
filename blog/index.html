@@ -11,7 +11,7 @@
           const urlParams = new URLSearchParams(window.location.search);
           const post = urlParams.get('post');
           let meta = document.createElement('meta');
-          meta.setAttribute('og:image', name);
+          meta.setAttribute('property', 'og:image');
           meta.setAttribute('content', '/img/blog/'+post+'.png');
           document.getElementsByTagName('head')[0].appendChild(meta);
           document.addEventListener("DOMContentLoaded", function(event){
