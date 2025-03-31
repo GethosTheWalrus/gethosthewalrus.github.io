@@ -14,6 +14,7 @@ const template = (post) => `
   <meta property="og:image" content="${post.image}" />
   <meta property="og:url" content="https://miketoscano.com/blog/${post.slug}.html" />
   <meta http-equiv="refresh" content="0; url=/blog/?post=${post.slug}" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
 </head>
 <body>
   <p>Redirecting to blog...</p>
