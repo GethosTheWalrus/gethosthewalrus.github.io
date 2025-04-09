@@ -123,10 +123,12 @@
             padding: 0.5rem 2rem;
             flex-direction: row;
             align-items: center;
-            justify-content: space-between;
             background: transparent;
             border: none;
             box-shadow: none;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
         }
 
         .hero.collapsed .app-logo {
@@ -139,7 +141,7 @@
 
         .hero.collapsed h1 {
             font-size: 1.5rem;
-            margin: 0;
+            margin: 0 2rem 0 0.5rem;
         }
 
         .hero.collapsed h2 {
@@ -151,7 +153,30 @@
         }
 
         .hero.collapsed .hero-buttons {
-            margin: 0;
+            flex-direction: row;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .hero.collapsed .hero-button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            min-width: auto;
+            border-radius: 5px;
+            justify-content: center;
+        }
+
+        .hero.collapsed .hero-button i {
+            font-size: 1rem;
+            margin-right: 0.3rem;
+        }
+
+        .hero.collapsed .hero-button span {
+            display: inline;
+        }
+
+        .hero.collapsed .hero-button.coming-soon::after {
+            display: block;
         }
 
         .hero-content {
@@ -214,33 +239,115 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero h2 {
-                font-size: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-                line-height: 1.5;
+            .hero {
+                min-height: auto;
+                padding: 1rem 0;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
             }
 
             .hero-content {
-                padding: 1.5rem;
-                margin: 1rem;
+                padding: 1rem;
+                margin: 0.5rem;
+                max-width: 100%;
+            }
+
+            .scroll-indicator {
+                position: relative;
+                bottom: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 10;
+                margin-top: 1rem;
+            }
+
+            .app-logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+                border-radius: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero h2 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin: 0.5rem 0;
             }
 
             .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
+                flex-direction: row;
+                gap: 0.2rem;
+                width: auto;
+                margin-top: 1rem;
             }
 
             .hero-button {
-                width: 100%;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+                min-width: auto;
+                border-radius: 5px;
                 justify-content: center;
+            }
+
+            .hero-button i {
+                font-size: 1rem;
+                margin: 0;
+            }
+
+            .hero.collapsed .hero-buttons {
+                flex-direction: row;
+                gap: 0.5rem;
+                margin-left: auto;
+            }
+
+            .hero.collapsed .hero-button {
+                padding: 0.4rem;
+                font-size: 0;
+                min-width: 40px;
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                justify-content: center;
+            }
+
+            .hero.collapsed .hero-button i {
+                font-size: 1.2rem;
+                margin: 0;
+            }
+
+            .hero.collapsed .hero-button span {
+                display: none;
+            }
+
+            .hero.collapsed .hero-button.coming-soon::after {
+                display: none;
+            }
+
+            .hero-button.coming-soon::after {
+                font-size: 0.4rem;
+                top: -8px;
+                padding: 1px 2px;
+            }
+
+            .scroll-indicator p {
+                font-size: 0.8rem;
+            }
+
+            .scroll-indicator i {
+                font-size: 1.2rem;
             }
         }
 
@@ -516,7 +623,7 @@
             gap: 0.5rem;
             opacity: 0.7;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
+            z-index: 1;
         }
 
         .scroll-indicator p {
@@ -542,7 +649,7 @@
             }
         }
 
-        .hero[style*="position: fixed"] .scroll-indicator {
+        .hero[style*="position: fixed"] ~ .scroll-indicator {
             display: none !important;
         }
     </style>
@@ -558,17 +665,17 @@
             <p class="font" style="margin-top: 1.5rem; font-size: 1.1rem;">Experience GitLab in a whole new way. Download PocketLab today and make your projects accessible to your entire team.</p>
             <div class="hero-buttons">
                 <a href="#" class="hero-button">
-                    <i class="fab fa-apple"></i> App Store
+                    <i class="fab fa-apple"></i> <span class="hero-button-text">App Store</span>
                 </a>
                 <a href="#" class="hero-button coming-soon">
-                    <i class="fab fa-google-play"></i> Google Play
+                    <i class="fab fa-google-play"></i> <span class="hero-button-text"></span>Google Play</span>
                 </a>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <p>Scroll down to learn more</p>
-            <i class="fas fa-chevron-down"></i>
-        </div>
+    </div>
+    <div class="scroll-indicator">
+        <p>Scroll down to learn more</p>
+        <i class="fas fa-chevron-down"></i>
     </div>
 
     <section class="features">
@@ -645,60 +752,52 @@
             const heroParagraphs = document.querySelectorAll('.hero p');
             const heroButtons = document.querySelector('.hero-buttons');
             
-            let lastScroll = 0;
             let scrollThreshold = 200; // Increased threshold for better mobile experience
 
             window.addEventListener('scroll', function() {
                 const currentScroll = window.pageYOffset;
-                const scrollDiff = currentScroll - lastScroll;
                 
-                // Calculate the progress of the transition (0 to 1)
-                const progress = Math.min(Math.max(currentScroll / scrollThreshold, 0), 1);
-                
-                // Apply smooth transitions based on scroll progress
-                if (currentScroll > 0) {
+                if (currentScroll > scrollThreshold) {
+                    // Collapsed state
+                    hero.classList.add('collapsed');
                     hero.style.position = 'fixed';
                     hero.style.top = '0';
                     hero.style.left = '0';
                     hero.style.right = '0';
-                    hero.style.minHeight = `${Math.max(80, 200 - (progress * 120))}px`; // Start with larger height
+                    hero.style.minHeight = '80px';
                     hero.style.background = 'var(--card-bg)';
                     hero.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
                     
                     heroContent.style.maxWidth = '1200px';
                     heroContent.style.margin = '0 auto';
-                    heroContent.style.padding = `${1.5 - (progress * 0.5)}rem 2rem`; // Start with larger padding
+                    heroContent.style.padding = '0.5rem 2rem';
                     heroContent.style.flexDirection = 'row';
                     heroContent.style.alignItems = 'center';
-                    heroContent.style.justifyContent = 'space-between';
+                    heroContent.style.justifyContent = 'flex-start';
                     heroContent.style.background = 'transparent';
                     heroContent.style.border = 'none';
                     heroContent.style.boxShadow = 'none';
+                    heroContent.style.width = '100%';
                     
-                    appLogo.style.width = `${150 - (progress * 100)}px`;
-                    appLogo.style.height = `${150 - (progress * 100)}px`;
+                    appLogo.style.width = '50px';
+                    appLogo.style.height = '50px';
                     appLogo.style.margin = '0';
-                    appLogo.style.padding = `${1 - (progress * 0.5)}rem`;
-                    appLogo.style.borderRadius = `${30 - (progress * 20)}px`;
+                    appLogo.style.padding = '0.5rem';
+                    appLogo.style.borderRadius = '10px';
                     
-                    heroTitle.style.fontSize = `${3 - (progress * 1.5)}rem`;
-                    heroTitle.style.margin = '0';
+                    heroTitle.style.fontSize = '1.5rem';
+                    heroTitle.style.margin = '0 2rem 0 0.5rem';
                     
-                    heroSubtitle.style.fontSize = `${1.2 - (progress * 0.2)}rem`;
-                    heroSubtitle.style.margin = '0';
-                    heroSubtitle.style.opacity = 1 - (progress * 1.2); // Slower fade
-                    
-                    heroParagraphs.forEach(p => {
-                        p.style.opacity = 1 - (progress * 1.2); // Slower fade
-                        if (progress > 0.7) p.style.display = 'none'; // Hide later
-                        else p.style.display = 'block';
-                    });
+                    heroSubtitle.style.display = 'none';
+                    heroParagraphs.forEach(p => p.style.display = 'none');
                     
                     heroButtons.style.margin = '0';
+                    heroButtons.style.marginLeft = 'auto';
                     
-                    body.style.paddingTop = `${80 + (progress * 20)}px`;
+                    body.style.paddingTop = '80px';
                 } else {
-                    // Reset to initial state
+                    // Full state
+                    hero.classList.remove('collapsed');
                     hero.style = '';
                     heroContent.style = '';
                     appLogo.style = '';
@@ -708,8 +807,6 @@
                     heroButtons.style = '';
                     body.style.paddingTop = '0';
                 }
-                
-                lastScroll = currentScroll;
             });
 
             // Initialize Swiper for device showcase
