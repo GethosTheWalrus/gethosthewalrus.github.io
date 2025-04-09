@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PocketLab - Your Intelligent GitLab Companion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c3e50;
+            --accent-color: #FC6D26;
+            --gitlab-purple: #6E49CB;
+            --text-color: #ecf0f1;
+            --card-bg: rgba(44, 62, 80, 0.7);
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding-top: 0;
+            transition: padding-top 0.3s ease;
+        }
+
+        body.partial {
+            padding-top: 200px;
+        }
+
+        body.scrolled {
+            padding-top: 80px;
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color);
+            position: relative;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero.partial {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            min-height: 200px;
+            background: var(--card-bg);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero.partial .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .hero.partial .app-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0;
+            padding: 0.5rem;
+            border-radius: 15px;
+        }
+
+        .hero.partial h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .hero.partial h2 {
+            font-size: 1rem;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        .hero.partial p {
+            display: none;
+        }
+
+        .hero.partial .hero-buttons {
+            margin: 0;
+        }
+
+        .hero.collapsed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            min-height: 80px;
+            background: var(--card-bg);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero.collapsed .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .hero.collapsed .app-logo {
+            width: 50px;
+            height: 50px;
+            margin: 0;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .hero.collapsed h1 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .hero.collapsed h2 {
+            display: none;
+        }
+
+        .hero.collapsed p {
+            display: none;
+        }
+
+        .hero.collapsed .hero-buttons {
+            margin: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-content p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .app-logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 2rem;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .purple {
+            color: var(--gitlab-purple);
+        }
+
+        .hero h2 {
+            margin-top: 0;
+            padding-top: 0;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .features {
+            padding: 4rem 0;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin-top: 40vh;
+        }
+
+        body.scrolled .features {
+            margin-top: 80px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 0.75rem 0;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .device-showcase {
+            padding: 3rem 0;
+            background-color: var(--secondary-color);
+        }
+
+        .device-showcase .swiper {
+            height: 300px;
+        }
+
+        .device-showcase .swiper-slide {
+            padding: 1rem;
+        }
+
+        .device-showcase .swiper-slide img {
+            max-height: 250px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .audience-section {
+            padding: 2rem 0;
+            background-color: var(--primary-color);
+            margin-top: 2rem;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .audience-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--gitlab-purple);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .audience-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--gitlab-purple);
+        }
+
+        .audience-card h3 {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .audience-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        section p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .download-section {
+            padding: 4rem 0;
+            text-align: center;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .download-button {
+            padding: 1rem 2rem;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+        }
+
+        .download-button:hover {
+            transform: scale(1.05);
+            background-color: var(--gitlab-purple);
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--accent-color) !important;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--text-color) !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--accent-color) !important;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-button:hover {
+            transform: scale(1.05);
+            background-color: var(--gitlab-purple);
+        }
+
+        .hero-button.coming-soon {
+            background-color: var(--secondary-color);
+            opacity: 0.7;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .hero-button.coming-soon:hover {
+            transform: none;
+            background-color: var(--secondary-color);
+        }
+
+        .hero-button.coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: var(--text-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .hero-button i {
+            font-size: 1.2rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+
+        .scroll-indicator p {
+            font-size: 0.9rem;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .hero[style*="position: fixed"] .scroll-indicator {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <img src="../img/pocketlab/1024-1024.png" alt="PocketLab Logo" class="app-logo">
+            <h1>Pocket<span class="purple">Lab</span></h1>
+            <h2>The smartest way to collaborate</h2>
+            <p class="font">Take control of your GitLab workflow with PocketLab, the AI-powered and privacy-focused mobile GitLab client that makes development details accessible to everyone - from developers to stakeholders.</p>
+            <p class="font" style="margin-top: 1.5rem; font-size: 1.1rem;">Experience GitLab in a whole new way. Download PocketLab today and make your projects accessible to your entire team.</p>
+            <div class="hero-buttons">
+                <a href="#" class="hero-button">
+                    <i class="fab fa-apple"></i> App Store
+                </a>
+                <a href="#" class="hero-button coming-soon">
+                    <i class="fab fa-google-play"></i> Google Play
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <p>Scroll down to learn more</p>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <section class="features">
+        <div class="innerscreen">
+            <h2 class="font" style="font-size:1.8rem;margin-top:100px;">Here's why you'll love PocketLab</h2>
+            <p>Code isn't just for developers. PocketLab makes it easy for everyone to understand and participate in your projects.</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI-Powered Insights</h3>
+                    <p>Transform complex code and pipeline data into easy-to-understand summaries, making technical information accessible to everyone. With self-hosted AI models, you maintain complete control over where and how your data is processed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Comprehensive Project Management</h3>
+                    <p>Manage repositories, track issues, and monitor pipelines with ease. Your project data stays secure and private, with AI processing happening on your self-hosted infrastructure.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Advanced Code Review</h3>
+                    <p>Effortlessly review merge requests and participate in discussions, all from your mobile device.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Smart Issue Tracking</h3>
+                    <p>Create, manage, and track issues with intuitive tools and AI assistance, ensuring that you know what's happening in your project at a glance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="audience-section">
+        <div class="innerscreen">
+            <h2 class="font" style="font-size:1.8rem;">Built for Your Entire Team</h2>
+            <p>PocketLab's AI assistance ensures everyone can participate effectively in the development process</p>
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Developers</h3>
+                    <p>Review code, manage merge requests, and track issues from anywhere. Get AI-powered insights on code changes and stay productive even when away from your desk. All AI processing is handled through your self-hosted LLMs, giving you full control over the infrastructure.</p>
+                </div>
+                <div class="audience-card">
+                    <i class="fas fa-user-tie"></i>
+                    <h3>Project Managers</h3>
+                    <p>Monitor project progress, track team velocity, and understand technical changes through AI-generated summaries. Make informed decisions with real-time updates on issues, milestones, and pipeline status.</p>
+                </div>
+                <div class="audience-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Business Stakeholders</h3>
+                    <p>Stay informed about project status without technical jargon. View simplified reports, track key metrics, and understand development progress through AI-translated updates. All data processing happens on your self-hosted infrastructure, ensuring complete privacy and compliance with your organization's security policies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hero = document.querySelector('.hero');
+            const body = document.body;
+            const heroContent = document.querySelector('.hero-content');
+            const appLogo = document.querySelector('.app-logo');
+            const heroTitle = document.querySelector('.hero h1');
+            const heroSubtitle = document.querySelector('.hero h2');
+            const heroParagraphs = document.querySelectorAll('.hero p');
+            const heroButtons = document.querySelector('.hero-buttons');
+            
+            let lastScroll = 0;
+            let scrollThreshold = 50; // Reduced threshold for more granular control
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                const scrollDiff = currentScroll - lastScroll;
+                
+                // Calculate the progress of the transition (0 to 1)
+                const progress = Math.min(Math.max(currentScroll / scrollThreshold, 0), 1);
+                
+                // Apply smooth transitions based on scroll progress
+                if (currentScroll > 0) {
+                    hero.style.position = 'fixed';
+                    hero.style.top = '0';
+                    hero.style.left = '0';
+                    hero.style.right = '0';
+                    hero.style.minHeight = `${Math.max(80, 100 - (progress * 20))}px`;
+                    hero.style.background = 'var(--card-bg)';
+                    hero.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+                    
+                    heroContent.style.maxWidth = '1200px';
+                    heroContent.style.margin = '0 auto';
+                    heroContent.style.padding = `${1 - (progress * 0.5)}rem 2rem`;
+                    heroContent.style.flexDirection = 'row';
+                    heroContent.style.alignItems = 'center';
+                    heroContent.style.justifyContent = 'space-between';
+                    heroContent.style.background = 'transparent';
+                    heroContent.style.border = 'none';
+                    heroContent.style.boxShadow = 'none';
+                    
+                    appLogo.style.width = `${150 - (progress * 100)}px`;
+                    appLogo.style.height = `${150 - (progress * 100)}px`;
+                    appLogo.style.margin = '0';
+                    appLogo.style.padding = `${1 - (progress * 0.5)}rem`;
+                    appLogo.style.borderRadius = `${30 - (progress * 20)}px`;
+                    
+                    heroTitle.style.fontSize = `${3 - (progress * 1.5)}rem`;
+                    heroTitle.style.margin = '0';
+                    
+                    heroSubtitle.style.fontSize = `${1.2 - (progress * 0.2)}rem`;
+                    heroSubtitle.style.margin = '0';
+                    heroSubtitle.style.opacity = 1 - progress;
+                    
+                    heroParagraphs.forEach(p => {
+                        p.style.opacity = 1 - progress;
+                        if (progress > 0.5) p.style.display = 'none';
+                        else p.style.display = 'block';
+                    });
+                    
+                    heroButtons.style.margin = '0';
+                    
+                    body.style.paddingTop = `${80 + (progress * 20)}px`;
+                } else {
+                    // Reset to initial state
+                    hero.style = '';
+                    heroContent.style = '';
+                    appLogo.style = '';
+                    heroTitle.style = '';
+                    heroSubtitle.style = '';
+                    heroParagraphs.forEach(p => p.style = '');
+                    heroButtons.style = '';
+                    body.style.paddingTop = '0';
+                }
+                
+                lastScroll = currentScroll;
+            });
+
+            // Initialize Swiper for device showcase
+            new Swiper('.device-showcase .swiper', {
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                },
+            });
+        });
+    </script>
+</body>
+</html>
