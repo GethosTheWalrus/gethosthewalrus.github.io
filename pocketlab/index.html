@@ -213,6 +213,37 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero h2 {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .hero-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         .features {
             padding: 4rem 0;
             background-color: var(--primary-color);
@@ -615,7 +646,7 @@
             const heroButtons = document.querySelector('.hero-buttons');
             
             let lastScroll = 0;
-            let scrollThreshold = 50; // Reduced threshold for more granular control
+            let scrollThreshold = 200; // Increased threshold for better mobile experience
 
             window.addEventListener('scroll', function() {
                 const currentScroll = window.pageYOffset;
@@ -630,13 +661,13 @@
                     hero.style.top = '0';
                     hero.style.left = '0';
                     hero.style.right = '0';
-                    hero.style.minHeight = `${Math.max(80, 100 - (progress * 20))}px`;
+                    hero.style.minHeight = `${Math.max(80, 200 - (progress * 120))}px`; // Start with larger height
                     hero.style.background = 'var(--card-bg)';
                     hero.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
                     
                     heroContent.style.maxWidth = '1200px';
                     heroContent.style.margin = '0 auto';
-                    heroContent.style.padding = `${1 - (progress * 0.5)}rem 2rem`;
+                    heroContent.style.padding = `${1.5 - (progress * 0.5)}rem 2rem`; // Start with larger padding
                     heroContent.style.flexDirection = 'row';
                     heroContent.style.alignItems = 'center';
                     heroContent.style.justifyContent = 'space-between';
@@ -655,11 +686,11 @@
                     
                     heroSubtitle.style.fontSize = `${1.2 - (progress * 0.2)}rem`;
                     heroSubtitle.style.margin = '0';
-                    heroSubtitle.style.opacity = 1 - progress;
+                    heroSubtitle.style.opacity = 1 - (progress * 1.2); // Slower fade
                     
                     heroParagraphs.forEach(p => {
-                        p.style.opacity = 1 - progress;
-                        if (progress > 0.5) p.style.display = 'none';
+                        p.style.opacity = 1 - (progress * 1.2); // Slower fade
+                        if (progress > 0.7) p.style.display = 'none'; // Hide later
                         else p.style.display = 'block';
                     });
                     
