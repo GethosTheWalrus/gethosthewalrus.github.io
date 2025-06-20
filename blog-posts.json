@@ -1,5 +1,11 @@
 [
     {
+      "slug": "docker-mcp-toolkit-postgres",
+      "title": "Sweet-Talk Your Database Into Revealing Its Secrets With Dockerized MCP Servers",
+      "description": "Docker has not-so-quietly revolutionized how we interact with AI tools through their new MCP Toolkit. This article explores how to use the MCP Toolkit to run a Postgres database and interact with it using AI models.",
+      "image": "https://miketoscano.com/img/blog/docker-mcp-toolkit-postgres.png"
+    },
+    {
       "slug": "docker-model-runner",
       "title": "Whale-Sized Intelligence - Running LLMs with Docker Desktop",
       "description": "Docker has quietly launched something really exciting: the Docker Model Runner, a new feature built into Docker Desktop that lets you pull, run, and interact with LLMs — all from the CLI or your apps, just like you would with containers",
