@@ -43,6 +43,19 @@
                     document.getElementById("gameFrame").setAttribute("src", "/wasm_games/?game="+game);
                 }
             });
+
+            // Make blog post cards clickable
+            document.querySelectorAll('.blog-post-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Prevent double-clicking if clicking directly on the link
+                    if (e.target.tagName !== 'A') {
+                        const link = this.querySelector('.blog-post-title');
+                        if (link) {
+                            window.open(link.href, '_blank');
+                        }
+                    }
+                });
+            });
         });
     </script>
 
@@ -102,16 +115,89 @@
             <div class="font flexcontainer" style="display:flex;align-items:center;justify-content:center;padding-left:10px;padding-right:10px;">
                 <div class="tree">
                     <ul>
-                      <li><i class="fa fa-folder-open"></i> Blog Posts
+                      <!-- <li><i class="fa fa-folder-open"></i> Blog Posts -->
                         <ul style="padding:0;">
-                            <li><img class="blog-icon" src="/img/blog/docker-icon.png" /> <a target="_blank" href="/blog/docker-model-runner.html">Whale-Sized Intelligence - Running LLMs with Docker Desktop</a> <span>- Mar 27, 2025</span>
-                            <li><img class="blog-icon" src="/img/blog/gitlab-icon.png" /> <a target="_blank" href="/blog/gitlab-terraform-proxmox-k8s">Deploying A Kubernetes Cluster To PVE Using GitLab CI</a> <span>- Mar 3, 2025</span>
-                            <li><!--<i class="fa fa-file"></i>--><img class="blog-icon" src="/img/blog/docker-icon.png" /> <a target="_blank" href="/blog/docker-scout-image-security.html">Maintaining Docker Image Security With Docker Scout</a> <span>- Nov 25, 2024</span>
-                            <li><!--<i class="fa fa-file"></i>--><img class="blog-icon" src="/img/blog/ai-icon.png" /> <a target="_blank" href="/blog/pixel-ai-companion.html">Pixel - Your Tiny, Offline AI Assistant</a> <span>- Aug 21, 2024</span>
-                            <li><!--<i class="fa fa-file"></i>--><img class="blog-icon" src="/img/blog/flappy-bird-icon.png" /> <a target="_blank" href="/blog/oracle-oci-flappy-bird.html">Deploying Flappy Bird To OCI With 3 Short Commands</a> <span>- Jun 8, 2024</span>
-                            <li><!--<i class="fa fa-file"></i>--><img class="blog-icon" src="/img/blog/terraform-icon.png" /> <a target="_blank" href="/blog/terraform-nodejs-oci-aws.html">Terraforming An Application Onto OCI And AWS</a> <span>- Dec 8, 2023</span>
-                            <li><!--<i class="fa fa-file"></i>--><img class="blog-icon" src="/img/blog/flappy-bird-icon.png" /> <a target="_blank" href="/blog/oracle-advanced-queue-flappy-bird.html">Express, TypeScript, And Oracle Advanced Queue</a> <span>- Nov 25, 2023</span>
-                            <li><!--<i class="fa fa-file"></i>--><img class="blog-icon" src="/img/blog/flappy-bird-icon.png" /> <a target="_blank" href="/blog/json-relational-duality-oracle-flappy-bird.html">Full Stack JavaScript App Utilizing JSON-Relational Duality Views</a> <span>- Nov 15, 2023</span>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/docker-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/docker-mcp-toolkit-postgres.html">Sweet-Talk Your Database Into Revealing Its Secrets</a>
+                                        <span class="blog-post-date">Jun 20, 2025</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/docker-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/docker-model-runner.html">Whale-Sized Intelligence - Running LLMs with Docker Desktop</a>
+                                        <span class="blog-post-date">Mar 27, 2025</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/gitlab-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/gitlab-terraform-proxmox-k8s">Deploying A Kubernetes Cluster To PVE Using GitLab CI</a>
+                                        <span class="blog-post-date">Mar 3, 2025</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/docker-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/docker-scout-image-security.html">Maintaining Docker Image Security With Docker Scout</a>
+                                        <span class="blog-post-date">Nov 25, 2024</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/ai-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/pixel-ai-companion.html">Pixel - Your Tiny, Offline AI Assistant</a>
+                                        <span class="blog-post-date">Aug 21, 2024</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/flappy-bird-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/oracle-oci-flappy-bird.html">Deploying Flappy Bird To OCI With 3 Short Commands</a>
+                                        <span class="blog-post-date">Jun 8, 2024</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/terraform-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/terraform-nodejs-oci-aws.html">Terraforming An Application Onto OCI And AWS</a>
+                                        <span class="blog-post-date">Dec 8, 2023</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/flappy-bird-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/oracle-advanced-queue-flappy-bird.html">Express, TypeScript, And Oracle Advanced Queue</a>
+                                        <span class="blog-post-date">Nov 25, 2023</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="blog-post-item">
+                                <div class="blog-post-content">
+                                    <img class="blog-icon-modern" src="/img/blog/flappy-bird-icon.png" />
+                                    <div class="blog-post-text">
+                                        <a class="blog-post-title" target="_blank" href="/blog/json-relational-duality-oracle-flappy-bird.html">Full Stack JavaScript App Utilizing JSON-Relational Duality Views</a>
+                                        <span class="blog-post-date">Nov 15, 2023</span>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                       </li>
                     </ul>

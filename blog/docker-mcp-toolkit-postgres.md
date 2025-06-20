@@ -1,4 +1,4 @@
-# Sweet-Talk Your Database Into Revealing Its Secrets With Dockerized MCP Servers <span style="opacity:0.5;margin:0;padding:0;font-size:14px;">- July 23, 2025</span>
+# Sweet-Talk Your Database Into Revealing Its Secrets With Dockerized MCP Servers <span style="opacity:0.5;margin:0;padding:0;font-size:14px;">- June 20, 2025</span>
 
 Docker has not-so-quietly revolutionized how we interact with AI tools through their new [MCP Toolkit](https://docs.docker.com/ai/mcp-catalog-and-toolkit/toolkit/), a containerized solution that enables seamless setup and management of [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) servers. If you've ever struggled with the tedious process of manually configuring MCP servers, environment dependencies, or client connections, Docker's MCP Toolkit is about to become your new best friend.
 
