@@ -59,9 +59,37 @@
                         font-size: 20px;
                         text-align: justify;
                       }
-                      div, p {
+                      div:not(.mermaid):not(.mermaid *), p:not(.mermaid):not(.mermaid *) {
                         background: #404040 !important;
                         background-color: #404040 !important;
+                      }
+                      .mermaid, .mermaid * {
+                        background: transparent !important;
+                        background-color: transparent !important;
+                      }
+                      .mermaid .er .entityBox, .mermaid .er .box {
+                        fill: #f8f8f8 !important;
+                        stroke: #333 !important;
+                      }
+                      .mermaid .er .label, .mermaid .er .nodeLabel {
+                        fill: #333 !important;
+                      }
+                      .mermaid foreignObject {
+                        width: 200px !important;
+                        min-width: 200px !important;
+                        overflow: visible !important;
+                      }
+                      .mermaid foreignObject > div {
+                        max-width: 200px !important;
+                        width: 200px !important;
+                        white-space: nowrap !important;
+                        overflow: visible !important;
+                      }
+                      .mermaid .nodeLabel p {
+                        margin: 0 !important;
+                        padding: 2px 4px !important;
+                        white-space: nowrap !important;
+                        font-size: 12px !important;
                       }
                       .blog-content-block {
                         margin: 0 auto !important;
