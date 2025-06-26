@@ -1,5 +1,11 @@
 [
     {
+      "slug": "docker-mcp-langgraph-agent",
+      "title": "Custom Agentic Applications With LangGraph And Dockerized MCP",
+      "description": "In this post, I will show you how to leverage Docker's MCP catalog and LangChain/LangGraph to create your own agent that can think, reason, self-correct, and perform tasks on your behalf.",
+      "image": "https://miketoscano.com/img/blog/docker-mcp-langgraph-agent.png"
+    },
+    {
       "slug": "docker-mcp-toolkit-postgres",
       "title": "Sweet-Talk Your Database Into Revealing Its Secrets With Dockerized MCP Servers",
       "description": "Docker has not-so-quietly revolutionized how we interact with AI tools through their new MCP Toolkit. This article explores how to use the MCP Toolkit to run a Postgres database and interact with it using AI models.",

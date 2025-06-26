@@ -587,8 +587,8 @@ ul {
 }
 
 .blog-icon-modern {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    /* height: 24px; */
     border-radius: 4px;
     background: transparent;
     padding: 4px;
