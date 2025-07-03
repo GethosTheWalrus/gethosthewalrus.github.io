@@ -832,7 +832,7 @@ docker compose up --build -d csharp-client -d
 
 Once everything is running, you can interact with the system through the Temporal UI at `http://localhost:8080`. 
 
-As configured in the repository, the system will automatically process a sample customer complaint. If you load up the Temporal UI, you will see a that a workflow has been registered and started.
+As configured in the repository, the system will automatically process a sample customer complaint. If you load up the Temporal UI, you will see that a workflow has been registered and started.
 
 <div class="blog-content-block">
     <img src="/img/blog/running-workflow-in-ui.png" />
