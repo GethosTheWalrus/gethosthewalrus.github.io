@@ -7,6 +7,7 @@
         <meta property="og:url" content="https://miketoscano.com/blog/?post='+post+'" />
         <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
         <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
+        <script src="/js/svg-pan-zoom-init.js"></script>
         <link rel="stylesheet" href="/css/style.css" />
         <script>
           const urlParams = new URLSearchParams(window.location.search);
@@ -98,6 +99,25 @@
                         vertical-align: middle !important;
                         width: 100% !important;
                         padding-bottom: 20px !important;
+                      }
+                      /* Ensure SVGs can receive mouse events */
+                      svg {
+                        pointer-events: all !important;
+                        user-select: none !important;
+                      }
+                      .mermaid svg {
+                        pointer-events: all !important;
+                        cursor: grab !important;
+                      }
+                      .mermaid svg:active {
+                        cursor: grabbing !important;
+                      }
+                      /* Override any conflicting styles */
+                      .mermaid div {
+                        pointer-events: none !important;
+                      }
+                      .mermaid svg * {
+                        pointer-events: all !important;
                       }
                     </style>
                 </template>
