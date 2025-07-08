@@ -790,7 +790,7 @@ This enables powerful coordination patterns:
 - `Conflict resolution` through structured data updates
 - `Audit trail` of all agent decisions and reasoning
 
-The system maintains conversation memory that survives worker restarts and enables continuity across distributed instances through LangGraph's [AsyncRedisSaver](https://github.com/GethosTheWalrus/langgraph-temporal-workflow/blob/26be84ac545b267be6e3a9ea712a00535cd011d0/workers/python/activities/resolution_suggestion_agent.py#L88). You can read more about agent memory [here](hhttps://langchain-ai.github.io/langgraph/how-tos/memory/add-memory/).
+The system maintains conversation memory that survives worker restarts and enables continuity across distributed instances through LangGraph's [AsyncRedisSaver](https://github.com/GethosTheWalrus/langgraph-temporal-workflow/blob/26be84ac545b267be6e3a9ea712a00535cd011d0/workers/python/activities/resolution_suggestion_agent.py#L88). You can read more about agent memory [here](https://langchain-ai.github.io/langgraph/how-tos/memory/add-memory/).
 
 <hr>
 
