@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <title>Mike Toscano | Blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="color-scheme" content="dark">
+        <meta name="supported-color-schemes" content="dark">
         <meta property="og:title" content="Mike Toscano | Blog" />
         <meta property="og:description" content="Learn about tech and software engineering with Mike Toscano" />
         <meta property="og:url" content="https://miketoscano.com/blog/?post='+post+'" />
@@ -53,6 +56,16 @@
             <zero-md id="post" src="loading.md">
                 <template data-append>
                     <style>
+                      /* Force dark color scheme */
+                      :root {
+                        color-scheme: dark;
+                      }
+                      
+                      /* Ensure proper text colors for most elements, but exclude code */
+                      *:not(code):not(pre):not(code *):not(pre *) {
+                        color: #ffffff !important;
+                      }
+                      
                       div {
                         max-width: 800px;
                         margin: 0 auto !important;
@@ -60,10 +73,29 @@
                       p {
                         font-size: 20px;
                         text-align: justify;
+                        color: #ffffff !important;
                       }
+                      
+                      /* Headers should also be white */
+                      h1, h2, h3, h4, h5, h6 {
+                        color: #ffffff !important;
+                      }
+                      
+                      /* Code blocks - preserve syntax highlighting colors */
+                      code, pre {
+                        background-color: #2d2d2d !important;
+                        /* Don't force text color to allow syntax highlighting */
+                      }
+                      
+                      /* Links */
+                      a {
+                        color: #4a9eff !important;
+                      }
+                      
                       div:not(.mermaid):not(.mermaid *), p:not(.mermaid):not(.mermaid *) {
                         background: #404040 !important;
                         background-color: #404040 !important;
+                        color: #ffffff !important;
                       }
                       .mermaid, .mermaid * {
                         background: transparent !important;

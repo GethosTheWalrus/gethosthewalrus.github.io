@@ -1,6 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Audiowide);
+
+/* Force dark color scheme on all devices */
+:root {
+    color-scheme: dark;
+}
+
 html {
     margin: 0;
+    color-scheme: dark;
 }
 body {
     background-color: #202020;
@@ -8,6 +15,7 @@ body {
     margin: 0;
     padding-top: 25px;
     min-height: 100vh;
+    color-scheme: dark;
 }
 a {
     text-decoration: none;
