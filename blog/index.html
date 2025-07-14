@@ -61,11 +61,6 @@
                         color-scheme: dark;
                       }
                       
-                      /* Ensure proper text colors for most elements, but exclude code */
-                      *:not(code):not(pre):not(code *):not(pre *) {
-                        color: #ffffff !important;
-                      }
-                      
                       div {
                         max-width: 800px;
                         margin: 0 auto !important;
@@ -73,12 +68,6 @@
                       p {
                         font-size: 20px;
                         text-align: justify;
-                        color: #ffffff !important;
-                      }
-                      
-                      /* Headers should also be white */
-                      h1, h2, h3, h4, h5, h6 {
-                        color: #ffffff !important;
                       }
                       
                       /* Code blocks - preserve syntax highlighting colors */
@@ -87,15 +76,9 @@
                         /* Don't force text color to allow syntax highlighting */
                       }
                       
-                      /* Links */
-                      a {
-                        color: #4a9eff !important;
-                      }
-                      
                       div:not(.mermaid):not(.mermaid *), p:not(.mermaid):not(.mermaid *) {
                         background: #404040 !important;
                         background-color: #404040 !important;
-                        color: #ffffff !important;
                       }
                       .mermaid, .mermaid * {
                         background: transparent !important;
