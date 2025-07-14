@@ -73,9 +73,10 @@
                 <p style="margin:0;color:white;opacity:0.5;font-size:16px">&#128011; Docker Captain | Engineering Leader | Open-Source Enthusiast</p>
               </div>
             </div>
-            <zero-md id="post" src="loading.md">
+            <zero-md id="post" src="loading.md" class="font">
                 <template data-append>
                     <style>
+                      /* Use existing site styling patterns */
                       div {
                         max-width: 800px;
                         margin: 0 auto !important;
@@ -83,9 +84,22 @@
                       p {
                         font-size: 20px;
                         text-align: justify;
+                        color: #fff; /* Use existing site white text color */
                       }
+                      
+                      /* Apply site's existing text color to all content */
+                      h1, h2, h3, h4, h5, h6, p, li, td, th {
+                        color: #fff !important;
+                      }
+                      
+                      /* Links use existing site style */
+                      a {
+                        color: #fff;
+                        text-decoration: none;
+                      }
+                      
                       div:not(.mermaid):not(.mermaid *), p:not(.mermaid):not(.mermaid *) {
-                        background: #404040 !important;
+                        background: #404040 !important; /* Use existing .screen background */
                         background-color: #404040 !important;
                       }
                       .mermaid, .mermaid * {
