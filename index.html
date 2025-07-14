@@ -5,19 +5,27 @@
 
     <title>Mike Toscano</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="color-scheme" content="dark only">
     <meta name="supported-color-schemes" content="dark">
     <style>
-      /* Prevent Safari from applying any automatic styling */
+      /* Aggressively prevent Safari from applying any automatic styling */
       :root {
-        color-scheme: dark only;
+        color-scheme: dark only !important;
+        -webkit-color-scheme: dark only !important;
       }
       html {
-        color-scheme: dark only;
+        color-scheme: dark only !important;
+        -webkit-color-scheme: dark only !important;
       }
       body {
-        color-scheme: dark only;
+        color-scheme: dark only !important;
+        -webkit-color-scheme: dark only !important;
+      }
+      
+      /* Disable automatic dark mode detection */
+      * {
+        -webkit-color-scheme: dark only !important;
       }
     </style>
 
