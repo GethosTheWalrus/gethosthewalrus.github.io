@@ -3,8 +3,20 @@
     <head>
         <title>Mike Toscano | Blog</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="color-scheme" content="dark">
+        <meta name="color-scheme" content="dark only">
         <meta name="supported-color-schemes" content="dark">
+        <style>
+          /* Prevent Safari from applying any automatic styling */
+          :root {
+            color-scheme: dark only;
+          }
+          html {
+            color-scheme: dark only;
+          }
+          body {
+            color-scheme: dark only;
+          }
+        </style>
         <meta property="og:title" content="Mike Toscano | Blog" />
         <meta property="og:description" content="Learn about tech and software engineering with Mike Toscano" />
         <meta property="og:url" content="https://miketoscano.com/blog/?post='+post+'" />
@@ -56,86 +68,17 @@
             <zero-md id="post" src="loading.md">
                 <template data-append>
                     <style>
-                      /* Force dark color scheme and set up proper dark theme defaults */
-                      :root {
-                        color-scheme: dark;
-                        /* Define dark theme color variables */
-                        --text-color: #ffffff;
-                        --background-color: #404040;
-                        --code-background: #202020;
-                        --link-color: #4a9eff;
-                        --border-color: #555555;
-                      }
-                      
-                      /* Set default text color for the entire content area */
-                      * {
-                        color: var(--text-color);
-                      }
-                      
-                      /* Override browser defaults for common elements */
-                      body, html {
-                        background-color: var(--background-color);
-                        color: var(--text-color);
-                      }
-                      
                       div {
                         max-width: 800px;
                         margin: 0 auto !important;
                       }
-                      
                       p {
                         font-size: 20px;
                         text-align: justify;
-                        color: var(--text-color);
                       }
-                      
-                      /* Headers */
-                      h1, h2, h3, h4, h5, h6 {
-                        color: var(--text-color);
-                      }
-                      
-                      /* Links */
-                      a {
-                        color: var(--link-color);
-                      }
-                      
-                      /* Horizontal rules */
-                      hr {
-                        border-color: var(--link-color);
-                        background-color: var(--link-color);
-                      }
-                      
-                      /* Lists */
-                      ul, ol, li {
-                        color: var(--text-color);
-                      }
-                      
-                      /* Tables */
-                      table, th, td {
-                        color: var(--text-color);
-                        border-color: var(--border-color);
-                      }
-                      
-                      /* Blockquotes */
-                      blockquote {
-                        color: var(--text-color);
-                        border-left-color: var(--border-color);
-                      }
-                      
-                      /* Code blocks - preserve syntax highlighting but ensure readable background */
-                      code, pre {
-                        background-color: var(--code-background) !important;
-                        /* Let syntax highlighting handle text colors */
-                      }
-                      
-                      /* Inline code should have light text if no syntax highlighting */
-                      code:not(pre code) {
-                        color: #e8e8e8;
-                      }
-                      
                       div:not(.mermaid):not(.mermaid *), p:not(.mermaid):not(.mermaid *) {
-                        background: var(--background-color) !important;
-                        background-color: var(--background-color) !important;
+                        background: #404040 !important;
+                        background-color: #404040 !important;
                       }
                       .mermaid, .mermaid * {
                         background: transparent !important;
