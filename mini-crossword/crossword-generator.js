@@ -21,8 +21,32 @@ class CrosswordGenerator {
 
     // Seeded random number generator for consistent puzzle generation
     seedRandom(seed) {
-        this.seed = seed;
-        this.rng = this.mulberry32(seed);
+        // Apply a hash function to the seed to create more variation
+        this.seed = this.hashSeed(seed);
+        this.rng = this.mulberry32(this.seed);
+    }
+
+    // Hash function to create more dramatic seed variation
+    hashSeed(seed) {
+        // Convert seed to string and apply multiple hash transformations
+        let hash = seed.toString();
+        
+        // Apply multiple hash operations to amplify small changes
+        let h1 = 0xdeadbeef ^ hash.length;
+        let h2 = 0x41c6ce57 ^ hash.length;
+        
+        for (let i = 0; i < hash.length; i++) {
+            const ch = hash.charCodeAt(i);
+            h1 = Math.imul(h1 ^ ch, 2654435761);
+            h2 = Math.imul(h2 ^ ch, 1597334677);
+        }
+        
+        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
+        h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
+        h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+        
+        return (h2 >>> 0) + (h1 >>> 0) * 4294967296;
     }
 
     mulberry32(a) {
@@ -49,7 +73,9 @@ class CrosswordGenerator {
     }
 
     generatePuzzle(seed) {
-        this.seedRandom(seed);
+        // Apply additional transformations to the seed to maximize variation
+        const transformedSeed = this.hashSeed(seed * 2654435761 + 1013904223);
+        this.seedRandom(transformedSeed);
         
         // Initialize empty grid
         this.grid = Array(this.gridSize).fill().map(() => Array(this.gridSize).fill(null));
@@ -63,7 +89,9 @@ class CrosswordGenerator {
         let bestScore = 0;
 
         for (let attempt = 0; attempt < 15; attempt++) {
-            const attemptResult = this.generateSingleAttempt(seed + attempt);
+            // Use hash function to create more varied attempt seeds
+            const attemptSeed = this.hashSeed(transformedSeed * 1000 + attempt * 7919); // Use prime number for better distribution
+            const attemptResult = this.generateSingleAttempt(attemptSeed);
             const score = this.scorePuzzle(attemptResult);
             
             if (score > bestScore) {
@@ -157,8 +185,12 @@ class CrosswordGenerator {
     }
 
     placeWordsBalanced(words, grid, solution, placedWords) {
-        // Place first word (horizontal)
-        const firstWord = words.find(w => w.word.length >= 4) || words[0];
+        // Randomly select and place first word (horizontal or vertical)
+        const suitableFirstWords = words.filter(w => w.word.length >= 4 && w.word.length <= 8);
+        const firstWordPool = suitableFirstWords.length > 0 ? suitableFirstWords : words.slice(0, 20);
+        const firstWordIndex = Math.floor(this.random() * firstWordPool.length);
+        const firstWord = firstWordPool[firstWordIndex];
+        
         if (firstWord) {
             this.placeFirstWord(firstWord, grid, solution, placedWords);
         }
@@ -279,19 +311,27 @@ class CrosswordGenerator {
     placeFirstWord(wordData, grid, solution, placedWords) {
         const word = wordData.word;
         
-        // Try both horizontal and vertical placement
-        const placements = [
-            // Horizontal in middle
-            { row: Math.floor(this.gridSize / 2), col: Math.floor((this.gridSize - word.length) / 2), direction: 'across' },
-            // Vertical in middle
-            { row: Math.floor((this.gridSize - word.length) / 2), col: Math.floor(this.gridSize / 2), direction: 'down' },
-            // Horizontal offset
-            { row: 1, col: 0, direction: 'across' },
-            // Vertical offset
-            { row: 0, col: 1, direction: 'down' }
-        ];
-
-        for (const placement of placements) {
+        // Create randomized placement options
+        const placements = [];
+        
+        // Multiple horizontal positions
+        for (let row = 1; row < this.gridSize - 1; row++) {
+            for (let col = 0; col <= this.gridSize - word.length; col++) {
+                placements.push({ row, col, direction: 'across' });
+            }
+        }
+        
+        // Multiple vertical positions  
+        for (let row = 0; row <= this.gridSize - word.length; row++) {
+            for (let col = 1; col < this.gridSize - 1; col++) {
+                placements.push({ row, col, direction: 'down' });
+            }
+        }
+        
+        // Shuffle placements using seeded random
+        const shuffledPlacements = this.shuffleArray(placements);
+        
+        for (const placement of shuffledPlacements) {
             if (this.canPlaceWordAt(word, placement.row, placement.col, placement.direction, grid, solution)) {
                 this.placeWordAt(wordData, placement.row, placement.col, placement.direction, grid, solution, placedWords);
                 return true;

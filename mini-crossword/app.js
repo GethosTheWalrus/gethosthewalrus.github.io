@@ -7,7 +7,29 @@ class CrosswordApp {
         this.userInputs = {};
         this.statusTimeout = null;
         
+        // Timer-related properties
+        this.startTime = null;
+        this.completionTime = null;
+        this.timerInterval = null;
+        this.isCompleted = false;
+        this.isPaused = false;
+        this.pausedTime = 0;
+        
         this.initializeApp();
+        
+        // Clean up timer on page unload
+        window.addEventListener('beforeunload', () => {
+            this.stopTimer();
+        });
+        
+        // Handle tab visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.pauseTimer();
+            } else {
+                this.resumeTimer();
+            }
+        });
     }
 
     async initializeApp() {
@@ -126,17 +148,6 @@ class CrosswordApp {
         window.history.replaceState({}, '', newUrl);
     }
 
-    generatePuzzle(seed) {
-        this.currentSeed = seed;
-        this.currentPuzzle = this.generator.generatePuzzle(seed);
-        this.userInputs = {};
-        
-        this.renderGrid();
-        this.renderClues();
-        this.updateHeader();
-        this.updateSeedDisplay();
-    }
-
     updateHeader() {
         const headerElement = document.querySelector('h1');
         const seed = this.currentSeed.toString();
@@ -163,11 +174,185 @@ class CrosswordApp {
             return;
         }
         
+        // Reset completion state
+        this.isCompleted = false;
+        this.completionTime = null;
+        this.isPaused = false;
+        this.pausedTime = 0;
+        
+        // Clear user inputs first (before loading saved ones)
+        this.userInputs = {};
+        
+        // Load saved user inputs
+        this.loadUserInputs();
+        
+        // Initialize or restore timer
+        this.initializeTimer();
+        
         this.renderGrid();
         this.renderClues();
         this.updateHeader();
         this.updateSeedDisplay();
         this.showStatus(`Generated puzzle #${seed}`, 'info');
+        
+        // Check for completion in case puzzle was already filled
+        this.checkForCompletion();
+    }
+
+    // Timer management methods
+    initializeTimer() {
+        const timerKey = `crossword_timer_${this.currentSeed}`;
+        const completionKey = `crossword_completed_${this.currentSeed}`;
+        const savedTimer = localStorage.getItem(timerKey);
+        const savedCompletion = localStorage.getItem(completionKey);
+        
+        if (savedCompletion) {
+            // Puzzle was previously completed
+            this.isCompleted = true;
+            this.completionTime = parseInt(savedCompletion);
+            this.startTime = null;
+            this.updateTimerDisplay();
+            
+            // Restore completed state visually after a brief delay to ensure grid is rendered
+            setTimeout(() => {
+                this.highlightCompletedPuzzle();
+            }, 100);
+        } else if (savedTimer) {
+            // Resume existing timer
+            this.startTime = parseInt(savedTimer);
+            this.startTimer();
+        } else {
+            // Start new timer
+            this.startTime = Date.now();
+            localStorage.setItem(timerKey, this.startTime.toString());
+            this.startTimer();
+        }
+    }
+
+    startTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+        }
+        
+        // Don't start timer if tab is hidden
+        if (document.hidden) {
+            this.isPaused = true;
+            return;
+        }
+        
+        this.isPaused = false;
+        
+        this.timerInterval = setInterval(() => {
+            if (!this.isCompleted && !this.isPaused) {
+                this.updateTimerDisplay();
+            }
+        }, 1000);
+        
+        this.updateTimerDisplay();
+    }
+
+    pauseTimer() {
+        if (this.isCompleted || !this.startTime) return;
+        
+        this.isPaused = true;
+        this.pausedTime = Date.now() - this.startTime;
+        
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
+    }
+
+    resumeTimer() {
+        if (this.isCompleted || this.isPaused === false) return;
+        
+        // Adjust start time to account for paused duration
+        if (this.pausedTime > 0) {
+            this.startTime = Date.now() - this.pausedTime;
+        }
+        
+        this.startTimer();
+    }
+
+    stopTimer() {
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
+        this.isPaused = false;
+    }
+
+    completeTimer() {
+        if (this.isCompleted || !this.startTime) return;
+        
+        this.completionTime = Date.now() - this.startTime;
+        this.isCompleted = true;
+        
+        // Save completion time to localStorage
+        const completionKey = `crossword_completed_${this.currentSeed}`;
+        localStorage.setItem(completionKey, this.completionTime.toString());
+        
+        // Remove the running timer from localStorage
+        const timerKey = `crossword_timer_${this.currentSeed}`;
+        localStorage.removeItem(timerKey);
+        
+        this.stopTimer();
+        this.updateTimerDisplay();
+    }
+
+    updateTimerDisplay() {
+        const timerElement = document.getElementById('timer-display');
+        let timeToShow;
+        
+        if (this.isCompleted && this.completionTime) {
+            timeToShow = this.completionTime;
+        } else if (this.startTime) {
+            if (this.isPaused && this.pausedTime > 0) {
+                timeToShow = this.pausedTime;
+            } else {
+                timeToShow = Date.now() - this.startTime;
+            }
+        } else {
+            timeToShow = 0;
+        }
+        
+        const minutes = Math.floor(timeToShow / 60000);
+        const seconds = Math.floor((timeToShow % 60000) / 1000);
+        
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Update styling based on completion status
+        if (this.isCompleted) {
+            timerElement.style.background = 'rgba(212, 237, 218, 0.95)';
+            timerElement.style.borderColor = 'rgba(40, 167, 69, 0.5)';
+            timerElement.style.color = '#155724';
+        } else {
+            timerElement.style.background = 'rgba(255, 255, 255, 0.95)';
+            timerElement.style.borderColor = 'rgba(44, 62, 80, 0.2)';
+            timerElement.style.color = '#2c3e50';
+        }
+    }
+
+    // User input persistence methods
+    saveUserInputs() {
+        const inputsKey = `crossword_inputs_${this.currentSeed}`;
+        localStorage.setItem(inputsKey, JSON.stringify(this.userInputs));
+    }
+
+    loadUserInputs() {
+        const inputsKey = `crossword_inputs_${this.currentSeed}`;
+        const savedInputs = localStorage.getItem(inputsKey);
+        
+        if (savedInputs) {
+            try {
+                this.userInputs = JSON.parse(savedInputs);
+            } catch (e) {
+                console.error('Failed to parse saved user inputs:', e);
+                this.userInputs = {};
+            }
+        } else {
+            this.userInputs = {};
+        }
     }
 
     renderGrid() {
@@ -328,15 +513,115 @@ class CrosswordApp {
     }
 
     handleInput(event, row, col) {
+        // Prevent input if puzzle is completed
+        if (this.isCompleted) {
+            event.preventDefault();
+            return;
+        }
+        
         const value = event.target.value.toUpperCase();
         event.target.value = value;
         
         // Store user input
         this.userInputs[`${row}-${col}`] = value;
         
+        // Save user inputs to localStorage
+        this.saveUserInputs();
+        
+        // Check for completion after each input
+        this.checkForCompletion();
+        
         if (value && this.selectedWord) {
             // Move to next cell in the selected word
             this.moveToNextCell(row, col);
+        }
+    }
+
+    checkForCompletion() {
+        if (this.isCompleted) return;
+        
+        const gridHeight = this.currentPuzzle.grid.length;
+        const gridWidth = this.currentPuzzle.grid[0].length;
+        
+        let allFilled = true;
+        let allCorrect = true;
+        
+        // Check if all non-blocked cells are filled and correct
+        for (let row = 0; row < gridHeight; row++) {
+            for (let col = 0; col < gridWidth; col++) {
+                const cellData = this.currentPuzzle.grid[row][col];
+                
+                if (!cellData.isBlocked) {
+                    const userInput = this.userInputs[`${row}-${col}`] || '';
+                    const correctLetter = this.currentPuzzle.solution[row][col];
+                    
+                    if (!userInput) {
+                        allFilled = false;
+                        break;
+                    }
+                    
+                    if (userInput !== correctLetter) {
+                        allCorrect = false;
+                    }
+                }
+            }
+            if (!allFilled) break;
+        }
+        
+        // If all cells are filled, show completion message
+        if (allFilled) {
+            if (allCorrect) {
+                this.completePuzzle();
+            } else {
+                this.showCompletionMessage(false);
+            }
+        }
+    }
+
+    completePuzzle() {
+        this.completeTimer();
+        this.highlightCompletedPuzzle();
+        this.showCompletionMessage(true);
+    }
+
+    highlightCompletedPuzzle() {
+        // Highlight all correct cells in green and make them non-editable
+        const gridHeight = this.currentPuzzle.grid.length;
+        const gridWidth = this.currentPuzzle.grid[0].length;
+
+        for (let row = 0; row < gridHeight; row++) {
+            for (let col = 0; col < gridWidth; col++) {
+                const cellData = this.currentPuzzle.grid[row][col];
+                
+                if (!cellData.isBlocked) {
+                    const cellElement = document.querySelector(
+                        `.cell[data-row="${row}"][data-col="${col}"]`
+                    );
+                    const inputElement = cellElement.querySelector('input');
+                    
+                    if (cellElement && inputElement) {
+                        // Add completed styling
+                        cellElement.classList.add('completed');
+                        cellElement.classList.remove('correct', 'incorrect'); // Remove any temporary styling
+                        
+                        // Make input non-editable
+                        inputElement.disabled = true;
+                        inputElement.style.cursor = 'default';
+                    }
+                }
+            }
+        }
+    }
+
+    showCompletionMessage(isCorrect) {
+        const minutes = Math.floor((this.completionTime || 0) / 60000);
+        const seconds = Math.floor(((this.completionTime || 0) % 60000) / 1000);
+        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        if (isCorrect) {
+            this.showStatus(`🎉 Congratulations! Puzzle completed in ${timeString}!`, 'success');
+        } else {
+            this.showStatus('Puzzle filled but some answers are incorrect. Keep trying!', 'info');
         }
     }
 
@@ -412,6 +697,7 @@ class CrosswordApp {
 
     showOnlySelectedClue(number, direction) {
         const cluesContainer = document.querySelector('.clues-container');
+        const focusedClueSection = document.getElementById('focused-clue-section');
         
         // Hide all clues with smooth transition
         document.querySelectorAll('.clues-list li').forEach(li => {
@@ -428,23 +714,14 @@ class CrosswordApp {
             section.style.display = 'none';
         });
         
-        // Create or show the centered clue container
-        let centeredContainer = document.querySelector('.centered-clue-container');
-        if (!centeredContainer) {
-            centeredContainer = document.createElement('div');
-            centeredContainer.className = 'centered-clue-container';
-            cluesContainer.appendChild(centeredContainer);
-        }
-        
-        // Find the selected clue and clone it to the centered container
+        // Show and populate the focused clue section
         const selectedClue = document.querySelector(
             `.clues-list li[data-number="${number}"][data-direction="${direction}"]`
         );
-        if (selectedClue) {
-            centeredContainer.innerHTML = selectedClue.outerHTML;
-            centeredContainer.style.display = 'flex';
-            centeredContainer.firstChild.classList.remove('hidden');
-            centeredContainer.firstChild.classList.add('active');
+        if (selectedClue && focusedClueSection) {
+            const clueText = selectedClue.textContent;
+            focusedClueSection.innerHTML = `<div class="clue-item">${clueText}</div>`;
+            focusedClueSection.classList.add('active');
         }
         
         // Add single clue class for any additional styling
@@ -453,11 +730,12 @@ class CrosswordApp {
 
     showAllClues() {
         const cluesContainer = document.querySelector('.clues-container');
+        const focusedClueSection = document.getElementById('focused-clue-section');
         
-        // Hide the centered container
-        const centeredContainer = document.querySelector('.centered-clue-container');
-        if (centeredContainer) {
-            centeredContainer.style.display = 'none';
+        // Hide the focused clue section
+        if (focusedClueSection) {
+            focusedClueSection.classList.remove('active');
+            focusedClueSection.innerHTML = '';
         }
         
         // Show all clue sections
@@ -548,6 +826,11 @@ class CrosswordApp {
     }
 
     handleKeyPress(event) {
+        // Prevent keyboard interaction if puzzle is completed
+        if (this.isCompleted) {
+            return;
+        }
+        
         if (!this.selectedWord) return;
 
         const activeElement = document.activeElement;
@@ -618,6 +901,12 @@ class CrosswordApp {
     }
 
     checkPuzzle() {
+        // Don't check if already completed
+        if (this.isCompleted) {
+            this.showStatus('Puzzle already completed!', 'success');
+            return;
+        }
+        
         let correct = 0;
         let total = 0;
         
@@ -666,6 +955,12 @@ class CrosswordApp {
     }
 
     revealSolution() {
+        // Don't reveal if already completed
+        if (this.isCompleted) {
+            this.showStatus('Puzzle already completed!', 'success');
+            return;
+        }
+        
         const gridHeight = this.currentPuzzle.grid.length;
         const gridWidth = this.currentPuzzle.grid[0].length;
         
@@ -694,13 +989,34 @@ class CrosswordApp {
     clearPuzzle() {
         this.userInputs = {};
         
+        // Clear saved inputs from localStorage
+        const inputsKey = `crossword_inputs_${this.currentSeed}`;
+        localStorage.removeItem(inputsKey);
+        
         document.querySelectorAll('.cell input').forEach(input => {
             input.value = '';
+            input.disabled = false; // Re-enable inputs
+            input.style.cursor = 'text';
         });
 
         document.querySelectorAll('.cell').forEach(cell => {
-            cell.classList.remove('correct', 'incorrect');
+            cell.classList.remove('correct', 'incorrect', 'completed');
         });
+
+        // Reset timer if puzzle was completed
+        if (this.isCompleted) {
+            this.isCompleted = false;
+            this.completionTime = null;
+            this.isPaused = false;
+            this.pausedTime = 0;
+            
+            // Remove completion from localStorage and restart timer
+            const completionKey = `crossword_completed_${this.currentSeed}`;
+            localStorage.removeItem(completionKey);
+            
+            // Restart timer
+            this.initializeTimer();
+        }
 
         this.showStatus('Puzzle cleared', 'info');
     }

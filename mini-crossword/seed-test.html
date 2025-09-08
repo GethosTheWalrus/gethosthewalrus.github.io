@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seed Test</title>
+</head>
+<body>
+    <h1>Crossword Seed Test</h1>
+    <button id="test-seeds">Test Different Seeds</button>
+    <div id="results"></div>
+
+    <script src="crossword-generator.js"></script>
+    <script>
+        document.getElementById('test-seeds').addEventListener('click', async function() {
+            const response = await fetch('words.json');
+            const wordsData = await response.json();
+            
+            const results = document.getElementById('results');
+            results.innerHTML = '<h3>Testing different seeds:</h3>';
+            
+            const seeds = [12345, 67890, 11111, 22222, 33333];
+            
+            seeds.forEach(seed => {
+                const generator = new CrosswordGenerator(wordsData, seed);
+                const puzzle = generator.generatePuzzle(seed);
+                
+                const div = document.createElement('div');
+                div.innerHTML = `
+                    <h4>Seed: ${seed}</h4>
+                    <p>Words: ${puzzle.placedWords.map(w => w.word).join(', ')}</p>
+                    <p>Grid size: ${puzzle.grid.length}x${puzzle.grid[0].length}</p>
+                    <hr>
+                `;
+                results.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>
