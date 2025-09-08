@@ -1,0 +1,726 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 2.5em;
+}
+
+.seed-info {
+    color: #7f8c8d;
+    font-size: 1.1em;
+    font-weight: 500;
+    background: #ecf0f1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 0;
+}
+
+.icon-button {
+    background: none;
+    color: #2c3e50;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+    min-width: 55px;
+}
+
+.icon-button:hover {
+    background: rgba(44, 62, 80, 0.1);
+    transform: none;
+    box-shadow: none;
+    color: #1a252f;
+}
+
+.icon-button:active {
+    transform: scale(0.95);
+    box-shadow: none;
+}
+
+.icon-button:disabled {
+    background: none;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.4;
+}
+
+.icon-button .icon {
+    font-size: 16px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.icon-button:hover .icon {
+    opacity: 1;
+}
+
+.icon-button .label {
+    font-size: 9px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.icon-button:hover .label {
+    opacity: 0.8;
+}
+
+
+
+button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #2980b9;
+}
+
+button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.puzzle-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    grid-template-areas: 
+        "header"
+        "grid"
+        "clues";
+}
+
+.header-section {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 20px;
+}
+
+.crossword-grid {
+    grid-area: grid;
+    display: grid;
+    gap: 0;
+    border: 3px solid #2c3e50;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 
+        0 4px 15px rgba(0,0,0,0.2),
+        inset 0 0 10px rgba(0,0,0,0.1);
+    background: #34495e;
+    font-size: 0;
+    line-height: 0;
+    vertical-align: top;
+    /* Grid size and dimensions will be set dynamically by JavaScript */
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border: 1px solid #34495e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.8s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: normal;
+}
+
+/* Border will be handled by the border-collapse style */
+
+.cell:not(.blocked):hover {
+    background: #ecf0f1;
+}
+
+.cell.blocked {
+    background: #2e3134;
+    cursor: default;
+    border: 1px solid #1a252f;
+}
+
+.cell.active {
+    background: #3498db;
+    color: white;
+    border-color: #2980b9;
+}
+
+.cell.highlighted {
+    background: #e8f4f8;
+    border-color: #3498db;
+}
+
+.cell.correct {
+    background: #d5f4e6;
+    color: #27ae60;
+    border-color: #58d68d;
+}
+
+.cell.incorrect {
+    background: #fadbd8;
+    color: #e74c3c;
+    border-color: #f1948a;
+}
+
+.cell input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background: transparent;
+    color: inherit;
+    outline: none;
+    text-transform: uppercase;
+}
+
+.cell-number {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #2c3e50;
+    background: white;
+    border-radius: 2px;
+    padding: 1px 2px;
+    line-height: 1;
+}
+
+.clues-container {
+    grid-area: clues;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+}
+
+.clues-container.single-clue {
+    justify-content: center;
+    position: relative;
+}
+
+.centered-clue-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.centered-clue-container li {
+    text-align: center;
+    max-width: 500px;
+    min-width: 300px;
+    list-style: none;
+}
+
+.clues-container.single-clue .clues-section {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 500px;
+    min-width: 300px;
+}
+
+.clues-container.single-clue .clues-list {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.clues-container.single-clue .clues-list li {
+    text-align: center;
+    width: 100%;
+}
+
+.clues-section {
+    flex: 1;
+    max-width: 400px;
+}
+
+.clues-section h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 5px;
+    transition: opacity 0.3s ease, height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+    opacity: 1;
+}
+
+.clues-section h3.hidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.clues-list {
+    list-style: none;
+}
+
+.clues-list li {
+    margin-bottom: 8px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.clues-list li.hidden {
+    opacity: 0;
+    pointer-events: none;
+    margin: 0;
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, height 0.3s ease, margin 0.3s ease, padding 0.3s ease;
+}
+
+.clues-list li:hover {
+    background: #e9ecef;
+}
+
+.clues-list li.active {
+    background: #3498db;
+    color: white;
+}
+
+.clue-number {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.clues-list li.active .clue-number {
+    color: white;
+}
+
+.toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.status-message {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 200px;
+    max-width: 400px;
+    text-align: center;
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: auto;
+}
+
+.status-message.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.status-message.success {
+    background: rgba(212, 237, 218, 0.95);
+    color: #155724;
+    border-color: rgba(195, 230, 203, 0.8);
+}
+
+.status-message.error {
+    background: rgba(248, 215, 218, 0.95);
+    color: #721c24;
+    border-color: rgba(245, 198, 203, 0.8);
+}
+
+.status-message.info {
+    background: rgba(209, 236, 241, 0.95);
+    color: #0c5460;
+    border-color: rgba(190, 229, 235, 0.8);
+}
+
+/* Share Dialog Styles */
+.share-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(4px);
+}
+
+.share-dialog-content {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.share-dialog-content h3 {
+    margin: 0 0 16px 0;
+    color: #2c3e50;
+    font-size: 1.4em;
+}
+
+.share-dialog-content p {
+    margin: 0 0 16px 0;
+    color: #7f8c8d;
+}
+
+.share-url-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+#share-url-input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #f8f9fa;
+    color: #2c3e50;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: transform 0.2s;
+}
+
+.copy-btn:hover {
+    transform: translateY(-1px);
+}
+
+.copy-btn:active {
+    transform: translateY(0);
+}
+
+.close-btn {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.close-btn:hover {
+    background: #7f8c8d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .controls {
+        gap: 8px;
+        margin-top: 20px;
+    }
+    
+    .icon-button {
+        padding: 6px 8px;
+        min-width: 45px;
+        font-size: 11px;
+    }
+    
+    .icon-button .icon {
+        font-size: 14px;
+    }
+    
+    .icon-button .label {
+        font-size: 8px;
+        font-weight: 400;
+    }
+    
+    .header-title {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .seed-info {
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+    
+    .puzzle-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+        grid-template-areas: 
+            "header"
+            "grid"
+            "clues";
+    }
+    
+    /* Grid sizing will be handled dynamically by JavaScript */
+    
+    .toast-container {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        transform: none;
+    }
+    
+    .status-message {
+        max-width: none;
+        margin: 0;
+        font-size: 13px;
+        padding: 14px 20px;
+    }
+    
+    .cell input {
+        font-size: 14px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .share-dialog-content {
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .share-url-container {
+        flex-direction: column;
+    }
+    
+    #share-url-input {
+        font-size: 16px; /* Prevents zoom on iOS */
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        padding: 5px;
+        gap: 15px;
+        max-width: 100%;
+    }
+    
+    .puzzle-container {
+        padding: 10px 0;
+        gap: 15px;
+        grid-template-areas: 
+            "header"
+            "grid"
+            "clues";
+    }
+    
+    .crossword-grid {
+        margin: 0;
+        border-width: 1px; /* Even thinner border */
+        align-self: center;
+        justify-self: center;
+    }
+    
+    .cell {
+        /* Remove fixed dimensions - let JavaScript set them */
+        width: auto !important;
+        height: auto !important;
+        font-size: 14px;
+        min-width: 20px;
+        min-height: 20px;
+    }
+    
+    .cell input {
+        font-size: 14px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        border: none;
+        background: transparent;
+        outline: none;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .cell-number {
+        font-size: 8px !important;
+        top: 1px !important;
+        left: 1px !important;
+    }
+    
+    .controls {
+        gap: 6px;
+    }
+    
+    .icon-button {
+        padding: 6px 8px;
+        min-width: 40px;
+    }
+    
+    .icon-button .icon {
+        font-size: 12px;
+    }
+    
+    .icon-button .label {
+        font-size: 7px;
+        font-weight: 400;
+    }
+    
+    .header-title {
+        gap: 8px;
+    }
+    
+    .seed-info {
+        font-size: 0.8em;
+        padding: 5px 8px;
+    }
+    
+    .status-message {
+        font-size: 12px;
+        padding: 12px 16px;
+    }
+    
+    .share-dialog-content {
+        padding: 16px;
+    }
+    
+    .share-dialog-content h3 {
+        font-size: 1.2em;
+    }
+    
+    /* Grid sizing will be handled dynamically by JavaScript for mobile too */
+    
+    .cell input {
+        font-size: 12px;
+    }
+    
+    .clues-container {
+        gap: 15px;
+        flex-direction: column;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+}

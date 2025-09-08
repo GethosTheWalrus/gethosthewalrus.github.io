@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Crossword</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="toast-container">
+            <div class="status-message" id="status-message"></div>
+        </div>
+        
+        <main>
+            <div class="puzzle-container">
+                <div class="header-section">
+                    <div class="header-title">
+                        <h1>Mini Crossword</h1>
+                        <div class="seed-info">
+                            <span id="current-seed"></span>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <button id="new-puzzle" class="icon-button" title="Generate a new random puzzle">
+                            <span class="icon">🔄</span>
+                            <span class="label">New Puzzle</span>
+                        </button>
+                        <button id="share-puzzle" class="icon-button" title="Share this puzzle with others">
+                            <span class="icon">📤</span>
+                            <span class="label">Share</span>
+                        </button>
+                        <button id="check-puzzle" class="icon-button" title="Check your answers">
+                            <span class="icon">✓</span>
+                            <span class="label">Check</span>
+                        </button>
+                        <button id="reveal-puzzle" class="icon-button" title="Show the complete solution">
+                            <span class="icon">💡</span>
+                            <span class="label">Reveal</span>
+                        </button>
+                        <button id="clear-puzzle" class="icon-button" title="Clear all entered letters">
+                            <span class="icon">🧹</span>
+                            <span class="label">Clear</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="crossword-grid" class="crossword-grid"></div>
+                
+                <div class="clues-container">
+                    <div class="clues-section">
+                        <h3>Across</h3>
+                        <ul id="across-clues" class="clues-list"></ul>
+                    </div>
+                    <div class="clues-section">
+                        <h3>Down</h3>
+                        <ul id="down-clues" class="clues-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="crossword-generator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

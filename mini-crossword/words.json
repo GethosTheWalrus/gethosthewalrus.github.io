@@ -1,0 +1,2280 @@
+{
+  "words": [
+    {
+      "word": "CAT",
+      "clue": "Finicky creature that judges your life choices"
+    },
+    {
+      "word": "DOG",
+      "clue": "Tail-wagging optimist who thinks you're amazing"
+    },
+    {
+      "word": "SUN",
+      "clue": "Daily brightness that makes vampires nervous"
+    },
+    {
+      "word": "MOON",
+      "clue": "Night shift worker in the sky"
+    },
+    {
+      "word": "BOOK",
+      "clue": "Netflix for people who read"
+    },
+    {
+      "word": "TREE",
+      "clue": "Nature's apartment building for squirrels"
+    },
+    {
+      "word": "BIRD",
+      "clue": "Dinosaur descendant with better PR"
+    },
+    {
+      "word": "FISH",
+      "clue": "Swimming creature that never needs a towel"
+    },
+    {
+      "word": "STAR",
+      "clue": "Hollywood type or cosmic furnace"
+    },
+    {
+      "word": "RAIN",
+      "clue": "Sky's way of watering the earth (and ruining picnics)"
+    },
+    {
+      "word": "SNOW",
+      "clue": "Winter's glitter that requires shoveling"
+    },
+    {
+      "word": "WIND",
+      "clue": "Invisible force that steals umbrellas"
+    },
+    {
+      "word": "FIRE",
+      "clue": "Prometheus's gift that likes marshmallows"
+    },
+    {
+      "word": "WATER",
+      "clue": "Earth's most boring essential beverage"
+    },
+    {
+      "word": "EARTH",
+      "clue": "Third rock from the sun (not the band)"
+    },
+    {
+      "word": "OCEAN",
+      "clue": "Vast soup bowl that's way too salty"
+    },
+    {
+      "word": "RIVER",
+      "clue": "Nature's highway that flows downstream"
+    },
+    {
+      "word": "MOUNTAIN",
+      "clue": "Earth's way of showing off its abs"
+    },
+    {
+      "word": "FOREST",
+      "clue": "Tree convention center"
+    },
+    {
+      "word": "DESERT",
+      "clue": "Sandy place where cacti throw parties"
+    },
+    {
+      "word": "CLOUD",
+      "clue": "Sky's cotton candy that holds water"
+    },
+    {
+      "word": "GRASS",
+      "clue": "Earth's green carpet that grows back when cut"
+    },
+    {
+      "word": "FLOWER",
+      "clue": "Plant's way of being extra for the bees"
+    },
+    {
+      "word": "APPLE",
+      "clue": "Fruit that supposedly keeps doctors away"
+    },
+    {
+      "word": "ORANGE",
+      "clue": "Citrus that shares its name with a color"
+    },
+    {
+      "word": "BANANA",
+      "clue": "Yellow crescent that monkeys allegedly love"
+    },
+    {
+      "word": "GRAPE",
+      "clue": "Future wine in cluster form"
+    },
+    {
+      "word": "BREAD",
+      "clue": "Carb delivery system for butter"
+    },
+    {
+      "word": "CHEESE",
+      "clue": "Milk's glow-up after meeting bacteria"
+    },
+    {
+      "word": "MILK",
+      "clue": "Cereal's swimming pool"
+    },
+    {
+      "word": "COFFEE",
+      "clue": "Bean juice that powers civilization"
+    },
+    {
+      "word": "TEA",
+      "clue": "Leaf water that the British take seriously"
+    },
+    {
+      "word": "HOUSE",
+      "clue": "Expensive box that holds your stuff"
+    },
+    {
+      "word": "DOOR",
+      "clue": "Hinged barrier that opportunity allegedly knocks on"
+    },
+    {
+      "word": "WINDOW",
+      "clue": "Transparent wall that birds keep hitting"
+    },
+    {
+      "word": "CHAIR",
+      "clue": "Four-legged friend that supports your decisions"
+    },
+    {
+      "word": "TABLE",
+      "clue": "Flat surface where arguments happen over dinner"
+    },
+    {
+      "word": "BED",
+      "clue": "Horizontal life recharging station"
+    },
+    {
+      "word": "LAMP",
+      "clue": "Enlightening furniture that moths adore"
+    },
+    {
+      "word": "CLOCK",
+      "clue": "Time's tattletale that never lies"
+    },
+    {
+      "word": "PHONE",
+      "clue": "Pocket computer disguised as a communication device"
+    },
+    {
+      "word": "COMPUTER",
+      "clue": "Electronic brain that's smarter than you but can't make coffee"
+    },
+    {
+      "word": "SCREEN",
+      "clue": "Glowing rectangle we stare at all day"
+    },
+    {
+      "word": "KEYBOARD",
+      "clue": "Button collection for digital conversation"
+    },
+    {
+      "word": "MOUSE",
+      "clue": "Clickable rodent that never needs cheese"
+    },
+    {
+      "word": "MUSIC",
+      "clue": "Organized noise that makes people move weirdly"
+    },
+    {
+      "word": "SONG",
+      "clue": "Three-minute emotional time machine"
+    },
+    {
+      "word": "DANCE",
+      "clue": "Vertical expression of horizontal desire"
+    },
+    {
+      "word": "MOVIE",
+      "clue": "Two-hour escape from reality with popcorn"
+    },
+    {
+      "word": "GAME",
+      "clue": "Structured fun that sometimes causes controller throwing"
+    },
+    {
+      "word": "SPORT",
+      "clue": "Athletic endeavor that makes people yell at TVs"
+    },
+    {
+      "word": "BALL",
+      "clue": "Spherical object that defies attempts to catch it"
+    },
+    {
+      "word": "TEAM",
+      "clue": "Group effort where everyone blames everyone else"
+    },
+    {
+      "word": "PLAYER",
+      "clue": "Someone in the game (literally or figuratively)"
+    },
+    {
+      "word": "WINNER",
+      "clue": "Person who gets to gloat temporarily"
+    },
+    {
+      "word": "SCHOOL",
+      "clue": "Knowledge factory with cafeteria food"
+    },
+    {
+      "word": "TEACHER",
+      "clue": "Professional herder of chaotic young humans"
+    },
+    {
+      "word": "STUDENT",
+      "clue": "Professional procrastinator with a backpack"
+    },
+    {
+      "word": "LESSON",
+      "clue": "Educational episode that may or may not stick"
+    },
+    {
+      "word": "PENCIL",
+      "clue": "Wooden stick that makes mistakes erasable"
+    },
+    {
+      "word": "PAPER",
+      "clue": "Tree's second career as a writing surface"
+    },
+    {
+      "word": "COLOR",
+      "clue": "Visual spice that makes life less boring"
+    },
+    {
+      "word": "RED",
+      "clue": "Hue of stop signs and embarrassment"
+    },
+    {
+      "word": "BLUE",
+      "clue": "Sky's favorite outfit choice"
+    },
+    {
+      "word": "GREEN",
+      "clue": "Money's color and envy's emotion"
+    },
+    {
+      "word": "YELLOW",
+      "clue": "Sunshine's signature shade"
+    },
+    {
+      "word": "BLACK",
+      "clue": "Color that goes with everything and hides stains"
+    },
+    {
+      "word": "WHITE",
+      "clue": "Pristine shade that shows every spill"
+    },
+    {
+      "word": "SMILE",
+      "clue": "Facial curve that sets everything straight"
+    },
+    {
+      "word": "LAUGH",
+      "clue": "Joy's soundtrack that's contagious"
+    },
+    {
+      "word": "HAPPY",
+      "clue": "Emotional state that pharmaceutical companies try to bottle"
+    },
+    {
+      "word": "FRIEND",
+      "clue": "Person who knows your weird and likes you anyway"
+    },
+    {
+      "word": "FAMILY",
+      "clue": "People you're stuck with who love you unconditionally"
+    },
+    {
+      "word": "LOVE",
+      "clue": "Four-letter word that makes people do crazy things"
+    },
+    {
+      "word": "PEACE",
+      "clue": "Harmony that everyone wants but few achieve"
+    },
+    {
+      "word": "DREAM",
+      "clue": "Sleep cinema with bizarre plotlines"
+    },
+    {
+      "word": "HOPE",
+      "clue": "Optimism's best friend and reality's challenge"
+    },
+    {
+      "word": "TRUTH",
+      "clue": "Rare commodity that hurts sometimes"
+    },
+    {
+      "word": "TIME",
+      "clue": "Currency we spend but never have enough of"
+    },
+    {
+      "word": "SPACE",
+      "clue": "Final frontier or what you need more of"
+    },
+    {
+      "word": "WORLD",
+      "clue": "Big blue marble we all share (poorly)"
+    },
+    {
+      "word": "LIFE",
+      "clue": "Subscription service with unclear terms and conditions"
+    },
+    {
+      "word": "NATURE",
+      "clue": "Earth's original programming before humans hacked it"
+    },
+    {
+      "word": "FUTURE",
+      "clue": "Tomorrow's neighborhood, always under construction"
+    },
+    {
+      "word": "PAST",
+      "clue": "Yesterday's baggage that therapy helps unpack"
+    },
+    {
+      "word": "PRESENT",
+      "clue": "Now moment or wrapped surprise"
+    },
+    {
+      "word": "MOMENT",
+      "clue": "Instant that photographers try to capture"
+    },
+    {
+      "word": "SECOND",
+      "clue": "Time unit or runner-up position"
+    },
+    {
+      "word": "MINUTE",
+      "clue": "Sixty ticks or incredibly small"
+    },
+    {
+      "word": "HOUR",
+      "clue": "Time chunk that meetings somehow expand to fill"
+    },
+    {
+      "word": "DAY",
+      "clue": "Earth's rotation cycle or employment shift"
+    },
+    {
+      "word": "WEEK",
+      "clue": "Seven-day cycle that feels longer on Mondays"
+    },
+    {
+      "word": "MONTH",
+      "clue": "Calendar page that rent is due"
+    },
+    {
+      "word": "YEAR",
+      "clue": "Earth's solar lap around the track"
+    },
+    {
+      "word": "SEASON",
+      "clue": "Climate's wardrobe change"
+    },
+    {
+      "word": "SPRING",
+      "clue": "Nature's wake-up call with flowers"
+    },
+    {
+      "word": "SUMMER",
+      "clue": "Sweat season with longer days"
+    },
+    {
+      "word": "AUTUMN",
+      "clue": "Trees' colorful farewell before winter"
+    },
+    {
+      "word": "WINTER",
+      "clue": "Cold season that makes bears hibernate"
+    },
+    {
+      "word": "MORNING",
+      "clue": "Day's opening act that coffee makes bearable"
+    },
+    {
+      "word": "EVENING",
+      "clue": "Day's closing credits with sunset"
+    },
+    {
+      "word": "NIGHT",
+      "clue": "Darkness that makes everything spookier"
+    },
+    {
+      "word": "LIGHT",
+      "clue": "Photon parade that banishes shadows"
+    },
+    {
+      "word": "DARK",
+      "clue": "Light's absence that hides monsters"
+    },
+    {
+      "word": "BRIGHT",
+      "clue": "Intelligent or blindingly luminous"
+    },
+    {
+      "word": "SHADOW",
+      "clue": "Dark doppelganger that follows you around"
+    },
+    {
+      "word": "PIZZA",
+      "clue": "Italian flatbread that conquered the world"
+    },
+    {
+      "word": "BEACH",
+      "clue": "Sandy meeting place of land and sea"
+    },
+    {
+      "word": "SHARK",
+      "clue": "Ocean's apex predator with a PR problem"
+    },
+    {
+      "word": "ROBOT",
+      "clue": "Metal human that never needs coffee breaks"
+    },
+    {
+      "word": "MAGIC",
+      "clue": "Impossible things that somehow happen"
+    },
+    {
+      "word": "CASTLE",
+      "clue": "Medieval mansion with terrible Wi-Fi"
+    },
+    {
+      "word": "DRAGON",
+      "clue": "Mythical creature with anger management issues"
+    },
+    {
+      "word": "WIZARD",
+      "clue": "Old person with questionable fashion sense and powers"
+    },
+    {
+      "word": "PIRATE",
+      "clue": "Maritime entrepreneur with questionable ethics"
+    },
+    {
+      "word": "NINJA",
+      "clue": "Stealthy warrior you never see coming"
+    },
+    {
+      "word": "ROCKET",
+      "clue": "Earth's way of visiting space neighbors"
+    },
+    {
+      "word": "PLANET",
+      "clue": "Cosmic real estate in the solar system"
+    },
+    {
+      "word": "ALIEN",
+      "clue": "Hypothetical being that probably judges our TV shows"
+    },
+    {
+      "word": "GALAXY",
+      "clue": "Cosmic neighborhood with billions of residents"
+    },
+    {
+      "word": "METEOR",
+      "clue": "Space rock on a one-way trip to Earth"
+    },
+    {
+      "word": "COMET",
+      "clue": "Cosmic snowball with a glowing tail"
+    },
+    {
+      "word": "TELESCOPE",
+      "clue": "Device for professional stargazing"
+    },
+    {
+      "word": "ASTRONAUT",
+      "clue": "Professional space tourist with the right stuff"
+    },
+    {
+      "word": "SATELLITE",
+      "clue": "Artificial moon that helps with GPS and gossip"
+    },
+    {
+      "word": "INTERNET",
+      "clue": "Global network of cat videos and arguments"
+    },
+    {
+      "word": "EMAIL",
+      "clue": "Digital mail that arrives faster than you want"
+    },
+    {
+      "word": "WEBSITE",
+      "clue": "Digital storefront in cyber-space"
+    },
+    {
+      "word": "BROWSER",
+      "clue": "Window to the world wide web"
+    },
+    {
+      "word": "PASSWORD",
+      "clue": "Secret word you always forget"
+    },
+    {
+      "word": "USERNAME",
+      "clue": "Your digital identity when 'John' is taken"
+    },
+    {
+      "word": "DOWNLOAD",
+      "clue": "Digital acquisition of stuff you might not need"
+    },
+    {
+      "word": "UPLOAD",
+      "clue": "Sharing your digital treasures with the world"
+    },
+    {
+      "word": "VIRUS",
+      "clue": "Tiny troublemaker that crashes parties and computers"
+    },
+    {
+      "word": "BACKUP",
+      "clue": "Digital insurance you make after disaster strikes"
+    },
+    {
+      "word": "FOLDER",
+      "clue": "Digital filing cabinet for your chaos"
+    },
+    {
+      "word": "DESKTOP",
+      "clue": "Computer's virtual workspace that's never clean"
+    },
+    {
+      "word": "LAPTOP",
+      "clue": "Portable computer that's too hot for your lap"
+    },
+    {
+      "word": "TABLET",
+      "clue": "Large phone or small computer, depending on mood"
+    },
+    {
+      "word": "SMARTPHONE",
+      "clue": "Pocket computer disguised as a phone"
+    },
+    {
+      "word": "HEADPHONES",
+      "clue": "Portable sound isolation chambers"
+    },
+    {
+      "word": "SPEAKER",
+      "clue": "Device that broadcasts your questionable music taste"
+    },
+    {
+      "word": "MICROPHONE",
+      "clue": "Device that amplifies your voice and insecurities"
+    },
+    {
+      "word": "CAMERA",
+      "clue": "Memory capturing device for posterity and social media"
+    },
+    {
+      "word": "PHOTOGRAPH",
+      "clue": "Frozen moment in time worth a thousand words"
+    },
+    {
+      "word": "SELFIE",
+      "clue": "Self-portrait for the digital age narcissist"
+    },
+    {
+      "word": "FILTER",
+      "clue": "Digital makeup for photos and reality"
+    },
+    {
+      "word": "HASHTAG",
+      "clue": "Pound sign that became a social organizing tool"
+    },
+    {
+      "word": "EMOJI",
+      "clue": "Tiny pictures that replaced actual words"
+    },
+    {
+      "word": "MEME",
+      "clue": "Internet joke with cultural staying power"
+    },
+    {
+      "word": "VIRAL",
+      "clue": "Digital fame that spreads faster than gossip"
+    },
+    {
+      "word": "TRENDING",
+      "clue": "Currently popular topic in the digital zeitgeist"
+    },
+    {
+      "word": "INFLUENCER",
+      "clue": "Person who makes living by having opinions online"
+    },
+    {
+      "word": "FOLLOWER",
+      "clue": "Digital stalker with your permission"
+    },
+    {
+      "word": "SUBSCRIBE",
+      "clue": "Agreeing to regular digital deliveries"
+    },
+    {
+      "word": "ALGORITHM",
+      "clue": "Mathematical recipe for digital recommendations"
+    },
+    {
+      "word": "ARTIFICIAL",
+      "clue": "Man-made substitute for the real thing"
+    },
+    {
+      "word": "INTELLIGENCE",
+      "clue": "Brain power that some humans lack"
+    },
+    {
+      "word": "MACHINE",
+      "clue": "Mechanical helper that never asks for raises"
+    },
+    {
+      "word": "AUTOMATION",
+      "clue": "Robots doing jobs humans used to do"
+    },
+    {
+      "word": "TECHNOLOGY",
+      "clue": "Modern magic that runs on electricity"
+    },
+    {
+      "word": "INNOVATION",
+      "clue": "New idea that changes everything"
+    },
+    {
+      "word": "INVENTION",
+      "clue": "Creative solution to a problem nobody knew they had"
+    },
+    {
+      "word": "DISCOVERY",
+      "clue": "Finding something that was always there"
+    },
+    {
+      "word": "RESEARCH",
+      "clue": "Organized curiosity with funding"
+    },
+    {
+      "word": "EXPERIMENT",
+      "clue": "Scientific trial and error with documentation"
+    },
+    {
+      "word": "LABORATORY",
+      "clue": "Controlled environment for controlled chaos"
+    },
+    {
+      "word": "SCIENTIST",
+      "clue": "Professional question asker with fancy equipment"
+    },
+    {
+      "word": "PROFESSOR",
+      "clue": "Academic who professes to know things"
+    },
+    {
+      "word": "UNIVERSITY",
+      "clue": "Expensive place to learn things Google knows for free"
+    },
+    {
+      "word": "DEGREE",
+      "clue": "Expensive paper that proves you attended classes"
+    },
+    {
+      "word": "DIPLOMA",
+      "clue": "Certificate of educational survival"
+    },
+    {
+      "word": "GRADUATION",
+      "clue": "Ceremony marking the end of student loan deferment"
+    },
+    {
+      "word": "SCHOLARSHIP",
+      "clue": "Academic achievement award that pays bills"
+    },
+    {
+      "word": "HOMEWORK",
+      "clue": "School's way of invading your personal time"
+    },
+    {
+      "word": "TEXTBOOK",
+      "clue": "Expensive knowledge container with planned obsolescence"
+    },
+    {
+      "word": "LIBRARY",
+      "clue": "Quiet place where books go to feel important"
+    },
+    {
+      "word": "BOOKSHELF",
+      "clue": "Furniture that judges your reading habits"
+    },
+    {
+      "word": "NOVEL",
+      "clue": "Long story that someone hopes you'll finish"
+    },
+    {
+      "word": "FICTION",
+      "clue": "Creative lies told for entertainment"
+    },
+    {
+      "word": "NONFICTION",
+      "clue": "True stories that are stranger than fiction"
+    },
+    {
+      "word": "BIOGRAPHY",
+      "clue": "Someone else's life story you probably won't finish"
+    },
+    {
+      "word": "AUTOBIOGRAPHY",
+      "clue": "Self-written life story with creative editing"
+    },
+    {
+      "word": "MEMOIR",
+      "clue": "Selective memory sharing for profit"
+    },
+    {
+      "word": "JOURNAL",
+      "clue": "Personal diary that judges your life choices"
+    },
+    {
+      "word": "MAGAZINE",
+      "clue": "Glossy collection of articles you skim in waiting rooms"
+    },
+    {
+      "word": "NEWSPAPER",
+      "clue": "Daily dose of reality that ruins breakfast"
+    },
+    {
+      "word": "ARTICLE",
+      "clue": "Written piece that's longer than a tweet"
+    },
+    {
+      "word": "HEADLINE",
+      "clue": "Attention-grabbing sentence designed to make you click"
+    },
+    {
+      "word": "REPORTER",
+      "clue": "Professional asker of awkward questions"
+    },
+    {
+      "word": "JOURNALIST",
+      "clue": "Truth seeker with deadline anxiety"
+    },
+    {
+      "word": "EDITOR",
+      "clue": "Person who makes other people's writing better"
+    },
+    {
+      "word": "PUBLISHER",
+      "clue": "Gatekeeper of the written word marketplace"
+    },
+    {
+      "word": "BESTSELLER",
+      "clue": "Popular book that everyone buys but few finish"
+    },
+    {
+      "word": "AUTHOR",
+      "clue": "Professional creator of imaginary friends and enemies"
+    },
+    {
+      "word": "WRITER",
+      "clue": "Person who turns coffee into words"
+    },
+    {
+      "word": "POET",
+      "clue": "Author who makes ordinary words dance"
+    },
+    {
+      "word": "POETRY",
+      "clue": "Condensed literature with line breaks in weird places"
+    },
+    {
+      "word": "RHYME",
+      "clue": "Words that sound alike and sometimes make sense"
+    },
+    {
+      "word": "RHYTHM",
+      "clue": "Musical beat that makes you move involuntarily"
+    },
+    {
+      "word": "MELODY",
+      "clue": "Tune that gets stuck in your head for days"
+    },
+    {
+      "word": "HARMONY",
+      "clue": "Musical cooperation between different voices"
+    },
+    {
+      "word": "SYMPHONY",
+      "clue": "Orchestral masterpiece that requires formal attire"
+    },
+    {
+      "word": "ORCHESTRA",
+      "clue": "Large group of musicians who somehow play together"
+    },
+    {
+      "word": "CONDUCTOR",
+      "clue": "Person who waves a stick and makes music happen"
+    },
+    {
+      "word": "MUSICIAN",
+      "clue": "Sound artist who practices for your entertainment"
+    },
+    {
+      "word": "INSTRUMENT",
+      "clue": "Tool for making organized noise"
+    },
+    {
+      "word": "PIANO",
+      "clue": "Black and white keys that make beautiful sounds"
+    },
+    {
+      "word": "GUITAR",
+      "clue": "Stringed instrument that makes neighbors complain"
+    },
+    {
+      "word": "VIOLIN",
+      "clue": "Stringed instrument that sounds terrible when learning"
+    },
+    {
+      "word": "DRUMS",
+      "clue": "Percussion instrument set that annoys roommates"
+    },
+    {
+      "word": "TRUMPET",
+      "clue": "Brass instrument that wakes the neighborhood"
+    },
+    {
+      "word": "SAXOPHONE",
+      "clue": "Smooth jazz maker that looks complicated"
+    },
+    {
+      "word": "FLUTE",
+      "clue": "Wind instrument that requires good breath control"
+    },
+    {
+      "word": "CLARINET",
+      "clue": "Reed instrument that squeaks when nervous"
+    },
+    {
+      "word": "TROMBONE",
+      "clue": "Brass instrument with a slide that extends"
+    },
+    {
+      "word": "TUBA",
+      "clue": "Big brass instrument that provides the bottom notes"
+    },
+    {
+      "word": "HARMONICA",
+      "clue": "Pocket-sized breath-powered music maker"
+    },
+    {
+      "word": "ACCORDION",
+      "clue": "Squeezebox that makes polka possible"
+    },
+    {
+      "word": "BANJO",
+      "clue": "Stringed instrument that sounds like home"
+    },
+    {
+      "word": "MANDOLIN",
+      "clue": "Small stringed instrument with a bright voice"
+    },
+    {
+      "word": "HARP",
+      "clue": "Angelic stringed instrument that's hard to move"
+    },
+    {
+      "word": "CELLO",
+      "clue": "Large stringed instrument you hug while playing"
+    },
+    {
+      "word": "BASS",
+      "clue": "Big instrument that provides the musical foundation"
+    },
+    {
+      "word": "KEYBOARD",
+      "clue": "Electronic piano that doesn't need tuning"
+    },
+    {
+      "word": "SYNTHESIZER",
+      "clue": "Electronic instrument that makes sounds from the future"
+    },
+    {
+      "word": "RECORDING",
+      "clue": "Captured sound for later enjoyment"
+    },
+    {
+      "word": "STUDIO",
+      "clue": "Soundproof room where music magic happens"
+    },
+    {
+      "word": "MICROPHONE",
+      "clue": "Sound capture device for amplification"
+    },
+    {
+      "word": "AMPLIFIER",
+      "clue": "Electronic volume booster for better or worse"
+    },
+    {
+      "word": "CONCERT",
+      "clue": "Live musical performance with overpriced drinks"
+    },
+    {
+      "word": "AUDIENCE",
+      "clue": "Group of people pretending to pay attention"
+    },
+    {
+      "word": "APPLAUSE",
+      "clue": "Synchronized hand-clapping appreciation"
+    },
+    {
+      "word": "ENCORE",
+      "clue": "Bonus performance after fake ending"
+    },
+    {
+      "word": "TICKET",
+      "clue": "Paper permission to attend overpriced events"
+    },
+    {
+      "word": "VENUE",
+      "clue": "Place where events happen and wallets empty"
+    },
+    {
+      "word": "FESTIVAL",
+      "clue": "Multi-day celebration with questionable hygiene"
+    },
+    {
+      "word": "PERFORMANCE",
+      "clue": "Artistic display that may or may not go well"
+    },
+    {
+      "word": "REHEARSAL",
+      "clue": "Practice session for the real thing"
+    },
+    {
+      "word": "PRACTICE",
+      "clue": "Repetition that supposedly leads to perfection"
+    },
+    {
+      "word": "TALENT",
+      "clue": "Natural ability that makes others jealous"
+    },
+    {
+      "word": "SKILL",
+      "clue": "Learned ability that comes from practice"
+    },
+    {
+      "word": "ABILITY",
+      "clue": "Capacity to do things others cannot"
+    },
+    {
+      "word": "EXPERT",
+      "clue": "Person who knows a lot about very little"
+    },
+    {
+      "word": "PROFESSIONAL",
+      "clue": "Someone who gets paid for their expertise"
+    },
+    {
+      "word": "AMATEUR",
+      "clue": "Enthusiast who does it for love, not money"
+    },
+    {
+      "word": "HOBBY",
+      "clue": "Activity that consumes time and money for fun"
+    },
+    {
+      "word": "INTEREST",
+      "clue": "Subject that captures your attention"
+    },
+    {
+      "word": "PASSION",
+      "clue": "Intense enthusiasm that drives you forward"
+    },
+    {
+      "word": "ENTHUSIASM",
+      "clue": "Infectious excitement about something"
+    },
+    {
+      "word": "EXCITEMENT",
+      "clue": "Energetic anticipation of good things"
+    },
+    {
+      "word": "ADVENTURE",
+      "clue": "Risky undertaking with uncertain outcomes"
+    },
+    {
+      "word": "JOURNEY",
+      "clue": "Trip that changes you along the way"
+    },
+    {
+      "word": "TRAVEL",
+      "clue": "Movement from here to somewhere else"
+    },
+    {
+      "word": "VACATION",
+      "clue": "Temporary escape from reality and responsibilities"
+    },
+    {
+      "word": "HOLIDAY",
+      "clue": "Special day that interrupts normal routine"
+    },
+    {
+      "word": "CELEBRATION",
+      "clue": "Party marking something worth remembering"
+    },
+    {
+      "word": "PARTY",
+      "clue": "Gathering where people pretend to have fun"
+    },
+    {
+      "word": "BIRTHDAY",
+      "clue": "Annual reminder that you're getting older"
+    },
+    {
+      "word": "ANNIVERSARY",
+      "clue": "Yearly reminder of when something started"
+    },
+    {
+      "word": "WEDDING",
+      "clue": "Expensive party to celebrate love and commitment"
+    },
+    {
+      "word": "MARRIAGE",
+      "clue": "Legal partnership with someone you can tolerate daily"
+    },
+    {
+      "word": "PROPOSAL",
+      "clue": "Romantic suggestion that comes with jewelry"
+    },
+    {
+      "word": "ENGAGEMENT",
+      "clue": "Commitment period before the real commitment"
+    },
+    {
+      "word": "ROMANCE",
+      "clue": "Love story with better lighting"
+    },
+    {
+      "word": "RELATIONSHIP",
+      "clue": "Connection between people that requires work"
+    },
+    {
+      "word": "COUPLE",
+      "clue": "Two people who pretend to agree on everything"
+    },
+    {
+      "word": "PARTNER",
+      "clue": "Person who shares your adventures and remote control"
+    },
+    {
+      "word": "SPOUSE",
+      "clue": "Legal life companion who knows all your secrets"
+    },
+    {
+      "word": "HUSBAND",
+      "clue": "Male partner who leaves dishes in the sink"
+    },
+    {
+      "word": "WIFE",
+      "clue": "Female partner who remembers everything you forget"
+    },
+    {
+      "word": "PARENT",
+      "clue": "Adult who created tiny humans and regrets sleeping"
+    },
+    {
+      "word": "MOTHER",
+      "clue": "Female superhero disguised as a regular person"
+    },
+    {
+      "word": "FATHER",
+      "clue": "Male protector who tells dad jokes"
+    },
+    {
+      "word": "CHILD",
+      "clue": "Small human who asks 'why' constantly"
+    },
+    {
+      "word": "BABY",
+      "clue": "Tiny human who communicates only through crying"
+    },
+    {
+      "word": "TODDLER",
+      "clue": "Walking disaster that looks adorable"
+    },
+    {
+      "word": "TEENAGER",
+      "clue": "Young adult who knows everything and nothing"
+    },
+    {
+      "word": "ADULT",
+      "clue": "Grown-up who still doesn't know what they're doing"
+    },
+    {
+      "word": "ELDERLY",
+      "clue": "Experienced human with stories to tell"
+    },
+    {
+      "word": "GENERATION",
+      "clue": "Group of people born around the same time"
+    },
+    {
+      "word": "ANCESTOR",
+      "clue": "Family member who came before you"
+    },
+    {
+      "word": "DESCENDANT",
+      "clue": "Family member who comes after you"
+    },
+    {
+      "word": "RELATIVE",
+      "clue": "Family member you're stuck with"
+    },
+    {
+      "word": "COUSIN",
+      "clue": "Relative who shares grandparents"
+    },
+    {
+      "word": "SIBLING",
+      "clue": "Person who shares your parents and annoyance"
+    },
+    {
+      "word": "BROTHER",
+      "clue": "Male sibling who borrowed your stuff"
+    },
+    {
+      "word": "SISTER",
+      "clue": "Female sibling who knows all your embarrassing stories"
+    },
+    {
+      "word": "GRANDPARENT",
+      "clue": "Parent's parent who spoils grandchildren"
+    },
+    {
+      "word": "GRANDMOTHER",
+      "clue": "Female grandparent who bakes cookies"
+    },
+    {
+      "word": "GRANDFATHER",
+      "clue": "Male grandparent who tells old stories"
+    },
+    {
+      "word": "UNCLE",
+      "clue": "Parent's brother who gives questionable advice"
+    },
+    {
+      "word": "AUNT",
+      "clue": "Parent's sister who remembers your birthday"
+    },
+    {
+      "word": "NEPHEW",
+      "clue": "Brother's or sister's son who calls you old"
+    },
+    {
+      "word": "NIECE",
+      "clue": "Brother's or sister's daughter who steals your heart"
+    },
+    {
+      "word": "NEIGHBOR",
+      "clue": "Person who lives close enough to judge your lawn"
+    },
+    {
+      "word": "COMMUNITY",
+      "clue": "Group of people who pretend to get along"
+    },
+    {
+      "word": "SOCIETY",
+      "clue": "Large group of humans with written and unwritten rules"
+    },
+    {
+      "word": "CULTURE",
+      "clue": "Shared beliefs and practices of a group"
+    },
+    {
+      "word": "TRADITION",
+      "clue": "Old way of doing things for tradition's sake"
+    },
+    {
+      "word": "CUSTOM",
+      "clue": "Local way of doing things that confuses outsiders"
+    },
+    {
+      "word": "RITUAL",
+      "clue": "Ceremonial activity with symbolic meaning"
+    },
+    {
+      "word": "CEREMONY",
+      "clue": "Formal event with specific procedures"
+    },
+    {
+      "word": "FESTIVAL",
+      "clue": "Community celebration with food and music"
+    },
+    {
+      "word": "PARADE",
+      "clue": "Organized procession that blocks traffic"
+    },
+    {
+      "word": "CARNIVAL",
+      "clue": "Traveling fair with questionable ride safety"
+    },
+    {
+      "word": "CIRCUS",
+      "clue": "Traveling show with amazing and terrifying acts"
+    },
+    {
+      "word": "THEATER",
+      "clue": "Building where actors pretend to be other people"
+    },
+    {
+      "word": "ACTOR",
+      "clue": "Professional pretender who memorizes other people's words"
+    },
+    {
+      "word": "ACTRESS",
+      "clue": "Female performer who brings characters to life"
+    },
+    {
+      "word": "DIRECTOR",
+      "clue": "Person who tells actors how to pretend better"
+    },
+    {
+      "word": "PRODUCER",
+      "clue": "Person who pays for actors to pretend"
+    },
+    {
+      "word": "SCRIPT",
+      "clue": "Written instructions for professional pretending"
+    },
+    {
+      "word": "SCREENPLAY",
+      "clue": "Movie script that directors mostly ignore"
+    },
+    {
+      "word": "DIALOGUE",
+      "clue": "Conversation between characters or people"
+    },
+    {
+      "word": "MONOLOGUE",
+      "clue": "Long speech by one person who won't stop talking"
+    },
+    {
+      "word": "SOLILOQUY",
+      "clue": "Character talking to themselves dramatically"
+    },
+    {
+      "word": "SCENE",
+      "clue": "Part of a play or dramatic moment in life"
+    },
+    {
+      "word": "ACT",
+      "clue": "Section of a play or thing you do"
+    },
+    {
+      "word": "CURTAIN",
+      "clue": "Theater divider that signals beginnings and endings"
+    },
+    {
+      "word": "STAGE",
+      "clue": "Platform where performers do their thing"
+    },
+    {
+      "word": "SPOTLIGHT",
+      "clue": "Bright light that makes performers sweat"
+    },
+    {
+      "word": "COSTUME",
+      "clue": "Special outfit that transforms the wearer"
+    },
+    {
+      "word": "MAKEUP",
+      "clue": "Face paint for transformation or confidence"
+    },
+    {
+      "word": "MASK",
+      "clue": "Face covering for disguise or protection"
+    },
+    {
+      "word": "DISGUISE",
+      "clue": "Outfit designed to fool people about your identity"
+    },
+    {
+      "word": "CHARACTER",
+      "clue": "Fictional person or someone's personality"
+    },
+    {
+      "word": "PERSONALITY",
+      "clue": "Unique combination of traits that makes you you"
+    },
+    {
+      "word": "BEHAVIOR",
+      "clue": "How someone acts when they think nobody's watching"
+    },
+    {
+      "word": "ATTITUDE",
+      "clue": "Mental stance that colors everything you do"
+    },
+    {
+      "word": "MOOD",
+      "clue": "Temporary emotional state that affects everyone around you"
+    },
+    {
+      "word": "EMOTION",
+      "clue": "Feeling that makes humans do irrational things"
+    },
+    {
+      "word": "FEELING",
+      "clue": "Internal experience that's hard to explain"
+    },
+    {
+      "word": "SENTIMENT",
+      "clue": "Emotional attitude toward something"
+    },
+    {
+      "word": "OPINION",
+      "clue": "Personal belief that you think others should share"
+    },
+    {
+      "word": "BELIEF",
+      "clue": "Something you accept as true without proof"
+    },
+    {
+      "word": "FAITH",
+      "clue": "Belief in something without evidence"
+    },
+    {
+      "word": "RELIGION",
+      "clue": "Organized system of beliefs and practices"
+    },
+    {
+      "word": "SPIRITUALITY",
+      "clue": "Personal connection to something greater"
+    },
+    {
+      "word": "PHILOSOPHY",
+      "clue": "Love of wisdom that answers nothing and questions everything"
+    },
+    {
+      "word": "WISDOM",
+      "clue": "Knowledge gained through experience and mistakes"
+    },
+    {
+      "word": "KNOWLEDGE",
+      "clue": "Information that you remember from learning"
+    },
+    {
+      "word": "EDUCATION",
+      "clue": "Formal process of filling your brain with facts"
+    },
+    {
+      "word": "LEARNING",
+      "clue": "Ongoing process of acquiring new information"
+    },
+    {
+      "word": "STUDYING",
+      "clue": "Deliberate attempt to cram information into your brain"
+    },
+    {
+      "word": "MEMORY",
+      "clue": "Brain's filing system that misplaces important things"
+    },
+    {
+      "word": "FORGET",
+      "clue": "Brain's way of making room for new information"
+    },
+    {
+      "word": "REMEMBER",
+      "clue": "Brain's attempt to retrieve filed information"
+    },
+    {
+      "word": "RECALL",
+      "clue": "Memory function that works best under no pressure"
+    },
+    {
+      "word": "RECOGNIZE",
+      "clue": "Brain's 'I've seen this before' function"
+    },
+    {
+      "word": "FAMILIAR",
+      "clue": "Something your brain files under 'seen before'"
+    },
+    {
+      "word": "STRANGER",
+      "clue": "Person your brain hasn't catalogued yet"
+    },
+    {
+      "word": "ACQUAINTANCE",
+      "clue": "Person you know but not well enough to borrow money from"
+    },
+    {
+      "word": "COLLEAGUE",
+      "clue": "Work person you pretend to like"
+    },
+    {
+      "word": "COWORKER",
+      "clue": "Person who shares your workplace complaints"
+    },
+    {
+      "word": "EMPLOYEE",
+      "clue": "Person who trades time for money"
+    },
+    {
+      "word": "EMPLOYER",
+      "clue": "Person who trades money for your time"
+    },
+    {
+      "word": "BOSS",
+      "clue": "Person who tells you what to do for money"
+    },
+    {
+      "word": "MANAGER",
+      "clue": "Person who manages to make simple things complicated"
+    },
+    {
+      "word": "SUPERVISOR",
+      "clue": "Person whose job is watching you work"
+    },
+    {
+      "word": "ASSISTANT",
+      "clue": "Person who makes someone else look more competent"
+    },
+    {
+      "word": "SECRETARY",
+      "clue": "Office organizer who knows where everything is"
+    },
+    {
+      "word": "RECEPTIONIST",
+      "clue": "First person visitors meet who judges their worthiness"
+    },
+    {
+      "word": "CUSTOMER",
+      "clue": "Person who is always right, except when they're wrong"
+    },
+    {
+      "word": "CLIENT",
+      "clue": "Customer with a fancier title"
+    },
+    {
+      "word": "BUSINESS",
+      "clue": "Organization that turns effort into profit"
+    },
+    {
+      "word": "COMPANY",
+      "clue": "Group of people pretending to work toward common goals"
+    },
+    {
+      "word": "CORPORATION",
+      "clue": "Large business entity with person-like legal rights"
+    },
+    {
+      "word": "ORGANIZATION",
+      "clue": "Group with structure that nobody fully understands"
+    },
+    {
+      "word": "INSTITUTION",
+      "clue": "Established organization that resists change"
+    },
+    {
+      "word": "GOVERNMENT",
+      "clue": "Group of people who make decisions for everyone else"
+    },
+    {
+      "word": "POLITICS",
+      "clue": "Art of convincing people you know what you're doing"
+    },
+    {
+      "word": "POLITICIAN",
+      "clue": "Professional promiser who rarely delivers"
+    },
+    {
+      "word": "ELECTION",
+      "clue": "Process where people choose which promises to believe"
+    },
+    {
+      "word": "VOTE",
+      "clue": "Democratic way to express your opinion"
+    },
+    {
+      "word": "DEMOCRACY",
+      "clue": "Government by the people, for the people, sometimes"
+    },
+    {
+      "word": "FREEDOM",
+      "clue": "Liberty to do what you want within legal limits"
+    },
+    {
+      "word": "LIBERTY",
+      "clue": "Freedom with responsibility attached"
+    },
+    {
+      "word": "RIGHTS",
+      "clue": "Things you're entitled to until someone says you're not"
+    },
+    {
+      "word": "JUSTICE",
+      "clue": "Fairness that's supposed to be blind but sometimes peeks"
+    },
+    {
+      "word": "LAW",
+      "clue": "Written rule that everyone's supposed to follow"
+    },
+    {
+      "word": "RULE",
+      "clue": "Guideline that exists to be broken by teenagers"
+    },
+    {
+      "word": "REGULATION",
+      "clue": "Official rule that makes simple things complicated"
+    },
+    {
+      "word": "POLICY",
+      "clue": "Organizational rule that nobody remembers making"
+    },
+    {
+      "word": "PROCEDURE",
+      "clue": "Step-by-step process that nobody follows exactly"
+    },
+    {
+      "word": "PROCESS",
+      "clue": "Series of actions that hopefully lead somewhere"
+    },
+    {
+      "word": "METHOD",
+      "clue": "Particular way of doing something"
+    },
+    {
+      "word": "TECHNIQUE",
+      "clue": "Skillful method that requires practice"
+    },
+    {
+      "word": "STRATEGY",
+      "clue": "Long-term plan that usually changes"
+    },
+    {
+      "word": "TACTICS",
+      "clue": "Short-term actions to achieve strategic goals"
+    },
+    {
+      "word": "PLAN",
+      "clue": "Organized approach that rarely survives contact with reality"
+    },
+    {
+      "word": "GOAL",
+      "clue": "Target you aim for but rarely hit exactly"
+    },
+    {
+      "word": "OBJECTIVE",
+      "clue": "Goal with a fancier name"
+    },
+    {
+      "word": "PURPOSE",
+      "clue": "Reason for doing something that you sometimes forget"
+    },
+    {
+      "word": "REASON",
+      "clue": "Logical explanation that makes sense to you"
+    },
+    {
+      "word": "LOGIC",
+      "clue": "Rational thinking that emotions often override"
+    },
+    {
+      "word": "RATIONAL",
+      "clue": "Sensible approach that feelings often ignore"
+    },
+    {
+      "word": "IRRATIONAL",
+      "clue": "Nonsensical behavior that humans excel at"
+    },
+    {
+      "word": "EMOTION",
+      "clue": "Feeling that makes logical decisions impossible"
+    },
+    {
+      "word": "PASSION",
+      "clue": "Intense emotion that drives people to extremes"
+    },
+    {
+      "word": "DESIRE",
+      "clue": "Want that becomes need in your mind"
+    },
+    {
+      "word": "NEED",
+      "clue": "Requirement for survival or happiness"
+    },
+    {
+      "word": "WANT",
+      "clue": "Desire that you convince yourself is necessary"
+    },
+    {
+      "word": "WISH",
+      "clue": "Hope for something that may never happen"
+    },
+    {
+      "word": "HOPE",
+      "clue": "Optimistic expectation despite evidence"
+    },
+    {
+      "word": "EXPECTATION",
+      "clue": "Anticipated outcome that leads to disappointment"
+    },
+    {
+      "word": "ANTICIPATION",
+      "clue": "Excited waiting for something good"
+    },
+    {
+      "word": "SURPRISE",
+      "clue": "Unexpected event that changes everything"
+    },
+    {
+      "word": "SHOCK",
+      "clue": "Surprise that leaves you speechless"
+    },
+    {
+      "word": "AMAZEMENT",
+      "clue": "Wonder at something incredible"
+    },
+    {
+      "word": "WONDER",
+      "clue": "Curious amazement at something mysterious"
+    },
+    {
+      "word": "CURIOSITY",
+      "clue": "Desire to know that killed the cat"
+    },
+    {
+      "word": "QUESTION",
+      "clue": "Inquiry that seeks an answer"
+    },
+    {
+      "word": "ANSWER",
+      "clue": "Response that may or may not be correct"
+    },
+    {
+      "word": "SOLUTION",
+      "clue": "Answer that actually solves the problem"
+    },
+    {
+      "word": "PROBLEM",
+      "clue": "Challenge that tests your patience and skills"
+    },
+    {
+      "word": "CHALLENGE",
+      "clue": "Difficult task that builds character"
+    },
+    {
+      "word": "DIFFICULTY",
+      "clue": "Obstacle that makes simple things hard"
+    },
+    {
+      "word": "OBSTACLE",
+      "clue": "Thing in your way that requires creativity"
+    },
+    {
+      "word": "BARRIER",
+      "clue": "Wall between you and your goal"
+    },
+    {
+      "word": "WALL",
+      "clue": "Vertical structure that separates spaces"
+    },
+    {
+      "word": "FENCE",
+      "clue": "Boundary marker that keeps neighbors honest"
+    },
+    {
+      "word": "GATE",
+      "clue": "Opening in a fence that's usually locked"
+    },
+    {
+      "word": "ENTRANCE",
+      "clue": "Way in that's often hard to find"
+    },
+    {
+      "word": "EXIT",
+      "clue": "Way out that you look for when things go wrong"
+    },
+    {
+      "word": "ESCAPE",
+      "clue": "Quick exit from an unpleasant situation"
+    },
+    {
+      "word": "FREEDOM",
+      "clue": "State of being without constraints"
+    },
+    {
+      "word": "PRISON",
+      "clue": "Place where freedom goes to die"
+    },
+    {
+      "word": "JAIL",
+      "clue": "Temporary prison for minor offenders"
+    },
+    {
+      "word": "CRIME",
+      "clue": "Act that society has decided is unacceptable"
+    },
+    {
+      "word": "CRIMINAL",
+      "clue": "Person who breaks laws for profit or pleasure"
+    },
+    {
+      "word": "POLICE",
+      "clue": "Law enforcement officers who protect and serve"
+    },
+    {
+      "word": "OFFICER",
+      "clue": "Person in authority who wears a uniform"
+    },
+    {
+      "word": "DETECTIVE",
+      "clue": "Investigator who solves mysteries for a living"
+    },
+    {
+      "word": "MYSTERY",
+      "clue": "Puzzle that needs solving"
+    },
+    {
+      "word": "SECRET",
+      "clue": "Information that's supposed to stay hidden"
+    },
+    {
+      "word": "HIDDEN",
+      "clue": "Concealed from view or knowledge"
+    },
+    {
+      "word": "VISIBLE",
+      "clue": "Able to be seen with the naked eye"
+    },
+    {
+      "word": "OBVIOUS",
+      "clue": "So clear that everyone should see it"
+    },
+    {
+      "word": "CLEAR",
+      "clue": "Easy to see or understand"
+    },
+    {
+      "word": "TRANSPARENT",
+      "clue": "See-through or honest about intentions"
+    },
+    {
+      "word": "HONEST",
+      "clue": "Truthful person who's rare in politics"
+    },
+    {
+      "word": "TRUTH",
+      "clue": "Reality that's often inconvenient"
+    },
+    {
+      "word": "REALITY",
+      "clue": "What's actually happening versus what you think"
+    },
+    {
+      "word": "FANTASY",
+      "clue": "Imaginary scenario that's better than reality"
+    },
+    {
+      "word": "IMAGINATION",
+      "clue": "Mental ability to create things that don't exist"
+    },
+    {
+      "word": "CREATIVE",
+      "clue": "Able to make something from nothing"
+    },
+    {
+      "word": "ARTISTIC",
+      "clue": "Having or showing creative skill"
+    },
+    {
+      "word": "PAINTER",
+      "clue": "Artist who puts color on canvas"
+    },
+    {
+      "word": "PAINTING",
+      "clue": "Art made with pigments on a surface"
+    },
+    {
+      "word": "SCULPTURE",
+      "clue": "Three-dimensional art that takes up space"
+    },
+    {
+      "word": "STATUE",
+      "clue": "Sculpture of a person who stands very still"
+    },
+    {
+      "word": "MONUMENT",
+      "clue": "Structure built to remember something important"
+    },
+    {
+      "word": "MEMORIAL",
+      "clue": "Something created to honor someone's memory"
+    },
+    {
+      "word": "MEMORY",
+      "clue": "Mental record of past experiences"
+    },
+    {
+      "word": "HISTORY",
+      "clue": "Past events that someone wrote down"
+    },
+    {
+      "word": "ANCIENT",
+      "clue": "Very old, like your parents' music"
+    },
+    {
+      "word": "MODERN",
+      "clue": "Contemporary or current style"
+    },
+    {
+      "word": "CONTEMPORARY",
+      "clue": "Belonging to the present time"
+    },
+    {
+      "word": "CURRENT",
+      "clue": "Happening now or flow of electricity"
+    },
+    {
+      "word": "ELECTRICITY",
+      "clue": "Power that makes modern life possible"
+    },
+    {
+      "word": "ENERGY",
+      "clue": "Power to do work or enthusiasm to do anything"
+    },
+    {
+      "word": "POWER",
+      "clue": "Ability to influence or electrical capacity"
+    },
+    {
+      "word": "STRENGTH",
+      "clue": "Physical or mental power to overcome resistance"
+    },
+    {
+      "word": "WEAKNESS",
+      "clue": "Lack of strength or chocolate"
+    },
+    {
+      "word": "STRONG",
+      "clue": "Having great physical or mental power"
+    },
+    {
+      "word": "WEAK",
+      "clue": "Lacking strength or willpower"
+    },
+    {
+      "word": "TOUGH",
+      "clue": "Strong and difficult to break"
+    },
+    {
+      "word": "FRAGILE",
+      "clue": "Easily broken like egos and dishes"
+    },
+    {
+      "word": "DELICATE",
+      "clue": "Requiring careful handling"
+    },
+    {
+      "word": "CAREFUL",
+      "clue": "Taking precautions to avoid problems"
+    },
+    {
+      "word": "CARELESS",
+      "clue": "Not paying attention to consequences"
+    },
+    {
+      "word": "ATTENTION",
+      "clue": "Mental focus that smartphones destroy"
+    },
+    {
+      "word": "FOCUS",
+      "clue": "Concentrated attention on one thing"
+    },
+    {
+      "word": "CONCENTRATE",
+      "clue": "Direct your mental effort toward something"
+    },
+    {
+      "word": "EFFORT",
+      "clue": "Energy you put into doing something"
+    },
+    {
+      "word": "TRY",
+      "clue": "Attempt to do something you might fail at"
+    },
+    {
+      "word": "ATTEMPT",
+      "clue": "Effort to accomplish something"
+    },
+    {
+      "word": "SUCCESS",
+      "clue": "Achievement of desired aim or fame"
+    },
+    {
+      "word": "FAILURE",
+      "clue": "Lack of success or learning opportunity"
+    },
+    {
+      "word": "MISTAKE",
+      "clue": "Error that teaches you what not to do"
+    },
+    {
+      "word": "ERROR",
+      "clue": "Wrong action due to poor judgment"
+    },
+    {
+      "word": "CORRECT",
+      "clue": "Right or accurate"
+    },
+    {
+      "word": "WRONG",
+      "clue": "Incorrect or morally bad"
+    },
+    {
+      "word": "RIGHT",
+      "clue": "Correct or the opposite of left"
+    },
+    {
+      "word": "LEFT",
+      "clue": "Direction opposite of right or past tense of leave"
+    },
+    {
+      "word": "DIRECTION",
+      "clue": "Way to go or guidance on how to do something"
+    },
+    {
+      "word": "NORTH",
+      "clue": "Direction toward the top of maps"
+    },
+    {
+      "word": "SOUTH",
+      "clue": "Direction toward the bottom of maps"
+    },
+    {
+      "word": "EAST",
+      "clue": "Direction where the sun rises"
+    },
+    {
+      "word": "WEST",
+      "clue": "Direction where the sun sets"
+    },
+    {
+      "word": "COMPASS",
+      "clue": "Navigation tool that points north"
+    },
+    {
+      "word": "MAP",
+      "clue": "Paper representation of places you want to visit"
+    },
+    {
+      "word": "LOCATION",
+      "clue": "Specific place where something is"
+    },
+    {
+      "word": "PLACE",
+      "clue": "Particular position or area"
+    },
+    {
+      "word": "POSITION",
+      "clue": "Location or job title"
+    },
+    {
+      "word": "SITUATION",
+      "clue": "Set of circumstances you find yourself in"
+    },
+    {
+      "word": "CIRCUMSTANCE",
+      "clue": "Condition that affects what happens"
+    },
+    {
+      "word": "CONDITION",
+      "clue": "State of something or requirement"
+    },
+    {
+      "word": "STATE",
+      "clue": "Condition of being or political division"
+    },
+    {
+      "word": "COUNTRY",
+      "clue": "Nation with borders and opinions"
+    },
+    {
+      "word": "NATION",
+      "clue": "Large group of people sharing common culture"
+    },
+    {
+      "word": "CITY",
+      "clue": "Large settlement where people live closely together"
+    },
+    {
+      "word": "TOWN",
+      "clue": "Smaller settlement than a city"
+    },
+    {
+      "word": "VILLAGE",
+      "clue": "Small community where everyone knows everyone"
+    },
+    {
+      "word": "NEIGHBORHOOD",
+      "clue": "Local area where you pretend to like your neighbors"
+    },
+    {
+      "word": "STREET",
+      "clue": "Road lined with houses and judgmental neighbors"
+    },
+    {
+      "word": "ROAD",
+      "clue": "Path for vehicles and metaphors"
+    },
+    {
+      "word": "PATH",
+      "clue": "Route to follow literally or metaphorically"
+    },
+    {
+      "word": "ROUTE",
+      "clue": "Specific way to get from here to there"
+    },
+    {
+      "word": "JOURNEY",
+      "clue": "Trip that changes you along the way"
+    },
+    {
+      "word": "DESTINATION",
+      "clue": "Place you're trying to reach"
+    },
+    {
+      "word": "ARRIVAL",
+      "clue": "Reaching your destination finally"
+    },
+    {
+      "word": "DEPARTURE",
+      "clue": "Leaving one place to go to another"
+    },
+    {
+      "word": "BEGINNING",
+      "clue": "Start of something new"
+    },
+    {
+      "word": "END",
+      "clue": "Conclusion of something or goal"
+    },
+    {
+      "word": "START",
+      "clue": "Initial point of something"
+    },
+    {
+      "word": "FINISH",
+      "clue": "Complete something or surface coating"
+    },
+    {
+      "word": "COMPLETE",
+      "clue": "Having all necessary parts"
+    },
+    {
+      "word": "INCOMPLETE",
+      "clue": "Missing some necessary parts"
+    },
+    {
+      "word": "PARTIAL",
+      "clue": "Not complete or showing favoritism"
+    },
+    {
+      "word": "WHOLE",
+      "clue": "Complete entity with all parts"
+    },
+    {
+      "word": "PART",
+      "clue": "Piece of something larger"
+    },
+    {
+      "word": "PIECE",
+      "clue": "Individual item or portion"
+    },
+    {
+      "word": "PORTION",
+      "clue": "Part of something divided"
+    },
+    {
+      "word": "SECTION",
+      "clue": "Distinct part of something larger"
+    },
+    {
+      "word": "SEGMENT",
+      "clue": "Portion separated from the whole"
+    },
+    {
+      "word": "FRAGMENT",
+      "clue": "Small piece broken off from something"
+    },
+    {
+      "word": "BROKEN",
+      "clue": "Damaged beyond normal function"
+    },
+    {
+      "word": "DAMAGED",
+      "clue": "Harmed but possibly repairable"
+    },
+    {
+      "word": "REPAIR",
+      "clue": "Fix something that's broken"
+    },
+    {
+      "word": "FIX",
+      "clue": "Mend something or difficult situation"
+    },
+    {
+      "word": "MEND",
+      "clue": "Repair something torn or broken"
+    },
+    {
+      "word": "RESTORE",
+      "clue": "Bring back to original condition"
+    },
+    {
+      "word": "RENEW",
+      "clue": "Make new again or extend validity"
+    },
+    {
+      "word": "REFRESH",
+      "clue": "Give new strength or update"
+    },
+    {
+      "word": "UPDATE",
+      "clue": "Make current with latest information"
+    },
+    {
+      "word": "UPGRADE",
+      "clue": "Improve to a better version"
+    },
+    {
+      "word": "IMPROVE",
+      "clue": "Make better than it was"
+    },
+    {
+      "word": "BETTER",
+      "clue": "Improved version of something"
+    },
+    {
+      "word": "BEST",
+      "clue": "Highest quality or most suitable"
+    },
+    {
+      "word": "WORST",
+      "clue": "Lowest quality or least desirable"
+    },
+    {
+      "word": "GOOD",
+      "clue": "Pleasant or morally right"
+    },
+    {
+      "word": "BAD",
+      "clue": "Unpleasant or morally wrong"
+    },
+    {
+      "word": "EXCELLENT",
+      "clue": "Extremely good quality"
+    },
+    {
+      "word": "TERRIBLE",
+      "clue": "Extremely bad quality"
+    },
+    {
+      "word": "AWFUL",
+      "clue": "Very bad or inspiring awe"
+    },
+    {
+      "word": "WONDERFUL",
+      "clue": "Inspiring delight or full of wonders"
+    },
+    {
+      "word": "AMAZING",
+      "clue": "Causing surprise or wonder"
+    },
+    {
+      "word": "INCREDIBLE",
+      "clue": "Hard to believe or extremely good"
+    },
+    {
+      "word": "UNBELIEVABLE",
+      "clue": "So extraordinary it seems impossible"
+    },
+    {
+      "word": "IMPOSSIBLE",
+      "clue": "Cannot be done or occur"
+    },
+    {
+      "word": "POSSIBLE",
+      "clue": "Able to be done or happen"
+    },
+    {
+      "word": "PROBABLE",
+      "clue": "Likely to happen"
+    },
+    {
+      "word": "LIKELY",
+      "clue": "Probably going to happen"
+    },
+    {
+      "word": "UNLIKELY",
+      "clue": "Probably not going to happen"
+    },
+    {
+      "word": "CERTAIN",
+      "clue": "Definitely true or will happen"
+    },
+    {
+      "word": "UNCERTAIN",
+      "clue": "Not known or not reliable"
+    },
+    {
+      "word": "SURE",
+      "clue": "Confident about something"
+    },
+    {
+      "word": "UNSURE",
+      "clue": "Not confident about something"
+    },
+    {
+      "word": "CONFIDENT",
+      "clue": "Sure of your abilities"
+    },
+    {
+      "word": "DOUBT",
+      "clue": "Uncertainty about truth or reliability"
+    },
+    {
+      "word": "TRUST",
+      "clue": "Confidence in someone's reliability"
+    },
+    {
+      "word": "DISTRUST",
+      "clue": "Lack of confidence in someone"
+    },
+    {
+      "word": "RELIABLE",
+      "clue": "Consistently good or dependable"
+    },
+    {
+      "word": "UNRELIABLE",
+      "clue": "Not consistently good or dependable"
+    },
+    {
+      "word": "DEPENDABLE",
+      "clue": "Trustworthy and reliable"
+    },
+    {
+      "word": "INDEPENDENT",
+      "clue": "Not depending on others"
+    },
+    {
+      "word": "DEPENDENT",
+      "clue": "Relying on someone or something else"
+    }
+  ]
+}
