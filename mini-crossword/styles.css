@@ -1,3 +1,72 @@
+/* Settings Modal Styles */
+.settings-pane {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2100;
+    backdrop-filter: blur(4px);
+}
+
+.settings-pane .settings-content {
+    background: white;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 20px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.settings-pane h2 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 1.4em;
+}
+
+.settings-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1em;
+    color: #2c3e50;
+}
+
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#hide-unfocused-clues {
+    accent-color: #3498db;
+    width: 18px;
+    height: 18px;
+}
+
+#close-settings-btn {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+#close-settings-btn:hover {
+    background: #7f8c8d;
+}
 * {
     margin: 0;
     padding: 0;

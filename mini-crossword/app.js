@@ -1,4 +1,20 @@
 class CrosswordApp {
+    // Settings management
+    getSettings() {
+        const settings = localStorage.getItem('crossword_settings');
+        if (settings) {
+            try {
+                return JSON.parse(settings);
+            } catch (e) {
+                return { hideUnfocusedClues: true };
+            }
+        }
+        return { hideUnfocusedClues: true };
+    }
+
+    saveSettings(settings) {
+        localStorage.setItem('crossword_settings', JSON.stringify(settings));
+    }
     constructor() {
         this.generator = null;
         this.currentPuzzle = null;
@@ -6,7 +22,7 @@ class CrosswordApp {
         this.selectedWord = null;
         this.userInputs = {};
         this.statusTimeout = null;
-        
+        this.settings = this.getSettings();
         // Timer-related properties
         this.startTime = null;
         this.completionTime = null;
@@ -14,14 +30,11 @@ class CrosswordApp {
         this.isCompleted = false;
         this.isPaused = false;
         this.pausedTime = 0;
-        
         this.initializeApp();
-        
         // Clean up timer on page unload
         window.addEventListener('beforeunload', () => {
             this.stopTimer();
         });
-        
         // Handle tab visibility changes
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
@@ -30,6 +43,8 @@ class CrosswordApp {
                 this.resumeTimer();
             }
         });
+        // Add settings pane to DOM
+        this.createSettingsPane();
     }
 
     async initializeApp() {
@@ -52,31 +67,32 @@ class CrosswordApp {
 
     setupEventListeners() {
         // Button events
+        document.getElementById('todays-puzzle').addEventListener('click', () => {
+            this.loadTodaysPuzzle();
+        });
         document.getElementById('new-puzzle').addEventListener('click', () => {
             this.generateNewPuzzle();
         });
-
         document.getElementById('share-puzzle').addEventListener('click', () => {
             this.sharePuzzle();
         });
-
         document.getElementById('check-puzzle').addEventListener('click', () => {
             this.checkPuzzle();
         });
-
         document.getElementById('reveal-puzzle').addEventListener('click', () => {
             this.revealSolution();
         });
-
         document.getElementById('clear-puzzle').addEventListener('click', () => {
             this.clearPuzzle();
         });
-
+        // Settings button
+        document.getElementById('settings-btn').addEventListener('click', () => {
+            this.openSettingsPane();
+        });
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             this.handleKeyPress(e);
         });
-
         // Handle window resize and orientation changes for mobile
         window.addEventListener('resize', () => {
             if (this.currentPuzzle) {
@@ -92,7 +108,6 @@ class CrosswordApp {
                 }, 250);
             }
         });
-
         // Clear selection when clicking outside the grid or clues
         document.addEventListener('click', (e) => {
             const isGridClick = e.target.closest('.grid-container') || e.target.closest('.clues-container');
@@ -101,6 +116,68 @@ class CrosswordApp {
                 this.clearSelection();
             }
         });
+    }
+    createSettingsPane() {
+        // Add settings button to menu if not present
+        if (!document.getElementById('settings-btn')) {
+            const menu = document.querySelector('.menu, #menu, nav');
+            if (menu) {
+                const btn = document.createElement('button');
+                btn.id = 'settings-btn';
+                btn.textContent = 'Settings';
+                btn.className = 'settings-btn';
+                menu.appendChild(btn);
+            }
+        }
+        // Add settings pane modal to body if not present
+        if (!document.getElementById('settings-pane')) {
+            const pane = document.createElement('div');
+            pane.id = 'settings-pane';
+            pane.className = 'settings-pane';
+            pane.innerHTML = `
+                <div class="settings-content">
+                    <h2>Settings</h2>
+                    <label class="settings-option">
+                        <input type="checkbox" id="hide-unfocused-clues" />
+                        Hide unfocused clues
+                    </label>
+                    <div class="settings-actions">
+                        <button id="close-settings-btn">Close</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(pane);
+            // Event listeners for settings
+            document.getElementById('close-settings-btn').addEventListener('click', () => {
+                this.closeSettingsPane();
+            });
+            document.getElementById('hide-unfocused-clues').addEventListener('change', (e) => {
+                this.settings.hideUnfocusedClues = e.target.checked;
+                this.saveSettings(this.settings);
+                // Update clue display immediately
+                if (this.selectedWord && this.settings.hideUnfocusedClues) {
+                    this.showOnlySelectedClue(this.selectedWord.number, this.selectedWord.direction);
+                } else {
+                    this.showAllClues();
+                }
+            });
+        }
+    }
+
+    openSettingsPane() {
+        const pane = document.getElementById('settings-pane');
+        if (pane) {
+            pane.style.display = 'flex';
+            // Set checkbox state
+            document.getElementById('hide-unfocused-clues').checked = !!this.settings.hideUnfocusedClues;
+        }
+    }
+
+    closeSettingsPane() {
+        const pane = document.getElementById('settings-pane');
+        if (pane) {
+            pane.style.display = 'none';
+        }
     }
 
     handleInitialLoad() {
@@ -135,6 +212,22 @@ class CrosswordApp {
         window.history.replaceState({}, '', newUrl);
     }
 
+    loadTodaysPuzzle() {
+        // Generate a seed based on today's date in YYYYMMDD format
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const seed = parseInt(`${year}${month}${day}`);
+
+        this.generatePuzzle(seed);
+
+        // Update URL with today's seed without reloading the page
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('seed', seed);
+        window.history.replaceState({}, '', newUrl);
+    }
+
     generateNewPuzzle() {
         // Generate a random timestamp-based seed
         const now = new Date();
@@ -165,6 +258,11 @@ class CrosswordApp {
     }
 
     generatePuzzle(seed) {
+        // Always clear any running timer interval before switching puzzles
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
         this.currentSeed = seed;
         this.generator = new CrosswordGenerator(this.wordsData, seed);
         this.currentPuzzle = this.generator.generatePuzzle(seed);
@@ -201,6 +299,11 @@ class CrosswordApp {
 
     // Timer management methods
     initializeTimer() {
+        // Always clear any running timer interval before starting/resuming
+        if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+            this.timerInterval = null;
+        }
         const timerKey = `crossword_timer_${this.currentSeed}`;
         const completionKey = `crossword_completed_${this.currentSeed}`;
         const savedTimer = localStorage.getItem(timerKey);
@@ -316,10 +419,27 @@ class CrosswordApp {
             timeToShow = 0;
         }
         
-        const minutes = Math.floor(timeToShow / 60000);
-        const seconds = Math.floor((timeToShow % 60000) / 1000);
+        // Format time with weeks, days, hours, minutes, and seconds as applicable
+        const totalSeconds = Math.floor(timeToShow / 1000);
+        const weeks = Math.floor(totalSeconds / (7 * 24 * 3600));
+        const days = Math.floor((totalSeconds % (7 * 24 * 3600)) / (24 * 3600));
+        const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
         
-        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        let timeString = '';
+        
+        if (weeks > 0) {
+            timeString = `${weeks}w ${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else if (days > 0) {
+            timeString = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else if (hours > 0) {
+            timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        timerElement.textContent = timeString;
         
         // Update styling based on completion status
         if (this.isCompleted) {
@@ -614,9 +734,25 @@ class CrosswordApp {
     }
 
     showCompletionMessage(isCorrect) {
-        const minutes = Math.floor((this.completionTime || 0) / 60000);
-        const seconds = Math.floor(((this.completionTime || 0) % 60000) / 1000);
-        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        // Format completion time with weeks, days, hours, minutes, and seconds as applicable
+        const totalSeconds = Math.floor((this.completionTime || 0) / 1000);
+        const weeks = Math.floor(totalSeconds / (7 * 24 * 3600));
+        const days = Math.floor((totalSeconds % (7 * 24 * 3600)) / (24 * 3600));
+        const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        
+        let timeString = '';
+        
+        if (weeks > 0) {
+            timeString = `${weeks}w ${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else if (days > 0) {
+            timeString = `${days}d ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else if (hours > 0) {
+            timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
         
         if (isCorrect) {
             this.showStatus(`🎉 Congratulations! Puzzle completed in ${timeString}!`, 'success');
@@ -696,24 +832,27 @@ class CrosswordApp {
     }
 
     showOnlySelectedClue(number, direction) {
+        if (!this.settings.hideUnfocusedClues) {
+            this.showAllClues();
+            // Still highlight the clue
+            const clueLi = document.querySelector(`.clues-list li[data-number="${number}"][data-direction="${direction}"]`);
+            if (clueLi) clueLi.classList.add('active');
+            return;
+        }
         const cluesContainer = document.querySelector('.clues-container');
         const focusedClueSection = document.getElementById('focused-clue-section');
-        
         // Hide all clues with smooth transition
         document.querySelectorAll('.clues-list li').forEach(li => {
             li.classList.add('hidden');
         });
-        
         // Hide all section headers
         document.querySelectorAll('.clues-section h3').forEach(header => {
             header.classList.add('hidden');
         });
-        
         // Hide all clue sections
         document.querySelectorAll('.clues-section').forEach(section => {
             section.style.display = 'none';
         });
-        
         // Show and populate the focused clue section
         const selectedClue = document.querySelector(
             `.clues-list li[data-number="${number}"][data-direction="${direction}"]`
@@ -723,7 +862,6 @@ class CrosswordApp {
             focusedClueSection.innerHTML = `<div class="clue-item">${clueText}</div>`;
             focusedClueSection.classList.add('active');
         }
-        
         // Add single clue class for any additional styling
         cluesContainer.classList.add('single-clue');
     }
@@ -731,28 +869,23 @@ class CrosswordApp {
     showAllClues() {
         const cluesContainer = document.querySelector('.clues-container');
         const focusedClueSection = document.getElementById('focused-clue-section');
-        
         // Hide the focused clue section
         if (focusedClueSection) {
             focusedClueSection.classList.remove('active');
             focusedClueSection.innerHTML = '';
         }
-        
         // Show all clue sections
         document.querySelectorAll('.clues-section').forEach(section => {
             section.style.display = 'block';
         });
-        
         // Show all clues again with smooth transition
         document.querySelectorAll('.clues-list li').forEach(li => {
             li.classList.remove('hidden');
         });
-        
         // Show all section headers
         document.querySelectorAll('.clues-section h3').forEach(header => {
             header.classList.remove('hidden');
         });
-        
         // Remove single clue class to return to normal layout
         cluesContainer.classList.remove('single-clue');
     }
