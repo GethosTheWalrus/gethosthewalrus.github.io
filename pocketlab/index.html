@@ -660,6 +660,85 @@
             animation: bounce 2s infinite;
         }
 
+        .linux-install-command {
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .command-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .command-box code {
+            color: var(--accent-color);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--accent-color);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .copy-button {
+            background: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-button:hover {
+            background: var(--gitlab-purple);
+        }
+
+        .copy-button.copied {
+            background: #27ae60;
+        }
+
+        .copy-button i {
+            font-size: 1rem;
+        }
+
+        .hero-button-linux {
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .command-box code {
+                font-size: 0.75rem;
+            }
+        }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
@@ -1033,9 +1112,18 @@
                     <i class="fab fa-apple"></i> <span class="hero-button-text">App Store</span>
                 </a>
                 <a href="#" class="hero-button coming-soon">
-                    <i class="fab fa-google-play"></i> <span class="hero-button-text"></span>Google Play</span>
+                    <i class="fab fa-google-play"></i> <span class="hero-button-text">Google Play</span>
                 </a>
+                <button class="hero-button hero-button-linux" id="linuxInstall">
+                    <i class="fab fa-linux"></i> <span class="hero-button-text">Linux</span>
+                </button>
             </div>
+            <div class="linux-install-command" id="linuxCommand" style="display: none;">
+                <div class="command-box">
+                    <code>curl -fsSL https://miketoscano.com/pocketlab/install.sh | bash</code>
+                </div>
+            </div>
+            <div class="copy-notification" id="copyNotification">Copied to clipboard!</div>
         </div>
     </div>
     <div class="scroll-indicator">
@@ -1220,6 +1308,7 @@
             const heroSubtitle = document.querySelector('.hero h2');
             const heroParagraphs = document.querySelectorAll('.hero p');
             const heroButtons = document.querySelector('.hero-buttons');
+            const linuxCommandBox = document.getElementById('linuxCommand');
             
             let scrollThreshold = 200; // Increased threshold for better mobile experience
 
@@ -1234,7 +1323,7 @@
                     hero.style.left = '0';
                     hero.style.right = '0';
                     hero.style.minHeight = '80px';
-                    hero.style.background = 'var(--card-bg)';
+                    hero.style.background = 'var(--secondary-color)';
                     hero.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
                     
                     heroContent.style.maxWidth = '1200px';
@@ -1259,6 +1348,8 @@
                     
                     heroSubtitle.style.display = 'none';
                     heroParagraphs.forEach(p => p.style.display = 'none');
+                    linuxCommandBox.style.display = 'none';
+                    linuxCommandBox.style.visibility = 'hidden';
                     
                     heroButtons.style.margin = '0';
                     heroButtons.style.marginLeft = 'auto';
@@ -1273,8 +1364,10 @@
                     heroTitle.style = '';
                     heroSubtitle.style = '';
                     heroParagraphs.forEach(p => p.style = '');
+                    linuxCommandBox.style.visibility = '';
                     heroButtons.style = '';
                     body.style.paddingTop = '0';
+                    // Don't automatically show the linux command, let the button control it
                 }
             });
 
@@ -1348,6 +1441,36 @@
                     currentIndex = index;
                     updateSlides();
                 });
+            });
+
+            // Linux install command toggle and copy
+            const linuxButton = document.getElementById('linuxInstall');
+            const linuxCommand = document.getElementById('linuxCommand');
+            const copyNotification = document.getElementById('copyNotification');
+
+            linuxButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Only show command if hero is not collapsed
+                if (!hero.classList.contains('collapsed')) {
+                    linuxCommand.style.display = 'block';
+                }
+                
+                // Copy to clipboard
+                const commandText = 'curl -fsSL https://miketoscano.com/pocketlab/install.sh | bash';
+                
+                // Use a try-catch for better error handling
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(commandText).then(() => {
+                        // Show notification
+                        copyNotification.classList.add('show');
+                        setTimeout(() => {
+                            copyNotification.classList.remove('show');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                    });
+                }
             });
         });
     </script>
