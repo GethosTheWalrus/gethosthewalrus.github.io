@@ -102,7 +102,8 @@ mkdir -p "$INSTALL_DIR/$APP_DIR"
 cp -r bundle/* "$INSTALL_DIR/$APP_DIR/"
 chmod +x "$INSTALL_DIR/$APP_DIR/$APP_NAME"
 
-# Create symlink
+# Create symlink (remove any existing file or directory first)
+rm -rf "$INSTALL_DIR/$APP_NAME"
 ln -sf "$INSTALL_DIR/$APP_DIR/$APP_NAME" "$INSTALL_DIR/$APP_NAME"
 show_progress 6 6 "Installation complete      "
 
