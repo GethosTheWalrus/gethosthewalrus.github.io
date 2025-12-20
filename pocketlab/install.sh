@@ -13,7 +13,7 @@ echo "Choose an action:"
 echo "  (i) Install/Update"
 echo "  (u) Uninstall"
 echo ""
-read -p "Enter choice [i/u]: " -n 1 -r
+read -r -n 1 -p "Enter choice [i/u]: " REPLY </dev/tty
 echo ""
 echo ""
 
