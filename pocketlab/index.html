@@ -1153,7 +1153,7 @@
                         <li style="margin-bottom: 0.5rem;">Enable "Install from Unknown Sources" in Android settings</li>
                         <li style="margin-bottom: 0.5rem;">Verify SHA1 hash matches:
                             <div class="command-box" style="margin-top: 0.5rem;">
-                                <code id="sha1Hash" style="font-size: 0.75rem; word-break: break-all;">6e9a37c6839792862669d2c035c25b18fc8b84b2</code>
+                                <code id="sha1Hash" style="font-size: 0.75rem; word-break: break-all;">Loading...</code>
                             </div>
                         </li>
                         <li>Install the APK on your device</li>
@@ -1348,6 +1348,23 @@
             const linuxCommandBox = document.getElementById('linuxCommand');
             
             let scrollThreshold = 200; // Increased threshold for better mobile experience
+
+            // Fetch and display SHA1 hash
+            fetch('/pocketlab/apk/pocketlab.apk.sha1')
+                .then(response => response.text())
+                .then(hash => {
+                    const sha1Element = document.getElementById('sha1Hash');
+                    if (sha1Element) {
+                        sha1Element.textContent = hash.trim();
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to load SHA1 hash:', err);
+                    const sha1Element = document.getElementById('sha1Hash');
+                    if (sha1Element) {
+                        sha1Element.textContent = 'Failed to load hash';
+                    }
+                });
 
             window.addEventListener('scroll', function() {
                 const currentScroll = window.pageYOffset;
