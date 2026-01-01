@@ -1,0 +1,26 @@
+{
+  "feed": {
+    "version": "1.0",
+    "updated": "2025-12-31T00:00:00Z"
+  },
+  "updates": [
+    {
+      "version": {
+        "major": 2,
+        "minor": 2,
+        "build": 0
+      },
+      "title": "On-device LLM inference is here!",
+      "description": "Happy New Year! PocketLab now supports on-device LLM inference with several small but powerful models in the Qwen, Gemma, and Phi families. If you're main priority is privacy and offline functionality, head over to the profile screen -> LLM Configuration and switch from Ollama to Local Model. For those who love PocketLab but hate having AI features forced on them, there's now a toggle to disable all AI functionality in the settings page. As always, thank you for any feedback that you're willing to provide, and have a great 2026! This won't be the last time you hear from me this year :)",
+      "notes": [
+        "Added support for on-device LLM inference",
+        "Added on-device support for Qwen 2.5 7B, Qwen 3 8B, Phi 4 Mini 4B, and Gemma 3 4B models",
+        "Provided the option to configure a routing model (e.g. FunctionGemma) for dynamic tool selection",
+        "Tweaked the settings pages for better usability",
+        "Added a toggle to switch Lab Assistant on and off",
+        "Added an option to totally disable AI functionality"
+      ],
+      "date": "2025-01-01T00:00:00Z"
+    }
+  ]
+}
