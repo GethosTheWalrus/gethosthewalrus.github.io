@@ -57,15 +57,6 @@
                 screenElement.classList.add("active");
             }
 
-            document.getElementById("gameSelect").addEventListener("change", (e) => {
-                game = e.target.value;
-                if (game == "archer") {
-                    document.getElementById("gameFrame").setAttribute("src", "/archer-game");
-                } else {
-                    document.getElementById("gameFrame").setAttribute("src", "/wasm_games/?game="+game);
-                }
-            });
-
             // Make blog post cards clickable
             document.querySelectorAll('.blog-post-item').forEach(item => {
                 item.addEventListener('click', function(e) {
@@ -116,134 +107,72 @@
     </div>
     <div id="games" class="screen">
         <div class="innerscreen">
-            <p id="finalline" class="font">
-                <span class="prompt">root@miketoscano.com:~$</span><span> 
-                    sh ~/games/<select id="gameSelect" class="font" style="border:none;background:transparent;padding:0;margin:0;position:relative;cursor:pointer;">
-                        <option value="flappy">Flappy Bird</option>
-                        <option value="snake">Snake</option>
-                        <option value="pacman">Pacman</option>
-                        <option value="archer">Zombies</option>
-                    </select>
-                </span>
-                <div style="width:100%;height:500px;">
-                    <iframe id="gameFrame" src="/wasm_games/" style="border:none;width:100%;height:420px;"></iframe>
-                </div>
-            </p>
+            <p class="font"><span class="prompt">root@miketoscano.com:~/games$</span> <span class="command">ls -lh</span></p>
+            <div class="font flexcontainer" style="display:flex;align-items:flex-start;justify-content:center;padding-left:10px;padding-right:10px;margin-top:20px;gap:30px;flex-wrap:wrap;">
+                <a href="mini-crossword/?seed=20260101" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">mini-crossword/</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Daily crossword puzzle</span>
+                </a>
+                <a href="flappy-bhatt/" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">flappy-bhatt/</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Flappy bird clone</span>
+                </a>
+                <a href="archer-game/" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">archer-game/</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Zombie survival shooter</span>
+                </a>
+            </div>
         </div>
     </div>
     <div id="blog" class="screen">
         <div class="innerscreen">
-            <p class="font"><span class="prompt">root@miketoscano.com:~/posts$</span> <span class="command">ls</span></p>
-            <div class="font flexcontainer" style="display:flex;align-items:center;justify-content:center;padding-left:10px;padding-right:10px;">
-                <div class="tree">
-                    <ul>
-                      <!-- <li><i class="fa fa-folder-open"></i> Blog Posts -->
-                        <ul style="padding:0;">
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/ai-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/langchain-temporal-workflow-processor.html">Building Agentic Workflows With LangChain And Temporal</a>
-                                        <span class="blog-post-date">Jul 7, 2025</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/ai-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/docker-mcp-langgraph-agent.html">Custom Agentic Applications With LangGraph And Dockerized MCP</a>
-                                        <span class="blog-post-date">Jun 26, 2025</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/docker-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/docker-mcp-toolkit-postgres.html">Sweet-Talk Your Database Into Revealing Its Secrets</a>
-                                        <span class="blog-post-date">Jun 20, 2025</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/docker-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/docker-model-runner.html">Whale-Sized Intelligence - Running LLMs with Docker Desktop</a>
-                                        <span class="blog-post-date">Mar 27, 2025</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/gitlab-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/gitlab-terraform-proxmox-k8s">Deploying A Kubernetes Cluster To PVE Using GitLab CI</a>
-                                        <span class="blog-post-date">Mar 3, 2025</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/docker-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/docker-scout-image-security.html">Maintaining Docker Image Security With Docker Scout</a>
-                                        <span class="blog-post-date">Nov 25, 2024</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/ai-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/pixel-ai-companion.html">Pixel - Your Tiny, Offline AI Assistant</a>
-                                        <span class="blog-post-date">Aug 21, 2024</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/flappy-bird-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/oracle-oci-flappy-bird.html">Deploying Flappy Bird To OCI With 3 Short Commands</a>
-                                        <span class="blog-post-date">Jun 8, 2024</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/terraform-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/terraform-nodejs-oci-aws.html">Terraforming An Application Onto OCI And AWS</a>
-                                        <span class="blog-post-date">Dec 8, 2023</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/flappy-bird-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/oracle-advanced-queue-flappy-bird.html">Express, TypeScript, And Oracle Advanced Queue</a>
-                                        <span class="blog-post-date">Nov 25, 2023</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="blog-post-item">
-                                <div class="blog-post-content">
-                                    <img class="blog-icon-modern" src="/img/blog/flappy-bird-icon.png" />
-                                    <div class="blog-post-text">
-                                        <a class="blog-post-title" target="_blank" href="/blog/json-relational-duality-oracle-flappy-bird.html">Full Stack JavaScript App Utilizing JSON-Relational Duality Views</a>
-                                        <span class="blog-post-date">Nov 15, 2023</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
+            <p class="font"><span class="prompt">root@miketoscano.com:~/posts$</span> <span class="command">ls -lh</span></p>
+            <div class="font flexcontainer" style="display:flex;align-items:flex-start;justify-content:center;padding-left:10px;padding-right:10px;margin-top:20px;gap:30px;flex-wrap:wrap;">
+                <a href="/blog/langchain-temporal-workflow-processor.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">langchain-temporal-workflow-processor.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Building Agentic Workflows With LangChain And Temporal</span>
+                </a>
+                <a href="/blog/docker-mcp-langgraph-agent.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">docker-mcp-langgraph-agent.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Custom Agentic Applications With LangGraph And Dockerized MCP</span>
+                </a>
+                <a href="/blog/docker-mcp-toolkit-postgres.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">docker-mcp-toolkit-postgres.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Sweet-Talk Your Database Into Revealing Its Secrets</span>
+                </a>
+                <a href="/blog/docker-model-runner.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">docker-model-runner.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Whale-Sized Intelligence - Running LLMs with Docker Desktop</span>
+                </a>
+                <a href="/blog/gitlab-terraform-proxmox-k8s" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">gitlab-terraform-proxmox-k8s.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Deploying A Kubernetes Cluster To PVE Using GitLab CI</span>
+                </a>
+                <a href="/blog/docker-scout-image-security.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">docker-scout-image-security.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Maintaining Docker Image Security With Docker Scout</span>
+                </a>
+                <a href="/blog/pixel-ai-companion.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">pixel-ai-companion.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Pixel - Your Tiny, Offline AI Assistant</span>
+                </a>
+                <a href="/blog/oracle-oci-flappy-bird.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">oracle-oci-flappy-bird.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Deploying Flappy Bird To OCI With 3 Short Commands</span>
+                </a>
+                <a href="/blog/terraform-nodejs-oci-aws.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">terraform-nodejs-oci-aws.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Terraforming An Application Onto OCI And AWS</span>
+                </a>
+                <a href="/blog/oracle-advanced-queue-flappy-bird.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">oracle-advanced-queue-flappy-bird.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Express, TypeScript, And Oracle Advanced Queue</span>
+                </a>
+                <a href="/blog/json-relational-duality-oracle-flappy-bird.html" target="_blank" style="display:block;text-align:center;text-decoration:none;transition:opacity 0.2s;flex:1;min-width:200px;max-width:250px;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">
+                    <span class="command">json-relational-duality-oracle-flappy-bird.html</span>
+                    <span style="display:block;color:#888;font-size:0.85em;margin-top:3px;">Full Stack JavaScript App Utilizing JSON-Relational Duality Views</span>
+                </a>
             </div>
-            <p id="finalline" style="display:none;" class="font"><span class="prompt">root@miketoscano.com:~$ </span><span class="blinking-cursor">|</span></p>
         </div>
     </div>
 </body>
