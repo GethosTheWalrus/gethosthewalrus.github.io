@@ -8,6 +8,22 @@
       "version": {
         "major": 2,
         "minor": 2,
+        "build": 1
+      },
+      "title": "PocketLab 2.2.1 - Bug Fixes and Enhancements",
+      "description": "This version includes minor bug fixes and UX enhancements.",
+      "notes": [
+        "Fixed a bug preventing the default branch from showing on smaller devices",
+        "Disabled local LLM configuration on Android devices due to stability issues",
+        "Added a toggle to run summaries on demand rather than on page load",
+        "Load and categorize Ollama models after connecting to an Ollama server"
+      ],
+      "date": "2025-01-08T00:00:00Z"
+    },
+    {
+      "version": {
+        "major": 2,
+        "minor": 2,
         "build": 0
       },
       "title": "On-device LLM inference is here!",
