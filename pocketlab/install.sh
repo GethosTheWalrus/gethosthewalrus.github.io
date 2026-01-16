@@ -99,8 +99,33 @@ show_progress 4 6 "Extraction complete        "
 show_progress 5 6 "Installing files           "
 rm -rf "$INSTALL_DIR/$APP_DIR"
 mkdir -p "$INSTALL_DIR/$APP_DIR"
-cp -r bundle/* "$INSTALL_DIR/$APP_DIR/"
-chmod +x "$INSTALL_DIR/$APP_DIR/$APP_NAME"
+# Determine source directory from extracted archive
+SRC_DIR=""
+if [ -d "bundle" ]; then
+    SRC_DIR="bundle"
+else
+    # find first directory created by extraction (exclude current dir)
+    first_dir=$(find . -maxdepth 1 -type d ! -path . | head -n 1)
+    if [ -n "$first_dir" ]; then
+        SRC_DIR="${first_dir#./}"
+    else
+        SRC_DIR="."
+    fi
+fi
+
+# Copy files (include hidden files)
+shopt -s dotglob || true
+if [ "$SRC_DIR" = "." ]; then
+    cp -a ./* "$INSTALL_DIR/$APP_DIR/" 2>/dev/null || true
+else
+    cp -a "$SRC_DIR"/* "$INSTALL_DIR/$APP_DIR/" 2>/dev/null || true
+fi
+shopt -u dotglob || true
+
+# Make the main binary executable if present
+if [ -f "$INSTALL_DIR/$APP_DIR/$APP_NAME" ]; then
+    chmod +x "$INSTALL_DIR/$APP_DIR/$APP_NAME"
+fi
 
 # Create symlink (remove any existing file or directory first)
 rm -rf "$INSTALL_DIR/$APP_NAME"
