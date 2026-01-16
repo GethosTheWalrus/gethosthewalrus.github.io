@@ -99,15 +99,29 @@ show_progress 4 6 "Extraction complete        "
 show_progress 5 6 "Installing files           "
 rm -rf "$INSTALL_DIR/$APP_DIR"
 mkdir -p "$INSTALL_DIR/$APP_DIR"
-# Determine source directory from extracted archive
+# Determine source directory from extracted archive.
+# If the archive created exactly one top-level directory, use it.
+# Otherwise copy all extracted entries from the current directory.
 SRC_DIR=""
 if [ -d "bundle" ]; then
     SRC_DIR="bundle"
 else
-    # find first directory created by extraction (exclude current dir)
-    first_dir=$(find . -maxdepth 1 -type d ! -path . | head -n 1)
-    if [ -n "$first_dir" ]; then
-        SRC_DIR="${first_dir#./}"
+    # list non-hidden entries in current dir
+    entries=(./*)
+    # count entries that actually exist
+    count=0
+    first_entry=""
+    for e in "${entries[@]}"; do
+        if [ -e "$e" ]; then
+            count=$((count+1))
+            if [ -z "$first_entry" ]; then
+                first_entry="$e"
+            fi
+        fi
+    done
+
+    if [ "$count" -eq 1 ] && [ -d "$first_entry" ]; then
+        SRC_DIR="${first_entry#./}"
     else
         SRC_DIR="."
     fi
@@ -125,6 +139,12 @@ shopt -u dotglob || true
 # Make the main binary executable if present
 if [ -f "$INSTALL_DIR/$APP_DIR/$APP_NAME" ]; then
     chmod +x "$INSTALL_DIR/$APP_DIR/$APP_NAME"
+else
+    # try to find an executable named pocketlab somewhere in the app dir
+    exe_path=$(find "$INSTALL_DIR/$APP_DIR" -maxdepth 3 -type f -executable -name "$APP_NAME" | head -n 1 || true)
+    if [ -n "$exe_path" ]; then
+        chmod +x "$exe_path" || true
+    fi
 fi
 
 # Create symlink (remove any existing file or directory first)
@@ -144,14 +164,36 @@ else
 fi
 echo ""
 
-# Check if directory is in PATH
+# Check if directory is in PATH; if not, attempt to add it to a suitable profile
 if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
-    echo "⚠️  Add $INSTALL_DIR to your PATH to run '$APP_NAME' from anywhere:"
+    echo "⚠️  $INSTALL_DIR is not in your PATH. Attempting to add it to a shell profile."
+
+    export_line='export PATH="$HOME/.local/bin:$PATH"'
+    candidates=("$HOME/.bash_profile" "$HOME/.profile" "$HOME/.bashrc" "$HOME/.bash_login")
+    target=""
+    for f in "${candidates[@]}"; do
+        if [ -f "$f" ]; then
+            target="$f"
+            break
+        fi
+    done
+    if [ -z "$target" ]; then
+        target="$HOME/.profile"
+    fi
+
+    if grep -Fqx "$export_line" "$target" 2>/dev/null; then
+        echo "PATH entry already present in $target"
+    else
+        echo "$export_line" >> "$target"
+        echo "Added PATH export to $target"
+    fi
+
     echo ""
-    echo "    echo 'export PATH=\"\$HOME/.local/bin:\$PATH\"' >> ~/.bashrc"
-    echo "    source ~/.bashrc"
+    echo "To apply now for this session, run:" 
     echo ""
-    echo "Or run directly: $INSTALL_DIR/$APP_NAME"
+    echo "    export PATH=\"\$HOME/.local/bin:\$PATH\""
+    echo ""
+    echo "Or open a new terminal/login shell to pick up the change."
 else
     echo "Run with: $APP_NAME"
 fi
