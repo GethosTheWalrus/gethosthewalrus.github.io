@@ -18,7 +18,7 @@
         "Updated summary generation to use rolling summaries for better context retention",
         "Fixed an issue causing the keyboard to cover input fields while chatting with Lab Assistant",
         "Fixed an issue causing LLM settings to show when 'No AI' is selected",
-        "Fixed an issue causing corrupted sumammary text as a result of non-ASCII characters in LLM output"
+        "Fixed an issue causing corrupted summary text as a result of non-ASCII characters in LLM output"
       ],
       "date": "2025-01-17T00:00:00Z"
     },
