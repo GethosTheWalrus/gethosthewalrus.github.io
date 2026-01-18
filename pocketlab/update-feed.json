@@ -8,6 +8,24 @@
       "version": {
         "major": 2,
         "minor": 2,
+        "build": 2
+      },
+      "title": "Rolling sumaries, Mermaid rendering, and more!",
+      "description": "This version improves summaries across the app, adds Mermaid diagram rendering within READMEs, and includes several bug fixes and enhancements. I've also added a new model, Granite 3.1 3B A800M to the list of models available for local inference.",
+      "notes": [
+        "Added suport for Granite 3.1 3B A800M",
+        "Added support for rendering Mermaid diagrams within README files on Adroid and iOS",
+        "Updated summary generation to use rolling summaries for better context retention",
+        "Fixed an issue causing the keyboard to cover input fields while chatting with Lab Assistant",
+        "Fixed an issue causing LLM settings to show when 'No AI' is selected",
+        "Fixed an issue causing corrupted sumammary text as a result of non-ASCII characters in LLM output"
+      ],
+      "date": "2025-01-17T00:00:00Z"
+    },
+    {
+      "version": {
+        "major": 2,
+        "minor": 2,
         "build": 1
       },
       "title": "PocketLab 2.2.1 - Bug Fixes and Enhancements",
