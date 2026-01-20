@@ -1,194 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Mike Toscano | Blog</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <meta name="color-scheme" content="dark only">
-        <meta name="supported-color-schemes" content="dark">
-        <style>
-          /* Aggressively prevent Safari from applying any automatic styling */
-          :root {
-            color-scheme: dark only !important;
-            -webkit-color-scheme: dark only !important;
-          }
-          html {
-            color-scheme: dark only !important;
-            -webkit-color-scheme: dark only !important;
-          }
-          body {
-            color-scheme: dark only !important;
-            -webkit-color-scheme: dark only !important;
-          }
-          
-          /* Disable automatic dark mode detection */
-          * {
-            -webkit-color-scheme: dark only !important;
-          }
-        </style>
-        <meta property="og:title" content="Mike Toscano | Blog" />
-        <meta property="og:description" content="Learn about tech and software engineering with Mike Toscano" />
-        <meta property="og:url" content="https://miketoscano.com/blog/?post='+post+'" />
-        <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
-        <script src="/js/svg-pan-zoom-init.js"></script>
-        <link rel="stylesheet" href="/css/style.css" />
-        <script>
-          const urlParams = new URLSearchParams(window.location.search);
-          const post = urlParams.get('post');
-          let meta = document.createElement('meta');
-          meta.setAttribute('property', 'og:image');
-          meta.setAttribute('content', '/img/blog/'+post+'.png');
-          document.getElementsByTagName('head')[0].appendChild(meta);
-          document.addEventListener("DOMContentLoaded", async function(event){
-            document.getElementById('post').setAttribute('src', post+'.md');
-            document.getElementById('header-image').setAttribute('src', '/img/blog/'+post+'.png')
 
-            // Track event if valid post
-            try {
-              const response = await fetch('/blog-posts.json');
-              const posts = await response.json();
-              const isValidPost = posts.some(p => p.slug === post);
-              
-              if (isValidPost && window.umami) {
-                umami.track(post);
-              }
-            } catch (e) {
-              console.error('Error verifying post for analytics:', e);
-            }
-          });
-        </script>
-    </head>
-    <body>
-      <div id="bar">
-        <div id="red">
-        </div>
-        <div id="yellow">
-        </div>
-        <div id="green">
-        </div>
-        <div id="terminal-title">
-            MIKE TOSCANO - ENGINEERING LEADER
-        </div>
-    </div>
-    <div id="tabbar">
-        <div onclick="window.location.href='https://miketoscano.com'" class="tab"><div class="innertab">About Mike</div></div><div  class="tab active"><div class="innertab">Blog</div></div><div class="tab"><div onclick="window.location.href='/?tab=games'" class="innertab">Games</div></div>
-    </div>
-    <div id="blog" class="screen active">
-        <div class="innerscreen" style="padding:15px;">
-          <div style="margin:0 auto;width:90%;">
-            <div class="article-img-container">
-              <img id="header-image" src="#" />
-            </div>
-            <div style="height:150;padding:15px">
-              <img style="display:inline-block;border-radius:50px;width: 100px;" src="/img/blog/Captain-headshot-Michael-Toscano.avif" />
-              <div style="display:inline-block;vertical-align:top;padding-top:25px;padding-left:5px;">
-                <p style="margin:0;color:white;font-size:24px;font-weight:bold;">Mike Toscano</p>
-                <p style="margin:0;color:white;opacity:0.5;font-size:16px">&#128011; Docker Captain | Engineering Leader | Open-Source Enthusiast</p>
-              </div>
-            </div>
-            <zero-md id="post" src="loading.md" class="font">
-                <template data-append>
-                    <style>
-                      /* Use existing site styling patterns */
-                      div {
-                        max-width: 800px;
-                        margin: 0 auto !important;
-                      }
-                      p {
-                        font-size: 20px;
-                        text-align: justify;
-                        color: #fff; /* Use existing site white text color */
-                      }
-                      
-                      /* Apply site's existing text color to all content */
-                      h1, h2, h3, h4, h5, h6, p, li, td, th {
-                        color: #fff !important;
-                      }
-                      
-                      /* Remove margin-bottom from all unordered lists */
-                      ul {
-                        margin-bottom: 0 !important;
-                      }
-                      
-                      /* Make all horizontal rules blue */
-                      hr {
-                        background-color: #3d444db3 !important;
-                        height: 2px !important;
-                      }
+<head>
+  <title>Mike Toscano | Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="color-scheme" content="dark only">
+  <meta name="supported-color-schemes" content="dark">
+  <style>
+    /* Aggressively prevent Safari from applying any automatic styling */
+    :root {
+      color-scheme: dark only !important;
+      -webkit-color-scheme: dark only !important;
+    }
 
-                      h1, h2, h3 {
-                        border-bottom: none !important;
-                      }
-                      
-                      /* Links use existing site style */
-                      a {
-                        color: #fff;
-                        text-decoration: none;
-                      }
-                      
-                      div:not(.mermaid):not(.mermaid *), p:not(.mermaid):not(.mermaid *) {
-                        background: #404040 !important; /* Use existing .screen background */
-                        background-color: #404040 !important;
-                      }
-                      .mermaid, .mermaid * {
-                        background: transparent !important;
-                        background-color: transparent !important;
-                      }
-                      .mermaid .er .entityBox, .mermaid .er .box {
-                        fill: #f8f8f8 !important;
-                        stroke: #333 !important;
-                      }
-                      .mermaid .er .label, .mermaid .er .nodeLabel {
-                        fill: #333 !important;
-                      }
-                      .mermaid foreignObject {
-                        width: 200px !important;
-                        min-width: 200px !important;
-                        overflow: visible !important;
-                      }
-                      .mermaid foreignObject > div {
-                        max-width: 200px !important;
-                        width: 200px !important;
-                        white-space: nowrap !important;
-                        overflow: visible !important;
-                      }
-                      .mermaid .nodeLabel p {
-                        margin: 0 !important;
-                        padding: 2px 4px !important;
-                        white-space: nowrap !important;
-                        font-size: 12px !important;
-                      }
-                      .blog-content-block {
-                        margin: 0 auto !important;
-                        text-align: center !important;
-                        vertical-align: middle !important;
-                        width: 100% !important;
-                        padding-bottom: 20px !important;
-                      }
-                      /* Ensure SVGs can receive mouse events */
-                      svg {
-                        pointer-events: all !important;
-                        user-select: none !important;
-                      }
-                      .mermaid svg {
-                        pointer-events: all !important;
-                        cursor: grab !important;
-                      }
-                      .mermaid svg:active {
-                        cursor: grabbing !important;
-                      }
-                      /* Override any conflicting styles */
-                      .mermaid div {
-                        pointer-events: none !important;
-                      }
-                      .mermaid svg * {
-                        pointer-events: all !important;
-                      }
-                    </style>
-                </template>
-            </zero-md>
+    html {
+      color-scheme: dark only !important;
+      -webkit-color-scheme: dark only !important;
+    }
+
+    body {
+      color-scheme: dark only !important;
+      -webkit-color-scheme: dark only !important;
+    }
+
+    /* Disable automatic dark mode detection */
+    * {
+      -webkit-color-scheme: dark only !important;
+    }
+
+    /* Spinner styles */
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.1);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: #09f;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Fade in animation */
+    .fade-in {
+      animation: fadeInSlide 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <meta property="og:title" content="Mike Toscano | Blog" />
+  <meta property="og:description" content="Learn about tech and software engineering with Mike Toscano" />
+  <meta property="og:url" content="https://miketoscano.com/blog/?post='+post+'" />
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/zero-md@3?register"></script>
+  <script src="/js/svg-pan-zoom-init.js"></script>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const post = urlParams.get('post');
+    let meta = document.createElement('meta');
+    meta.setAttribute('property', 'og:image');
+    meta.setAttribute('content', '/img/blog/' + post + '.png');
+    document.getElementsByTagName('head')[0].appendChild(meta);
+    document.addEventListener("DOMContentLoaded", async function (event) {
+      document.getElementById('post').setAttribute('src', post + '.md');
+      document.getElementById('header-image').setAttribute('src', '/img/blog/' + post + '.png')
+
+      // Handle loading state
+      const postElement = document.getElementById('post');
+      const spinner = document.getElementById('loading-spinner');
+
+      postElement.addEventListener('zero-md-rendered', () => {
+        spinner.style.display = 'none';
+        postElement.classList.add('fade-in');
+      });
+
+      // Track event if valid post
+      try {
+        const response = await fetch('/blog-posts.json');
+        const posts = await response.json();
+        const isValidPost = posts.some(p => p.slug === post);
+
+        if (isValidPost && window.umami) {
+          umami.track(post);
+        }
+      } catch (e) {
+        console.error('Error verifying post for analytics:', e);
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div id="bar">
+    <div id="red">
+    </div>
+    <div id="yellow">
+    </div>
+    <div id="green">
+    </div>
+    <div id="terminal-title">
+      MIKE TOSCANO - ENGINEERING LEADER
+    </div>
+  </div>
+  <div id="tabbar">
+    <div onclick="window.location.href='https://miketoscano.com'" class="tab">
+      <div class="innertab">About Mike</div>
+    </div>
+    <div class="tab active">
+      <div class="innertab">Blog</div>
+    </div>
+    <div class="tab">
+      <div onclick="window.location.href='/?tab=games'" class="innertab">Games</div>
+    </div>
+  </div>
+  <div id="blog" class="screen active">
+    <div class="innerscreen" style="padding:15px;">
+      <div style="margin:0 auto;width:90%;">
+        <div class="article-img-container">
+          <img id="header-image" src="#" />
+        </div>
+        <div style="height:150;padding:15px">
+          <img style="display:inline-block;border-radius:50px;width: 100px;"
+            src="/img/blog/Captain-headshot-Michael-Toscano.avif" />
+          <div style="display:inline-block;vertical-align:top;padding-top:25px;padding-left:5px;">
+            <p style="margin:0;color:white;font-size:24px;font-weight:bold;">Mike Toscano</p>
+            <p style="margin:0;color:white;opacity:0.5;font-size:16px">&#128011; Docker Captain | Engineering Leader |
+              Open-Source Enthusiast</p>
           </div>
         </div>
+        <div id="loading-spinner" class="spinner"></div>
+        <zero-md id="post" src="loading.md" class="font" style="opacity: 0;">
+          <template data-append>
+            <style>
+              /* Use existing site styling patterns */
+              div {
+                max-width: 800px;
+                margin: 0 auto !important;
+              }
+
+              p {
+                font-size: 20px;
+                text-align: justify;
+                color: #fff;
+                /* Use existing site white text color */
+              }
+
+              /* Apply site's existing text color to all content */
+              h1,
+              h2,
+              h3,
+              h4,
+              h5,
+              h6,
+              p,
+              li,
+              td,
+              th {
+                color: #fff !important;
+              }
+
+              /* Remove margin-bottom from all unordered lists */
+              ul {
+                margin-bottom: 0 !important;
+              }
+
+              /* Make all horizontal rules blue */
+              hr {
+                background-color: #3d444db3 !important;
+                height: 2px !important;
+              }
+
+              h1,
+              h2,
+              h3 {
+                border-bottom: none !important;
+              }
+
+              /* Links use existing site style */
+              a {
+                color: #fff;
+                text-decoration: none;
+              }
+
+              div:not(.mermaid):not(.mermaid *),
+              p:not(.mermaid):not(.mermaid *) {
+                background: #404040 !important;
+                /* Use existing .screen background */
+                background-color: #404040 !important;
+              }
+
+              .mermaid,
+              .mermaid * {
+                background: transparent !important;
+                background-color: transparent !important;
+              }
+
+              .mermaid .er .entityBox,
+              .mermaid .er .box {
+                fill: #f8f8f8 !important;
+                stroke: #333 !important;
+              }
+
+              .mermaid .er .label,
+              .mermaid .er .nodeLabel {
+                fill: #333 !important;
+              }
+
+              .mermaid foreignObject {
+                width: 200px !important;
+                min-width: 200px !important;
+                overflow: visible !important;
+              }
+
+              .mermaid foreignObject>div {
+                max-width: 200px !important;
+                width: 200px !important;
+                white-space: nowrap !important;
+                overflow: visible !important;
+              }
+
+              .mermaid .nodeLabel p {
+                margin: 0 !important;
+                padding: 2px 4px !important;
+                white-space: nowrap !important;
+                font-size: 12px !important;
+              }
+
+              .blog-content-block {
+                margin: 0 auto !important;
+                text-align: center !important;
+                vertical-align: middle !important;
+                width: 100% !important;
+                padding-bottom: 20px !important;
+              }
+
+              /* Ensure SVGs can receive mouse events */
+              svg {
+                pointer-events: all !important;
+                user-select: none !important;
+              }
+
+              .mermaid svg {
+                pointer-events: all !important;
+                cursor: grab !important;
+              }
+
+              .mermaid svg:active {
+                cursor: grabbing !important;
+              }
+
+              /* Override any conflicting styles */
+              .mermaid div {
+                pointer-events: none !important;
+              }
+
+              .mermaid svg * {
+                pointer-events: all !important;
+              }
+            </style>
+          </template>
+        </zero-md>
+      </div>
     </div>
-    </body>
+  </div>
+</body>
+
 </html>
