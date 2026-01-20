@@ -39,9 +39,22 @@
           meta.setAttribute('property', 'og:image');
           meta.setAttribute('content', '/img/blog/'+post+'.png');
           document.getElementsByTagName('head')[0].appendChild(meta);
-          document.addEventListener("DOMContentLoaded", function(event){
+          document.addEventListener("DOMContentLoaded", async function(event){
             document.getElementById('post').setAttribute('src', post+'.md');
             document.getElementById('header-image').setAttribute('src', '/img/blog/'+post+'.png')
+
+            // Track event if valid post
+            try {
+              const response = await fetch('/blog-posts.json');
+              const posts = await response.json();
+              const isValidPost = posts.some(p => p.slug === post);
+              
+              if (isValidPost && window.umami) {
+                umami.track(post);
+              }
+            } catch (e) {
+              console.error('Error verifying post for analytics:', e);
+            }
           });
         </script>
     </head>
