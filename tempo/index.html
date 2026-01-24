@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tempo — Temporal Mobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Tempo brings Temporal workflows to mobile — observe, manage, and debug your workflows on the go with a mobile-first interface." />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tempo — Temporal Mobile">
+    <meta property="og:description" content="Tempo brings Temporal workflows to mobile — observe, manage, and debug your workflows on the go with a mobile-first interface.">
+    <meta property="og:image" content="/img/tempo/tempo_master.png">
+    <meta property="og:url" content="https://gethosthewalrus.github.io/tempo/">
+
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
+
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c3e50;
+            --accent-color: #FC6D26;
+            --temporal-blue: #00D4FF;
+            --text-color: #ecf0f1;
+            --card-bg: rgba(44, 62, 80, 0.7);
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding-top: 0;
+            transition: padding-top 0.3s ease;
+        }
+
+        body.scrolled {
+            padding-top: 80px;
+        }
+
+        .hero {
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color);
+            position: relative;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero.collapsed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            min-height: 80px;
+            background: var(--card-bg);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero.collapsed .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.5rem 2rem;
+            flex-direction: row;
+            align-items: center;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .hero.collapsed .app-logo {
+            width: 50px;
+            height: 50px;
+            margin: 0;
+            padding: 0.5rem;
+            border-radius: 10px;
+        }
+
+        .hero.collapsed h1 {
+            font-size: 1.5rem;
+            margin: 0 2rem 0 0.5rem;
+        }
+
+        .hero.collapsed h2 {
+            display: none;
+        }
+
+        .hero.collapsed p {
+            display: none;
+        }
+
+        .hero.collapsed .hero-buttons {
+            flex-direction: row;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .hero.collapsed .hero-button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            min-width: auto;
+            border-radius: 5px;
+            justify-content: center;
+        }
+
+        .hero.collapsed .hero-button i {
+            font-size: 1rem;
+            margin-right: 0.3rem;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-content p {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .app-logo {
+            width: 240px;
+            height: 240px;
+            margin-bottom: 2rem;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero h2 {
+            margin-top: 0;
+            padding-top: 0;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-button:hover {
+            transform: scale(1.05);
+            background-color: var(--temporal-blue);
+        }
+
+        .hero-button.coming-soon {
+            background-color: var(--secondary-color);
+            opacity: 0.7;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .hero-button.coming-soon:hover {
+            transform: none;
+            background-color: var(--secondary-color);
+        }
+
+        .hero-button.coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: var(--text-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .hero-button i {
+            font-size: 1.2rem;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            pointer-events: none;
+            padding-bottom: 1rem;
+        }
+
+        body.scrolled .scroll-indicator {
+            display: none !important;
+        }
+
+        .scroll-indicator p {
+            font-size: 0.9rem;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-indicator i {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .features {
+            padding: 4rem 0;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            margin-top: 40vh;
+        }
+
+        body.scrolled .features {
+            margin-top: 240px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 0.75rem 0;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        section p {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .llm-section {
+            padding: 4rem 0;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .llm-section .innerscreen {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .llm-carousel {
+            max-width: 1200px;
+            margin: 2rem auto;
+            position: relative;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .llm-stack {
+            position: relative;
+            width: 40%;
+            height: 450px;
+            max-width: 350px;
+            margin: 0;
+        }
+
+        .llm-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center center;
+            opacity: 0;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+        }
+
+        .llm-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 3;
+            transform: translateY(0) translateX(0) scale(1);
+        }
+
+        .llm-slide.next {
+            opacity: 0.7;
+            transform: translateY(10px) translateX(-10px) scale(0.98);
+            z-index: 2;
+        }
+
+        .llm-slide.prev {
+            opacity: 0.7;
+            transform: translateY(20px) translateX(-20px) scale(0.96);
+            z-index: 1;
+        }
+
+        .llm-screenshot {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+
+        .llm-screenshot img {
+            width: auto;
+            height: 100%;
+            max-height: 430px;
+            display: block;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .llm-descriptions {
+            width: 55%;
+            position: relative;
+            height: 450px;
+        }
+
+        .llm-description {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: left;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            top: 0;
+            left: 0;
+        }
+
+        .llm-description.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .llm-description h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        .llm-description p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .llm-navigation {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            pointer-events: none;
+            width: 100%;
+        }
+
+        .llm-nav-button {
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+            position: absolute;
+        }
+
+        .llm-nav-button#prevSlide {
+            left: -50px;
+        }
+
+        .llm-nav-button#nextSlide {
+            right: -50px;
+        }
+
+        .llm-nav-button:hover {
+            background: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .llm-pagination {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .llm-pagination-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-color);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .llm-pagination-dot.active {
+            background: var(--accent-color);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .audience-section {
+            padding: 2rem 0;
+            background-color: var(--primary-color);
+            margin-top: 2rem;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .audience-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--temporal-blue);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .audience-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--temporal-blue);
+        }
+
+        .audience-card h3 {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .audience-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            opacity: 0.9;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        .contact-section {
+            padding: 2rem 0;
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 1rem 0;
+            }
+
+            .hero-content {
+                padding: 1rem;
+                margin: 0.5rem;
+                max-width: 100%;
+            }
+
+            .app-logo {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+                border-radius: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero h2 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+                margin: 0.5rem 0;
+            }
+
+            .hero-buttons {
+                flex-direction: row;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .hero-button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
+            }
+
+            .llm-carousel {
+                flex-direction: column;
+                height: auto;
+                gap: 1rem;
+                padding: 0 1rem;
+                margin: 1rem auto;
+            }
+
+            .llm-stack {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+                height: auto;
+                min-height: 400px;
+            }
+
+            .llm-screenshot img {
+                width: 100%;
+                height: auto;
+                max-width: 300px;
+            }
+
+            .llm-descriptions {
+                width: 100%;
+                height: auto;
+                min-height: 250px;
+                margin-top: 2rem;
+                position: relative;
+            }
+
+            .llm-description {
+                position: absolute;
+                width: 100%;
+                height: auto;
+                text-align: center;
+                padding: 1rem;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                top: 0;
+                left: 0;
+            }
+
+            .llm-description.active {
+                opacity: 1;
+                position: relative;
+            }
+
+            .llm-description h3 {
+                font-size: 1.8rem;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .llm-description p {
+                text-align: justify;
+                text-justify: inter-word;
+                font-size: 1rem;
+                margin: 0;
+            }
+
+            .llm-nav-button {
+                width: 35px;
+                height: 35px;
+                position: absolute;
+            }
+
+            .llm-nav-button#prevSlide {
+                left: 0;
+            }
+
+            .llm-nav-button#nextSlide {
+                right: 0;
+            }
+
+            .llm-pagination {
+                bottom: -25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <img src="/img/tempo/tempo_master.png" alt="Tempo Logo" class="app-logo">
+            <h1>Tempo</h1>
+            <h2>Temporal in Your Pocket</h2>
+            <p>Don't let distance keep you from your workflows. Tempo brings the full power of Temporal to your mobile device. Monitor executions, investigate failures, and take action from anywhere. Because the best observability tool is the one you can take with you.</p>
+
+            <div class="hero-buttons">
+                <a href="https://example.com/tempo/app-store" class="hero-button coming-soon" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_app_store"><i class="fab fa-apple"></i> <span class="hero-button-text">App Store</span></a>
+                <a href="https://example.com/tempo/google-play" class="hero-button coming-soon" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_android"><i class="fab fa-android"></i> <span class="hero-button-text">Android</span></a>
+                <a href="https://example.com/tempo/linux" class="hero-button coming-soon" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_linux"><i class="fab fa-linux"></i> <span class="hero-button-text">Linux</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <p>Scroll down to learn more</p>
+        <i class="fas fa-chevron-down"></i>
+    </div>
+
+    <section class="features">
+        <div class="innerscreen">
+            <h2 style="font-size:1.8rem;margin-top:100px;">All of Temporal with no commitments to your desk</h2>
+            <p>No compromises. Tempo delivers powerful, polished, and portable Temporal access that's easy to use for anyone</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-stream"></i></div>
+                    <h3>Complete Execution Visibility</h3>
+                    <p>From high-level workflow status to granular event timelines, see everything happening in your Temporal cluster. Filter, search, and drill down into the details that matter most.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Real-Time Actions</h3>
+                    <p>Respond to production issues without scrambling for a laptop. Send signals, terminate workflows, and trigger operations instantly. Your on-call team will thank you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-search"></i></div>
+                    <h3>Smart Search & Filtering</h3>
+                    <p>Find what you're looking for fast. Search by workflow ID, type, or status. Tempo's intuitive filters help you zero in on issues before they become incidents.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Your Infrastructure, Your Rules</h3>
+                    <p>Connect directly to your Temporal deployment. Tempo provides gRPC-based connectivity to your Temporal cluster, allowing it to function on the same port as your workers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="llm-section" style="background:var(--secondary-color);padding:4rem 0;">
+        <div class="innerscreen">
+            <h2 style="font-size:1.8rem;">Fast, powerful, and portable access to Temporal</h2>
+            <p>Tempo is the Temporal UX you wish you had yesterday</p>
+
+            <div class="llm-carousel">
+                <div class="llm-navigation">
+                    <button class="llm-nav-button" id="prevSlide">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="llm-nav-button" id="nextSlide">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="llm-pagination">
+                    <span class="llm-pagination-dot active"></span>
+                    <span class="llm-pagination-dot"></span>
+                    <span class="llm-pagination-dot"></span>
+                    <span class="llm-pagination-dot"></span>
+                    <span class="llm-pagination-dot"></span>
+                    <span class="llm-pagination-dot"></span>
+                </div>
+                <div class="llm-stack">
+                    <div class="llm-slide active">
+                        <div class="llm-screenshot">
+                            <img src="/img/tempo/tempo_workflows_list.PNG" alt="Workflow List">
+                        </div>
+                    </div>
+                    <div class="llm-slide next">
+                        <div class="llm-screenshot">
+                            <img src="/img/tempo/tempo_event_timeline.PNG" alt="Event Timeline">
+                        </div>
+                    </div>
+                    <div class="llm-slide prev">
+                        <div class="llm-screenshot">
+                            <img src="/img/tempo/tempo_workflow_details_actions.PNG" alt="Workflow Actions">
+                        </div>
+                    </div>
+                    <div class="llm-slide">
+                        <div class="llm-screenshot">
+                            <img src="/img/tempo/tempo_batch_operation_details.PNG" alt="Batch Operations">
+                        </div>
+                    </div>
+                    <div class="llm-slide">
+                        <div class="llm-screenshot">
+                            <img src="/img/tempo/tempo_schedule_details.PNG" alt="Schedule Details">
+                        </div>
+                    </div>
+                    <div class="llm-slide">
+                        <div class="llm-screenshot">
+                            <img src="/img/tempo/tempo_menu_drawer.PNG" alt="Menu Navigation">
+                        </div>
+                    </div>
+                </div>
+                <div class="llm-descriptions">
+                    <div class="llm-description active">
+                        <h3>Your Workflows at a Glance</h3>
+                        <p>Browse active, completed, and failed workflows in one streamlined view. Filter by status, search by workflow ID, and launch new executions all from your pocket. Stay on top of your entire Temporal deployment without opening a laptop.</p>
+                    </div>
+                    <div class="llm-description">
+                        <h3>Deep Dive into Every Event</h3>
+                        <p>Trace every step of your workflow execution with a visual timeline that makes sense on mobile. From workflow started to completed, see the full story of what your workflows are doing, when they're doing it, and why.</p>
+                    </div>
+                    <div class="llm-description">
+                        <h3>Take Control When It Matters</h3>
+                        <p>Don't just observe—act. Terminate runaway workflows, send signals, query state, or trigger retries. Tempo puts powerful workflow control at your fingertips, so you can respond to incidents from anywhere.</p>
+                    </div>
+                    <div class="llm-description">
+                        <h3>Batch Operations Made Simple</h3>
+                        <p>Track the progress of bulk workflow operations in real-time. Monitor success rates, view logs, and understand exactly how your batch jobs are performing—whether you're processing hundreds or thousands of workflows.</p>
+                    </div>
+                    <div class="llm-description">
+                        <h3>Schedule Management On the Go</h3>
+                        <p>Keep tabs on your scheduled workflows without missing a beat. View upcoming runs, check execution history, and understand schedule cadence. Know when your next workflow will trigger and verify your automation is running smoothly.</p>
+                    </div>
+                    <div class="llm-description">
+                        <h3>Everything You Need, Right Where You Need It</h3>
+                        <p>Navigate seamlessly between workflows, schedules, batch operations, and settings. Tempo puts every feature within reach, making complex Temporal operations feel natural on mobile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="audience-section">
+        <div class="innerscreen">
+            <h2 style="font-size:1.8rem;">For Teams That Never Stop</h2>
+            <p>Whether you're on-call, debugging in production, or checking in on a deployment, Tempo keeps you connected to your workflows.</p>
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <i class="fas fa-user-cog"></i>
+                    <h3>Platform Engineers</h3>
+                    <p>Monitor workflow health across your entire infrastructure. Track batch operations, verify schedules, and ensure your Temporal deployment is running smoothly, all while away from your desk.</p>
+                </div>
+                <div class="audience-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Developers</h3>
+                    <p>Debug workflow failures with full event timelines and payload inspection. Quickly identify the root cause of issues and take corrective action without waiting to get back to your IDE.</p>
+                </div>
+                <div class="audience-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>On-Call Teams</h3>
+                    <p>Respond to alerts instantly. View workflow status, terminate stuck executions, and send signals to recover from failures,all from the device already in your hand when you get paged.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="innerscreen">
+            <p style="text-align:center;opacity:0.7;">Feedback or questions — <a href="mailto:appsupport@miketoscano.com" style="color:var(--accent-color);text-decoration:none;">appsupport@miketoscano.com</a></p>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const hero = document.querySelector('.hero');
+            const body = document.body;
+            const heroContent = document.querySelector('.hero-content');
+            const appLogo = document.querySelector('.app-logo');
+            const heroTitle = document.querySelector('.hero h1');
+            const heroSubtitle = document.querySelector('.hero h2');
+            const heroParagraphs = document.querySelectorAll('.hero p');
+            const heroButtons = document.querySelector('.hero-buttons');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            let scrollThreshold = 200;
+
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > scrollThreshold) {
+                    // Collapsed state
+                    hero.classList.add('collapsed');
+                    body.classList.add('scrolled');
+                } else {
+                    // Full state
+                    hero.classList.remove('collapsed');
+                    body.classList.remove('scrolled');
+                }
+            });
+
+            // Carousel for screenshots
+            const slides = Array.from(document.querySelectorAll('.llm-slide'));
+            const descriptions = Array.from(document.querySelectorAll('.llm-description'));
+            const prevButton = document.getElementById('prevSlide');
+            const nextButton = document.getElementById('nextSlide');
+            const dots = document.querySelectorAll('.llm-pagination-dot');
+            let currentIndex = 0;
+
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active', 'next', 'prev');
+                    
+                    if (index === currentIndex) {
+                        slide.classList.add('active');
+                    } else if (index === (currentIndex + 1) % slides.length) {
+                        slide.classList.add('next');
+                    } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
+                        slide.classList.add('prev');
+                    }
+                });
+
+                descriptions.forEach((desc, index) => {
+                    desc.classList.remove('active');
+                    if (index === currentIndex) {
+                        desc.classList.add('active');
+                    }
+                });
+
+                dots.forEach((dot, index) => {
+                    dot.classList.remove('active');
+                    if (index === currentIndex) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slides.length;
+                updateSlides();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                updateSlides();
+            }
+
+            if (prevButton && nextButton) {
+                prevButton.addEventListener('click', prevSlide);
+                nextButton.addEventListener('click', nextSlide);
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlides();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
