@@ -1025,7 +1025,9 @@
                 .then(hash => {
                     const sha256Element = document.getElementById('sha256Hash');
                     if (sha256Element) {
-                        sha256Element.textContent = hash.trim();
+                        // Extract just the hash part (before the filename)
+                        const hashOnly = hash.trim().split(/\s+/)[0];
+                        sha256Element.textContent = hashOnly;
                     }
                 })
                 .catch(err => {
