@@ -229,6 +229,76 @@
             font-size: 1.2rem;
         }
 
+        .hero-button-linux {
+            cursor: pointer;
+        }
+
+        .hero-button-android {
+            cursor: pointer;
+            background-color: #3DDC84;
+        }
+
+        .hero-button-android:hover {
+            background-color: #2bb36a;
+        }
+
+        .linux-install-command {
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .command-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.75rem;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .command-box code {
+            color: var(--accent-color);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--accent-color);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .android-install-instructions {
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .android-install-instructions h4 {
+            text-align: left;
+        }
+
+        .android-install-instructions ol li {
+            text-align: left;
+        }
+
         .scroll-indicator {
             position: fixed;
             bottom: 0;
@@ -740,6 +810,10 @@
             .llm-pagination {
                 bottom: -25px;
             }
+
+            .command-box code {
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
@@ -753,9 +827,30 @@
 
             <div class="hero-buttons">
                 <a href="https://example.com/tempo/app-store" class="hero-button coming-soon" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_app_store"><i class="fab fa-apple"></i> <span class="hero-button-text">App Store</span></a>
-                <a href="/tempo/apk/tempo.apk" class="hero-button" download data-umami-event="tempo_android"><i class="fab fa-android"></i> <span class="hero-button-text">Android</span></a>
-                <a href="/tempo/install.sh" class="hero-button" download data-umami-event="tempo_linux"><i class="fab fa-linux"></i> <span class="hero-button-text">Linux</span></a>
+                <button class="hero-button hero-button-android" id="androidInstall" data-umami-event="tempo_android"><i class="fab fa-android"></i> <span class="hero-button-text">Android</span></button>
+                <button class="hero-button hero-button-linux" id="linuxInstall" data-umami-event="tempo_linux"><i class="fab fa-linux"></i> <span class="hero-button-text">Linux</span></button>
             </div>
+            <div class="linux-install-command" id="linuxCommand" style="display: none;">
+                <div class="command-box">
+                    <code>curl -fsSL https://miketoscano.com/tempo/install.sh | bash</code>
+                </div>
+            </div>
+            <div class="android-install-instructions" id="androidInstructions" style="display: none;">
+                <div style="background: rgba(0, 0, 0, 0.5); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 1rem;">
+                    <h4 style="margin: 0 0 0.75rem 0; color: var(--accent-color); font-size: 1rem;">Download & Verify</h4>
+                    <ol style="margin: 0; padding-left: 1.5rem; font-size: 0.9rem; line-height: 1.6;">
+                        <li style="margin-bottom: 0.5rem;">Download: <a href="/tempo/apk/tempo.apk" class="hero-button" style="display: inline-flex; padding: 0.3rem 0.6rem; font-size: 0.85rem; margin-left: 0.5rem;" download><i class="fab fa-android" style="margin-right: 0.3rem;"></i>Tempo.apk</a></li>
+                        <li style="margin-bottom: 0.5rem;">Enable "Install from Unknown Sources" in Android settings</li>
+                        <li style="margin-bottom: 0.5rem;">Verify SHA256 hash matches:
+                            <div class="command-box" style="margin-top: 0.5rem;">
+                                <code id="sha256Hash" style="font-size: 0.75rem; word-break: break-all;">Loading...</code>
+                            </div>
+                        </li>
+                        <li>Install the APK on your device</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="copy-notification" id="copyNotification">Copied to clipboard!</div>
         </div>
     </div>
 
@@ -920,8 +1015,26 @@
             const heroParagraphs = document.querySelectorAll('.hero p');
             const heroButtons = document.querySelector('.hero-buttons');
             const scrollIndicator = document.querySelector('.scroll-indicator');
+            const linuxCommandBox = document.getElementById('linuxCommand');
             
             let scrollThreshold = 200;
+
+            // Fetch and display SHA256 hash
+            fetch('/tempo/apk/tempo.apk.sha256')
+                .then(response => response.text())
+                .then(hash => {
+                    const sha256Element = document.getElementById('sha256Hash');
+                    if (sha256Element) {
+                        sha256Element.textContent = hash.trim();
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to load SHA256 hash:', err);
+                    const sha256Element = document.getElementById('sha256Hash');
+                    if (sha256Element) {
+                        sha256Element.textContent = 'Failed to load hash';
+                    }
+                });
 
             window.addEventListener('scroll', function() {
                 const currentScroll = window.pageYOffset;
@@ -930,11 +1043,71 @@
                     // Collapsed state
                     hero.classList.add('collapsed');
                     body.classList.add('scrolled');
+                    linuxCommandBox.style.display = 'none';
+                    linuxCommandBox.style.visibility = 'hidden';
+                    document.getElementById('androidInstructions').style.display = 'none';
+                    document.getElementById('androidInstructions').style.visibility = 'hidden';
                 } else {
                     // Full state
                     hero.classList.remove('collapsed');
                     body.classList.remove('scrolled');
+                    linuxCommandBox.style.visibility = '';
+                    document.getElementById('androidInstructions').style.visibility = '';
                 }
+            });
+
+            // Linux install command toggle and copy
+            const linuxButton = document.getElementById('linuxInstall');
+            const linuxCommand = document.getElementById('linuxCommand');
+            const copyNotification = document.getElementById('copyNotification');
+
+            linuxButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Hide Android instructions
+                const androidInstructions = document.getElementById('androidInstructions');
+                androidInstructions.style.display = 'none';
+                
+                // Only show command if hero is not collapsed
+                if (!hero.classList.contains('collapsed')) {
+                    linuxCommand.style.display = 'block';
+                }
+                
+                // Copy to clipboard
+                const commandText = 'curl -fsSL https://miketoscano.com/tempo/install.sh | bash';
+                
+                // Use a try-catch for better error handling
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(commandText).then(() => {
+                        // Show notification
+                        copyNotification.classList.add('show');
+                        setTimeout(() => {
+                            copyNotification.classList.remove('show');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                    });
+                }
+            });
+
+            // Android install instructions toggle
+            const androidButton = document.getElementById('androidInstall');
+            const androidInstructions = document.getElementById('androidInstructions');
+
+            androidButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // If hero is collapsed, directly download the APK
+                if (hero.classList.contains('collapsed')) {
+                    window.location.href = '/tempo/apk/tempo.apk';
+                    return;
+                }
+                
+                // Hide Linux command
+                linuxCommand.style.display = 'none';
+                
+                // Show instructions if hero is not collapsed
+                androidInstructions.style.display = 'block';
             });
 
             // Carousel for screenshots
