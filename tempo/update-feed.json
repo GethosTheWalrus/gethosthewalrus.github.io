@@ -1,0 +1,21 @@
+{
+  "feed": {
+    "version": "1.0",
+    "updated": "2026-01-27T00:00:00Z"
+  },
+  "updates": [
+    {
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "build": 0
+      },
+      "title": "Tempo 1.0 - Initial Release",
+      "description": "Welcome to Tempo 1.0! The first official release of Tempo.",
+      "notes": [
+        "Initial release of Tempo"
+      ],
+      "date": "2026-01-27T00:00:00Z"
+    }
+  ]
+}
