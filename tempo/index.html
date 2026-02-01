@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Tempo — Monitor and Manage Temporal Workflows on Mobile</title>
@@ -19,273 +19,792 @@
     <meta name="twitter:description" content="Tempo brings Temporal workflows to mobile — observe, manage, and debug your workflows on the go with a mobile-first interface.">
     <meta name="twitter:image" content="https://gethosthewalrus.github.io/img/tempo/tempo_og.png">
 
-    <link rel="stylesheet" href="../css/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
 
     <style>
         :root {
-            --primary-color: #1a1a1a;
-            --secondary-color: #2c3e50;
-            --accent-color: #FC6D26;
-            --temporal-blue: #00D4FF;
-            --text-color: #ecf0f1;
-            --card-bg: rgba(44, 62, 80, 0.7);
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --temporal-cyan: #00d4ff;
+            --temporal-cyan-dim: rgba(0, 212, 255, 0.15);
+            --temporal-purple: #8b5cf6;
+            --temporal-gradient: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #6b6b7b;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(0, 212, 255, 0.3);
+            --shadow-glow: 0 0 60px rgba(0, 212, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            padding-top: 0;
-            transition: padding-top 0.3s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        body.scrolled {
-            padding-top: 80px;
-        }
-
-        .hero {
-            background-color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--text-color);
-            position: relative;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .hero.collapsed {
+        /* Animated gradient background */
+        .gradient-bg {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            min-height: 80px;
-            background: var(--card-bg);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .hero.collapsed .hero-content {
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0.5rem 2rem;
-            flex-direction: row;
-            align-items: center;
-            background: transparent;
-            border: none;
-            box-shadow: none;
-            width: 100%;
             display: flex;
-            justify-content: flex-start;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .hero.collapsed .app-logo {
-            width: 50px;
-            height: 50px;
-            margin: 0;
-            padding: 0.5rem;
-            border-radius: 10px;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
         }
 
-        .hero.collapsed h1 {
-            font-size: 1.5rem;
-            margin: 0 2rem 0 0.5rem;
+        .nav-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
         }
 
-        .hero.collapsed h2 {
-            display: none;
+        .nav-title-svg {
+            width: 90px;
+            height: 28px;
+            display: block;
+            opacity: 1;
         }
 
-        .hero.collapsed p {
-            display: none;
+        .nav-title-svg text {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 20px;
+            font-weight: 700;
         }
 
-        .hero.collapsed .hero-buttons {
-            flex-direction: row;
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
-            margin-left: auto;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
 
-        .hero.collapsed .hero-button {
-            padding: 0.4rem 0.8rem;
-            font-size: 0.8rem;
-            min-width: auto;
-            border-radius: 5px;
-            justify-content: center;
+        .nav-btn-primary {
+            background: var(--temporal-gradient);
+            color: var(--bg-dark);
         }
 
-        .hero.collapsed .hero-button i {
-            font-size: 1rem;
-            margin-right: 0.3rem;
+        .nav-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .nav-btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .nav-btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--temporal-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-content {
-            max-width: 900px;
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-            background: var(--card-bg);
-            border-radius: 15px;
-            margin: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
             align-items: center;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .hero-content p {
-            text-align: justify;
-            text-justify: inter-word;
+        .hero-text {
+            max-width: 560px;
         }
 
-        .app-logo {
-            width: 240px;
-            height: 240px;
-            margin-bottom: 2rem;
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 24px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        .gradient-text-svg {
+            width: 280px;
+            height: 70px;
+            display: block;
         }
 
-        .hero h2 {
-            margin-top: 0;
-            padding-top: 0;
-            font-size: 1.2rem;
+        .gradient-text-svg text {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 52px;
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--temporal-cyan);
             margin-bottom: 1.5rem;
-            color: var(--accent-color);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            text-align: justify;
         }
 
         .hero-buttons {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
         }
 
-        .hero-button {
-            padding: 0.8rem 1.5rem;
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            border: none;
-            display: flex;
+        .hero-btn {
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-        }
-
-        .hero-button:hover {
-            transform: scale(1.05);
-            background-color: var(--temporal-blue);
-        }
-
-        .hero-button.coming-soon {
-            background-color: var(--secondary-color);
-            opacity: 0.7;
-            cursor: not-allowed;
-            position: relative;
-        }
-
-        .hero-button.coming-soon:hover {
-            transform: none;
-            background-color: var(--secondary-color);
-        }
-
-        .hero-button.coming-soon::after {
-            content: "Coming Soon";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-color);
-            color: var(--text-color);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-
-        .hero-button i {
-            font-size: 1.2rem;
-        }
-
-        .hero-button-linux {
+            gap: 0.75rem;
+            padding: 0.875rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
             cursor: pointer;
+            border: none;
+            font-family: inherit;
         }
 
-        .hero-button-android {
-            cursor: pointer;
-            background-color: #3DDC84;
+        .hero-btn-apple {
+            background: var(--text-primary);
+            color: var(--bg-dark);
         }
 
-        .hero-button-android:hover {
-            background-color: #2bb36a;
+        .hero-btn-apple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
         }
 
-        .linux-install-command {
+        .hero-btn-android {
+            background: #3DDC84;
+            color: var(--bg-dark);
+        }
+
+        .hero-btn-android:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(61, 220, 132, 0.3);
+        }
+
+        .hero-btn-linux {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .hero-btn-linux:hover {
+            border-color: var(--temporal-cyan);
+            background: var(--bg-card-hover);
+        }
+
+        .hero-btn i {
+            font-size: 1.25rem;
+        }
+
+        /* Install Instructions */
+        .install-panel {
+            display: none;
             margin-top: 1rem;
-            transition: all 0.3s ease;
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .install-panel.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .install-panel h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--temporal-cyan);
+            margin-bottom: 0.75rem;
         }
 
         .command-box {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 0.75rem;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 0.75rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
         }
 
         .command-box code {
-            color: var(--accent-color);
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            flex: 1;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--temporal-cyan);
             word-break: break-all;
         }
 
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            color: var(--temporal-cyan);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .android-steps {
+            list-style: none;
+            counter-reset: steps;
+        }
+
+        .android-steps li {
+            counter-increment: steps;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .android-steps li::before {
+            content: counter(steps);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            background: var(--temporal-cyan-dim);
+            color: var(--temporal-cyan);
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .android-steps a {
+            color: var(--temporal-cyan);
+            text-decoration: none;
+        }
+
+        .android-steps a:hover {
+            text-decoration: underline;
+        }
+
+        /* Phone Mockup */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .phone-mockup {
+            position: relative;
+            width: 280px;
+            padding: 12px;
+            background: linear-gradient(145deg, #2a2a35 0%, #1a1a22 100%);
+            border-radius: 40px;
+            box-shadow: 
+                var(--shadow-glow),
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .phone-mockup::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            background: var(--temporal-gradient);
+            border-radius: 42px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .phone-screen {
+            width: 100%;
+            aspect-ratio: 9/19.5;
+            background: var(--bg-dark);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 28px;
+            background: #1a1a22;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--temporal-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--temporal-cyan-dim);
+            border-radius: 10px;
+        }
+
+        .feature-icon i {
+            font-size: 1.25rem;
+            color: var(--temporal-cyan);
+        }
+
+        .feature-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-card) 50%, var(--bg-dark) 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        .screenshots-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .screenshot-viewer {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .screenshot-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .screenshot-tab {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .screenshot-tab:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .screenshot-tab.active {
+            background: var(--bg-card-hover);
+            border-color: var(--temporal-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .screenshot-tab h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .screenshot-tab h4 i {
+            color: var(--temporal-cyan);
+            font-size: 0.875rem;
+        }
+
+        .screenshot-tab p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0;
+            text-align: justify;
+        }
+
+        .screenshot-display {
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .screenshot-phone {
+            position: relative;
+            width: 300px;
+            padding: 14px;
+            background: linear-gradient(145deg, #2a2a35 0%, #1a1a22 100%);
+            border-radius: 45px;
+            box-shadow: 
+                0 0 80px rgba(0, 212, 255, 0.15),
+                0 30px 60px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .screenshot-phone:hover {
+            transform: rotateY(-5deg) rotateX(5deg);
+        }
+
+        .screenshot-phone-screen {
+            width: 100%;
+            aspect-ratio: 9/19.5;
+            background: var(--bg-dark);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screenshot-phone-screen img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .screenshot-phone-screen img.active {
+            opacity: 1;
+        }
+
+        /* Audience Section */
+        .audience {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .audience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .audience-card::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 20px;
+            background: var(--temporal-gradient);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .audience-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .audience-card:hover::after {
+            opacity: 0.2;
+        }
+
+        .audience-icon {
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--temporal-cyan-dim);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+        }
+
+        .audience-icon i {
+            font-size: 1.75rem;
+            color: var(--temporal-cyan);
+        }
+
+        .audience-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .audience-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-subtle);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-contact {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .footer-contact a {
+            color: var(--temporal-cyan);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .footer-contact a:hover {
+            opacity: 0.8;
+        }
+
+        /* Copy Notification */
         .copy-notification {
             position: fixed;
-            top: 20px;
+            bottom: 2rem;
             left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: var(--accent-color);
-            color: var(--text-color);
+            transform: translateX(-50%) translateY(100px);
+            background: var(--temporal-gradient);
+            color: var(--bg-dark);
             padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: bold;
+            border-radius: 12px;
+            font-weight: 600;
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
             z-index: 10000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
         }
 
         .copy-notification.show {
@@ -293,710 +812,362 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        .android-install-instructions {
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .android-install-instructions h4 {
-            text-align: left;
-        }
-
-        .android-install-instructions ol li {
-            text-align: left;
-        }
-
-        .scroll-indicator {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0.7;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            pointer-events: none;
-            padding-bottom: 1rem;
-        }
-
-        body.scrolled .scroll-indicator {
-            display: none !important;
-        }
-
-        .scroll-indicator p {
-            font-size: 0.9rem;
-            margin: 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .scroll-indicator i {
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        .features {
-            padding: 4rem 0;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            margin-top: 40vh;
-        }
-
-        body.scrolled .features {
-            margin-top: 240px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem auto;
-            max-width: 1200px;
-            padding: 0 2rem;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 350px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-
-        .feature-icon i {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin: 0 0 0.75rem 0;
-            color: var(--text-color);
-            text-align: center;
-        }
-
-        .feature-card p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin: 0;
-            opacity: 0.9;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        section h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        section p {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        .llm-section {
-            padding: 4rem 0;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-        }
-
-        .llm-section .innerscreen {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .llm-carousel {
-            max-width: 1200px;
-            margin: 2rem auto;
-            position: relative;
-            height: 500px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .llm-stack {
-            position: relative;
-            width: 40%;
-            height: 450px;
-            max-width: 350px;
-            margin: 0;
-        }
-
-        .llm-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center center;
-            opacity: 0;
-            pointer-events: none;
-            top: 0;
-            left: 0;
-        }
-
-        .llm-slide.active {
-            opacity: 1;
-            pointer-events: auto;
-            z-index: 3;
-            transform: translateY(0) translateX(0) scale(1);
-        }
-
-        .llm-slide.next {
-            opacity: 0.7;
-            transform: translateY(10px) translateX(-10px) scale(0.98);
-            z-index: 2;
-        }
-
-        .llm-slide.prev {
-            opacity: 0.7;
-            transform: translateY(20px) translateX(-20px) scale(0.96);
-            z-index: 1;
-        }
-
-        .llm-screenshot {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-
-        .llm-screenshot img {
-            width: auto;
-            height: 100%;
-            max-height: 430px;
-            display: block;
-            object-fit: contain;
-            border-radius: 15px;
-        }
-
-        .llm-descriptions {
-            width: 55%;
-            position: relative;
-            height: 450px;
-        }
-
-        .llm-description {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            text-align: left;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.8s ease;
-            top: 0;
-            left: 0;
-        }
-
-        .llm-description.active {
-            opacity: 1;
-            z-index: 1;
-        }
-
-        .llm-description h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-color);
-            line-height: 1.2;
-            text-align: left;
-        }
-
-        .llm-description p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin: 0;
-            opacity: 0.9;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        .llm-navigation {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            transform: translateY(-50%);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10;
-            pointer-events: none;
-            width: 100%;
-        }
-
-        .llm-nav-button {
-            background: rgba(0, 0, 0, 0.5);
-            color: var(--text-color);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: auto;
-            position: absolute;
-        }
-
-        .llm-nav-button#prevSlide {
-            left: -50px;
-        }
-
-        .llm-nav-button#nextSlide {
-            right: -50px;
-        }
-
-        .llm-nav-button:hover {
-            background: var(--accent-color);
-            transform: scale(1.1);
-        }
-
-        .llm-pagination {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-
-        .llm-pagination-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--text-color);
-            opacity: 0.5;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .llm-pagination-dot.active {
-            background: var(--accent-color);
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-        .audience-section {
-            padding: 2rem 0;
-            background-color: var(--primary-color);
-            margin-top: 2rem;
-        }
-
-        .audience-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem auto;
-            max-width: 1200px;
-            padding: 0 2rem;
-        }
-
-        .audience-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 350px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .audience-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--temporal-blue);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .audience-card i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--temporal-blue);
-        }
-
-        .audience-card h3 {
-            margin: 0.5rem 0;
-            font-size: 1.2rem;
-            color: var(--text-color);
-        }
-
-        .audience-card p {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin: 0;
-            opacity: 0.9;
-            text-align: justify;
-            text-justify: inter-word;
-        }
-
-        .contact-section {
-            padding: 2rem 0;
-            background-color: var(--secondary-color);
-        }
-
-        @media (max-width: 768px) {
-            .hero {
-                min-height: auto;
-                padding: 1rem 0;
-            }
-
+        /* Responsive */
+        @media (max-width: 1024px) {
             .hero-content {
-                padding: 1rem;
-                margin: 0.5rem;
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .hero-text {
                 max-width: 100%;
             }
 
-            .app-logo {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 1rem;
-                padding: 0.5rem;
-                border-radius: 15px;
+            .hero-buttons {
+                justify-content: center;
             }
 
-            .hero h1 {
-                font-size: 2rem;
-                margin-bottom: 0.5rem;
+            .hero-visual {
+                order: -1;
             }
 
-            .hero h2 {
-                font-size: 0.9rem;
-                margin-bottom: 0.5rem;
+            .phone-mockup {
+                width: 240px;
             }
 
-            .hero p {
-                font-size: 0.9rem;
-                line-height: 1.4;
-                margin: 0.5rem 0;
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshot-viewer {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .screenshot-tabs {
+                order: 2;
+            }
+
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .nav-btn {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-btn span {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 1rem 3rem;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .gradient-text-svg {
+                width: 200px;
+                height: 55px;
+                margin: 0 auto;
+            }
+
+            .gradient-text-svg text {
+                font-size: 42px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
             }
 
             .hero-buttons {
-                flex-direction: row;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-
-            .hero-button {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.7rem;
-            }
-
-            .llm-carousel {
                 flex-direction: column;
-                height: auto;
+            }
+
+            .hero-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .phone-mockup {
+                width: 200px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .features, .screenshots, .audience {
+                padding: 4rem 1rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
                 gap: 1rem;
-                padding: 0 1rem;
-                margin: 1rem auto;
-            }
-
-            .llm-stack {
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-                height: auto;
-                min-height: 400px;
-            }
-
-            .llm-screenshot img {
-                width: 100%;
-                height: auto;
-                max-width: 300px;
-            }
-
-            .llm-descriptions {
-                width: 100%;
-                height: auto;
-                min-height: 250px;
-                margin-top: 2rem;
-                position: relative;
-            }
-
-            .llm-description {
-                position: absolute;
-                width: 100%;
-                height: auto;
                 text-align: center;
-                padding: 1rem;
-                opacity: 0;
-                transition: opacity 0.3s ease;
-                top: 0;
-                left: 0;
-            }
-
-            .llm-description.active {
-                opacity: 1;
-                position: relative;
-            }
-
-            .llm-description h3 {
-                font-size: 1.8rem;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-
-            .llm-description p {
-                text-align: justify;
-                text-justify: inter-word;
-                font-size: 1rem;
-                margin: 0;
-            }
-
-            .llm-nav-button {
-                width: 35px;
-                height: 35px;
-                position: absolute;
-            }
-
-            .llm-nav-button#prevSlide {
-                left: 0;
-            }
-
-            .llm-nav-button#nextSlide {
-                right: 0;
-            }
-
-            .llm-pagination {
-                bottom: -25px;
-            }
-
-            .command-box code {
-                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <img src="/img/tempo/tempo_master.png" alt="Tempo Logo" class="app-logo">
-            <h1>Tempo</h1>
-            <h2>Temporal in Your Pocket</h2>
-            <p>Don't let distance keep you from your workflows. Tempo brings the full power of Temporal to your mobile device. Monitor executions, investigate failures, and take action from anywhere. Because the best observability tool is the one you can take with you.</p>
+    <div class="gradient-bg"></div>
 
-            <div class="hero-buttons">
-                <a href="https://apps.apple.com/us/app/tempo-for-temporal/id6758174732" class="hero-button" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_app_store"><i class="fab fa-apple"></i> <span class="hero-button-text">App Store</span></a>
-                <button class="hero-button hero-button-android" id="androidInstall" data-umami-event="tempo_android"><i class="fab fa-android"></i> <span class="hero-button-text">Android</span></button>
-                <button class="hero-button hero-button-linux" id="linuxInstall" data-umami-event="tempo_linux"><i class="fab fa-linux"></i> <span class="hero-button-text">Linux</span></button>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-brand">
+                <img src="/img/tempo/tempo_master.png" alt="Tempo" class="nav-logo">
+                <svg class="nav-title-svg" viewBox="0 0 100 24" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="nav-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4ff"/>
+                            <stop offset="100%" style="stop-color:#8b5cf6"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="0" y="18" fill="url(#nav-gradient)">Tempo</text>
+                </svg>
+            </a>
+            <div class="nav-buttons">
+                <a href="https://apps.apple.com/us/app/tempo-for-temporal/id6758174732" class="nav-btn nav-btn-primary" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_app_store">
+                    <i class="fab fa-apple"></i>
+                    <span>App Store</span>
+                </a>
+                <button class="nav-btn nav-btn-secondary" id="navAndroidBtn" data-umami-event="tempo_android">
+                    <i class="fab fa-android"></i>
+                    <span>Android</span>
+                </button>
+                <button class="nav-btn nav-btn-secondary" id="navLinuxBtn" data-umami-event="tempo_linux">
+                    <i class="fab fa-linux"></i>
+                    <span>Linux</span>
+                </button>
             </div>
-            <div class="linux-install-command" id="linuxCommand" style="display: none;">
-                <div class="command-box">
-                    <code>curl -fsSL https://miketoscano.com/tempo/install.sh | bash</code>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <svg class="gradient-text-svg" viewBox="0 0 200 60" preserveAspectRatio="xMinYMid meet">
+                        <defs>
+                            <linearGradient id="tempo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                        <text x="0" y="50%" dominant-baseline="middle" text-anchor="start" fill="url(#tempo-gradient)">Tempo</text>
+                    </svg>
+                </h1>
+                <h2 class="hero-subtitle">Temporal in Your Pocket</h2>
+                <p class="hero-description">
+                    Don't let distance keep you from your workflows. Tempo brings the full power of Temporal to your mobile device. Monitor executions, investigate failures, and take action from anywhere. Because the best observability tool is the one you can take with you.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="https://apps.apple.com/us/app/tempo-for-temporal/id6758174732" class="hero-btn hero-btn-apple" target="_blank" rel="noopener noreferrer" data-umami-event="tempo_app_store">
+                        <i class="fab fa-apple"></i>
+                        App Store
+                    </a>
+                    <button class="hero-btn hero-btn-android" id="androidInstall" data-umami-event="tempo_android">
+                        <i class="fab fa-android"></i>
+                        Android
+                    </button>
+                    <button class="hero-btn hero-btn-linux" id="linuxInstall" data-umami-event="tempo_linux">
+                        <i class="fab fa-linux"></i>
+                        Linux
+                    </button>
                 </div>
-            </div>
-            <div class="android-install-instructions" id="androidInstructions" style="display: none;">
-                <div style="background: rgba(0, 0, 0, 0.5); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); margin-top: 1rem;">
-                    <h4 style="margin: 0 0 0.75rem 0; color: var(--accent-color); font-size: 1rem;">Download & Verify</h4>
-                    <ol style="margin: 0; padding-left: 1.5rem; font-size: 0.9rem; line-height: 1.6;">
-                        <li style="margin-bottom: 0.5rem;">Download: <a href="/tempo/apk/tempo.apk" class="hero-button" style="display: inline-flex; padding: 0.3rem 0.6rem; font-size: 0.85rem; margin-left: 0.5rem;" download><i class="fab fa-android" style="margin-right: 0.3rem;"></i>Tempo.apk</a></li>
-                        <li style="margin-bottom: 0.5rem;">Enable "Install from Unknown Sources" in Android settings</li>
-                        <li style="margin-bottom: 0.5rem;">Verify SHA256 hash matches:
-                            <div class="command-box" style="margin-top: 0.5rem;">
-                                <code id="sha256Hash" style="font-size: 0.75rem; word-break: break-all;">Loading...</code>
-                            </div>
+
+                <!-- Linux Install Panel -->
+                <div class="install-panel" id="linuxPanel">
+                    <h4><i class="fab fa-linux"></i> Install on Linux</h4>
+                    <div class="command-box">
+                        <code>curl -fsSL https://miketoscano.com/tempo/install.sh | bash</code>
+                        <button class="copy-btn" id="copyCommand" title="Copy to clipboard">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Android Install Panel -->
+                <div class="install-panel" id="androidPanel">
+                    <h4><i class="fab fa-android"></i> Install on Android</h4>
+                    <ol class="android-steps">
+                        <li>
+                            <span>Download the APK: <a href="/tempo/apk/tempo.apk" download>Tempo.apk</a></span>
                         </li>
-                        <li>Install the APK on your device</li>
+                        <li>
+                            <span>Enable "Install from Unknown Sources" in Android settings</span>
+                        </li>
+                        <li>
+                            <span>Verify SHA256: <code id="sha256Hash" style="font-size: 0.75rem; color: var(--temporal-cyan); word-break: break-all;">Loading...</code></span>
+                        </li>
+                        <li>
+                            <span>Install the APK on your device</span>
+                        </li>
                     </ol>
                 </div>
             </div>
-            <div class="copy-notification" id="copyNotification">Copied to clipboard!</div>
+
+            <div class="hero-visual">
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <img src="/img/tempo/tempo_workflows_list.PNG" alt="Tempo App">
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="scroll-indicator">
-        <p>Scroll down to learn more</p>
-        <i class="fas fa-chevron-down"></i>
-    </div>
-
-    <section class="features">
-        <div class="innerscreen">
-            <h2 style="font-size:1.8rem;margin-top:100px;">All of Temporal with no commitments to your desk</h2>
-            <p>No compromises. Tempo delivers powerful, polished, and portable Temporal access that's easy to use for anyone</p>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <h2 class="section-title">All of Temporal with no commitments to your desk</h2>
+                <p class="section-subtitle">No compromises. Tempo delivers powerful, polished, and portable Temporal access that's easy to use for anyone</p>
+            </div>
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-stream"></i></div>
-                    <h3>Complete Execution Visibility</h3>
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-stream"></i>
+                        </div>
+                        <h3>Complete Execution Visibility</h3>
+                    </div>
                     <p>From high-level workflow status to granular event timelines, see everything happening in your Temporal cluster. Filter, search, and drill down into the details that matter most.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
-                    <h3>Real-Time Actions</h3>
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Real-Time Actions</h3>
+                    </div>
                     <p>Respond to production issues without scrambling for a laptop. Send signals, terminate workflows, and trigger operations instantly. Your on-call team will thank you.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-search"></i></div>
-                    <h3>Smart Search & Filtering</h3>
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Smart Search & Filtering</h3>
+                    </div>
                     <p>Find what you're looking for fast. Search by workflow ID, type, or status. Tempo's intuitive filters help you zero in on issues before they become incidents.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
-                    <h3>Your Infrastructure, Your Rules</h3>
+                    <div class="feature-card-header">
+                        <div class="feature-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>Your Infrastructure, Your Rules</h3>
+                    </div>
                     <p>Connect directly to your Temporal deployment. Tempo provides gRPC-based connectivity to your Temporal cluster, allowing it to function on the same port as your workers.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="llm-section" style="background:var(--secondary-color);padding:4rem 0;">
-        <div class="innerscreen">
-            <h2 style="font-size:1.8rem;">Fast, powerful, and portable access to Temporal</h2>
-            <p>Tempo is the Temporal UX you wish you had yesterday</p>
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="screenshots-container">
+            <div class="section-header">
+                <h2 class="section-title">Fast, powerful, and portable access to Temporal</h2>
+                <p class="section-subtitle">Tempo is the Temporal UX you wish you had yesterday</p>
+            </div>
 
-            <div class="llm-carousel">
-                <div class="llm-navigation">
-                    <button class="llm-nav-button" id="prevSlide">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button class="llm-nav-button" id="nextSlide">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="llm-pagination">
-                    <span class="llm-pagination-dot active"></span>
-                    <span class="llm-pagination-dot"></span>
-                    <span class="llm-pagination-dot"></span>
-                    <span class="llm-pagination-dot"></span>
-                    <span class="llm-pagination-dot"></span>
-                    <span class="llm-pagination-dot"></span>
-                </div>
-                <div class="llm-stack">
-                    <div class="llm-slide active">
-                        <div class="llm-screenshot">
-                            <img src="/img/tempo/tempo_workflows_list.PNG" alt="Workflow List">
-                        </div>
+            <div class="screenshot-viewer">
+                <div class="screenshot-tabs">
+                    <div class="screenshot-tab active" data-index="0">
+                        <h4><i class="fas fa-list"></i> Your Workflows at a Glance</h4>
+                        <p>Browse active, completed, and failed workflows in one streamlined view. Filter by status, search by workflow ID, and launch new executions all from your pocket.</p>
                     </div>
-                    <div class="llm-slide next">
-                        <div class="llm-screenshot">
+                    <div class="screenshot-tab" data-index="1">
+                        <h4><i class="fas fa-timeline"></i> Deep Dive into Every Event</h4>
+                        <p>Trace every step of your workflow execution with a visual timeline that makes sense on mobile. See the full story of what your workflows are doing.</p>
+                    </div>
+                    <div class="screenshot-tab" data-index="2">
+                        <h4><i class="fas fa-sliders-h"></i> Take Control When It Matters</h4>
+                        <p>Don't just observe...act! Terminate runaway workflows, send signals, query state, or trigger retries. Respond to incidents from anywhere.</p>
+                    </div>
+                    <div class="screenshot-tab" data-index="3">
+                        <h4><i class="fas fa-layer-group"></i> Batch Operations Made Simple</h4>
+                        <p>Track the progress of bulk workflow operations in real-time. Monitor success rates, view logs, and understand how your batch jobs are performing.</p>
+                    </div>
+                    <div class="screenshot-tab" data-index="4">
+                        <h4><i class="fas fa-calendar-alt"></i> Schedule Management On the Go</h4>
+                        <p>Keep tabs on your scheduled workflows without missing a beat. View upcoming runs, check execution history, and understand schedule cadence.</p>
+                    </div>
+                    <div class="screenshot-tab" data-index="5">
+                        <h4><i class="fas fa-bars"></i> Everything You Need, Right Where You Need It</h4>
+                        <p>Navigate seamlessly between workflows, schedules, batch operations, and settings. Every feature within reach.</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-display">
+                    <div class="screenshot-phone">
+                        <div class="screenshot-phone-screen">
+                            <img src="/img/tempo/tempo_workflows_list.PNG" alt="Workflow List" class="active">
                             <img src="/img/tempo/tempo_event_timeline.PNG" alt="Event Timeline">
-                        </div>
-                    </div>
-                    <div class="llm-slide prev">
-                        <div class="llm-screenshot">
                             <img src="/img/tempo/tempo_workflow_details_actions.PNG" alt="Workflow Actions">
-                        </div>
-                    </div>
-                    <div class="llm-slide">
-                        <div class="llm-screenshot">
                             <img src="/img/tempo/tempo_batch_operation_details.PNG" alt="Batch Operations">
-                        </div>
-                    </div>
-                    <div class="llm-slide">
-                        <div class="llm-screenshot">
                             <img src="/img/tempo/tempo_schedule_details.PNG" alt="Schedule Details">
-                        </div>
-                    </div>
-                    <div class="llm-slide">
-                        <div class="llm-screenshot">
                             <img src="/img/tempo/tempo_menu_drawer.PNG" alt="Menu Navigation">
                         </div>
-                    </div>
-                </div>
-                <div class="llm-descriptions">
-                    <div class="llm-description active">
-                        <h3>Your Workflows at a Glance</h3>
-                        <p>Browse active, completed, and failed workflows in one streamlined view. Filter by status, search by workflow ID, and launch new executions all from your pocket. Stay on top of your entire Temporal deployment without opening a laptop.</p>
-                    </div>
-                    <div class="llm-description">
-                        <h3>Deep Dive into Every Event</h3>
-                        <p>Trace every step of your workflow execution with a visual timeline that makes sense on mobile. From workflow started to completed, see the full story of what your workflows are doing, when they're doing it, and why.</p>
-                    </div>
-                    <div class="llm-description">
-                        <h3>Take Control When It Matters</h3>
-                        <p>Don't just observe...act! Terminate runaway workflows, send signals, query state, or trigger retries. Tempo puts powerful workflow control at your fingertips, so you can respond to incidents from anywhere.</p>
-                    </div>
-                    <div class="llm-description">
-                        <h3>Batch Operations Made Simple</h3>
-                        <p>Track the progress of bulk workflow operations in real-time. Monitor success rates, view logs, and understand exactly how your batch jobs are performing, whether you're processing hundreds or thousands of workflows.</p>
-                    </div>
-                    <div class="llm-description">
-                        <h3>Schedule Management On the Go</h3>
-                        <p>Keep tabs on your scheduled workflows without missing a beat. View upcoming runs, check execution history, and understand schedule cadence. Know when your next workflow will trigger and verify your automation is running smoothly.</p>
-                    </div>
-                    <div class="llm-description">
-                        <h3>Everything You Need, Right Where You Need It</h3>
-                        <p>Navigate seamlessly between workflows, schedules, batch operations, and settings. Tempo puts every feature within reach, making complex Temporal operations feel natural on mobile.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="audience-section">
-        <div class="innerscreen">
-            <h2 style="font-size:1.8rem;">For Teams That Never Stop</h2>
-            <p>Whether you're on-call, debugging in production, or checking in on a deployment, Tempo keeps you connected to your workflows.</p>
+    <!-- Audience Section -->
+    <section class="audience" id="audience">
+        <div class="audience-container">
+            <div class="section-header">
+                <h2 class="section-title">For Teams That Never Stop</h2>
+                <p class="section-subtitle">Whether you're on-call, debugging in production, or checking in on a deployment, Tempo keeps you connected to your workflows.</p>
+            </div>
+
             <div class="audience-grid">
                 <div class="audience-card">
-                    <i class="fas fa-user-cog"></i>
+                    <div class="audience-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
                     <h3>Platform Engineers</h3>
                     <p>Monitor workflow health across your entire infrastructure. Track batch operations, verify schedules, and ensure your Temporal deployment is running smoothly, all while away from your desk.</p>
                 </div>
                 <div class="audience-card">
-                    <i class="fas fa-code"></i>
+                    <div class="audience-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
                     <h3>Developers</h3>
                     <p>Debug workflow failures with full event timelines and payload inspection. Quickly identify the root cause of issues and take corrective action without waiting to get back to your IDE.</p>
                 </div>
                 <div class="audience-card">
-                    <i class="fas fa-bell"></i>
+                    <div class="audience-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
                     <h3>On-Call Teams</h3>
                     <p>Respond to alerts instantly. View workflow status, terminate stuck executions, and send signals to recover from failures,all from the device already in your hand when you get paged.</p>
                 </div>
@@ -1004,35 +1175,30 @@
         </div>
     </section>
 
-    <section class="contact-section">
-        <div class="innerscreen">
-            <p style="text-align:center;opacity:0.7;">Feedback or questions — <a href="mailto:appsupport@miketoscano.com" style="color:var(--accent-color);text-decoration:none;">appsupport@miketoscano.com</a></p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="/img/tempo/tempo_master.png" alt="Tempo" class="footer-logo">
+                <span class="footer-text">Tempo — Temporal in Your Pocket</span>
+            </div>
+            <div class="footer-contact">
+                Feedback or questions — <a href="mailto:appsupport@miketoscano.com">appsupport@miketoscano.com</a>
+            </div>
         </div>
-    </section>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Copy Notification -->
+    <div class="copy-notification" id="copyNotification">Copied to clipboard!</div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
-            const hero = document.querySelector('.hero');
-            const body = document.body;
-            const heroContent = document.querySelector('.hero-content');
-            const appLogo = document.querySelector('.app-logo');
-            const heroTitle = document.querySelector('.hero h1');
-            const heroSubtitle = document.querySelector('.hero h2');
-            const heroParagraphs = document.querySelectorAll('.hero p');
-            const heroButtons = document.querySelector('.hero-buttons');
-            const scrollIndicator = document.querySelector('.scroll-indicator');
-            const linuxCommandBox = document.getElementById('linuxCommand');
-            
-            let scrollThreshold = 200;
-
+        document.addEventListener('DOMContentLoaded', function() {
             // Fetch and display SHA256 hash
             fetch('/tempo/apk/tempo.apk.sha256')
                 .then(response => response.text())
                 .then(hash => {
                     const sha256Element = document.getElementById('sha256Hash');
                     if (sha256Element) {
-                        // Extract just the hash part (before the filename)
                         const hashOnly = hash.trim().split(/\s+/)[0];
                         sha256Element.textContent = hashOnly;
                     }
@@ -1045,136 +1211,83 @@
                     }
                 });
 
-            window.addEventListener('scroll', function() {
-                const currentScroll = window.pageYOffset;
-                
-                if (currentScroll > scrollThreshold) {
-                    // Collapsed state
-                    hero.classList.add('collapsed');
-                    body.classList.add('scrolled');
-                    linuxCommandBox.style.display = 'none';
-                    linuxCommandBox.style.visibility = 'hidden';
-                    document.getElementById('androidInstructions').style.display = 'none';
-                    document.getElementById('androidInstructions').style.visibility = 'hidden';
-                } else {
-                    // Full state
-                    hero.classList.remove('collapsed');
-                    body.classList.remove('scrolled');
-                    linuxCommandBox.style.visibility = '';
-                    document.getElementById('androidInstructions').style.visibility = '';
-                }
-            });
-
-            // Linux install command toggle and copy
-            const linuxButton = document.getElementById('linuxInstall');
-            const linuxCommand = document.getElementById('linuxCommand');
+            // Install panel toggles
+            const linuxBtn = document.getElementById('linuxInstall');
+            const androidBtn = document.getElementById('androidInstall');
+            const navAndroidBtn = document.getElementById('navAndroidBtn');
+            const navLinuxBtn = document.getElementById('navLinuxBtn');
+            const linuxPanel = document.getElementById('linuxPanel');
+            const androidPanel = document.getElementById('androidPanel');
             const copyNotification = document.getElementById('copyNotification');
 
-            linuxButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // Hide Android instructions
-                const androidInstructions = document.getElementById('androidInstructions');
-                androidInstructions.style.display = 'none';
-                
-                // Only show command if hero is not collapsed
-                if (!hero.classList.contains('collapsed')) {
-                    linuxCommand.style.display = 'block';
-                }
-                
-                // Copy to clipboard
+            linuxBtn.addEventListener('click', () => {
+                androidPanel.classList.remove('active');
+                linuxPanel.classList.toggle('active');
+            });
+
+            androidBtn.addEventListener('click', () => {
+                linuxPanel.classList.remove('active');
+                androidPanel.classList.toggle('active');
+            });
+
+            navAndroidBtn.addEventListener('click', () => {
+                document.querySelector('.hero').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    linuxPanel.classList.remove('active');
+                    androidPanel.classList.add('active');
+                }, 500);
+            });
+
+            navLinuxBtn.addEventListener('click', () => {
+                document.querySelector('.hero').scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    androidPanel.classList.remove('active');
+                    linuxPanel.classList.add('active');
+                }, 500);
+            });
+
+            // Copy command
+            const copyBtn = document.getElementById('copyCommand');
+            copyBtn.addEventListener('click', () => {
                 const commandText = 'curl -fsSL https://miketoscano.com/tempo/install.sh | bash';
-                
-                // Use a try-catch for better error handling
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(commandText).then(() => {
-                        // Show notification
-                        copyNotification.classList.add('show');
-                        setTimeout(() => {
-                            copyNotification.classList.remove('show');
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Failed to copy:', err);
-                    });
-                }
+                navigator.clipboard.writeText(commandText).then(() => {
+                    copyNotification.classList.add('show');
+                    setTimeout(() => {
+                        copyNotification.classList.remove('show');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
             });
 
-            // Android install instructions toggle
-            const androidButton = document.getElementById('androidInstall');
-            const androidInstructions = document.getElementById('androidInstructions');
+            // Screenshot tabs
+            const tabs = document.querySelectorAll('.screenshot-tab');
+            const images = document.querySelectorAll('.screenshot-phone-screen img');
 
-            androidButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                // If hero is collapsed, directly download the APK
-                if (hero.classList.contains('collapsed')) {
-                    window.location.href = '/tempo/apk/tempo.apk';
-                    return;
-                }
-                
-                // Hide Linux command
-                linuxCommand.style.display = 'none';
-                
-                // Show instructions if hero is not collapsed
-                androidInstructions.style.display = 'block';
-            });
-
-            // Carousel for screenshots
-            const slides = Array.from(document.querySelectorAll('.llm-slide'));
-            const descriptions = Array.from(document.querySelectorAll('.llm-description'));
-            const prevButton = document.getElementById('prevSlide');
-            const nextButton = document.getElementById('nextSlide');
-            const dots = document.querySelectorAll('.llm-pagination-dot');
-            let currentIndex = 0;
-
-            function updateSlides() {
-                slides.forEach((slide, index) => {
-                    slide.classList.remove('active', 'next', 'prev');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const index = parseInt(tab.dataset.index);
                     
-                    if (index === currentIndex) {
-                        slide.classList.add('active');
-                    } else if (index === (currentIndex + 1) % slides.length) {
-                        slide.classList.add('next');
-                    } else if (index === (currentIndex - 1 + slides.length) % slides.length) {
-                        slide.classList.add('prev');
-                    }
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    images.forEach((img, i) => {
+                        img.classList.remove('active');
+                        if (i === index) {
+                            img.classList.add('active');
+                        }
+                    });
                 });
+            });
 
-                descriptions.forEach((desc, index) => {
-                    desc.classList.remove('active');
-                    if (index === currentIndex) {
-                        desc.classList.add('active');
-                    }
-                });
-
-                dots.forEach((dot, index) => {
-                    dot.classList.remove('active');
-                    if (index === currentIndex) {
-                        dot.classList.add('active');
-                    }
-                });
-            }
-
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % slides.length;
-                updateSlides();
-            }
-
-            function prevSlide() {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                updateSlides();
-            }
-
-            if (prevButton && nextButton) {
-                prevButton.addEventListener('click', prevSlide);
-                nextButton.addEventListener('click', nextSlide);
-            }
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateSlides();
-                });
+            // Nav scroll effect
+            const nav = document.querySelector('.nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    nav.style.background = 'rgba(10, 10, 15, 0.95)';
+                } else {
+                    nav.style.background = 'rgba(10, 10, 15, 0.8)';
+                }
             });
         });
     </script>
