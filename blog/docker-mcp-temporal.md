@@ -169,7 +169,7 @@ Your assistant can then interpret this data and provide a natural language summa
 
 For deeper investigation, you can ask about specific workflows:
 
-> "Can you describe the workflow `mcp-batch-test-2` in detail?"
+> "Can you describe the workflow 'mcp-batch-test-2' in detail?"
 
 The server returns comprehensive information:
 
@@ -191,7 +191,7 @@ Your assistant interprets: "The workflow `mcp-batch-test-2` is currently running
 
 Beyond basic querying, the Temporal MCP server enables powerful operations:
 
-* **Querying Workflow State**: If your workflows expose query handlers, you can inspect their internal state without interfering with execution—perfect for monitoring business processes in real-time.
+* **Querying Workflow State**: If your workflows expose query handlers, you can inspect their internal state without interfering with execution. Perfect for monitoring business processes in real-time.
 
 * **Sending Signals**: Trigger actions in running workflows through natural language. For example, asking "Send an 'approve_order' signal to workflow 'customer-order-123'" allows you to control workflow behavior without writing code or using CLI commands.
 
@@ -199,7 +199,7 @@ Beyond basic querying, the Temporal MCP server enables powerful operations:
 
 * **Workflow History**: Troubleshoot issues by requesting the complete event history: "Show me the execution history for workflow 'payment-processing-456'." The assistant retrieves the full event log to help you understand exactly what happened during execution.
 
-The real power comes from combining these operations with AI reasoning. You can ask complex questions like "Find all failed workflows in the last hour and show me their error messages," and your assistant will intelligently query Temporal, parse the results, and present a summary—all without you needing to remember specific query syntax or navigate through multiple UI screens.
+The real power comes from combining these operations with AI reasoning. You can ask complex questions like "Find all failed workflows in the last hour and show me their error messages," and your assistant will intelligently query Temporal, parse the results, and present a summary, all without you needing to remember specific query syntax or navigate through multiple UI screens.
 
 <hr>
 
