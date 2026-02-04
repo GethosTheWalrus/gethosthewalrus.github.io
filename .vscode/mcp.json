@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "temporal": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "TEMPORAL_HOST",
+        "-e",
+        "TEMPORAL_NAMESPACE",
+        "-e",
+        "TEMPORAL_TLS_ENABLED",
+        "mcp/temporal"
+      ],
+      "env": {
+        "TEMPORAL_HOST": "192.168.69.98:7233",
+        "TEMPORAL_NAMESPACE": "default",
+        "TEMPORAL_TLS_ENABLED": "false"
+      }
+    }
+  }
+}

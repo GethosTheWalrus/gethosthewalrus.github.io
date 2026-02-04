@@ -1,5 +1,11 @@
 [
   {
+    "slug": "docker-mcp-temporal",
+    "title": "Automated Temporal Workflow Management With Docker MCP",
+    "description": "In this post, I will help you utilize a Temporal MCP server from the Docker MCP catalog to enable autonomous management of your Temporal instance by your favorite AI assistant.",
+    "image": "https://miketoscano.com/img/blog/docker-mcp-temporal.png"
+  },
+  {
     "slug": "langchain-temporal-workflow-processor",
     "title": "Building Agentic Workflows With LangChain And Temporal",
     "description": "In this article, I'll show you how to combine the agentic reasoning of LangChain with the robust workflow orchestration of Temporal to build workflows comprised of agents that can think, adapt, and act on your behalf. As generative AI and workflow automation mature, the ability to create intelligent, self-correcting systems is more accessible than ever.",
