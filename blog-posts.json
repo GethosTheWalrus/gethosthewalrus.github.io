@@ -1,7 +1,7 @@
 [
   {
     "slug": "agentic-devops-infrastructure",
-    "title": "Agentic DevOps Infrastructure",
+    "title": "Home Lab Administration Via Long Running Agents",
     "description": "A deep dive into building an AI-powered DevOps platform on Temporal, Go, and the MCP featuring durable agent workflows, self-hosted LLMs via Ollama, RAG-backed memory, and human-in-the-loop approval gates for safe autonomous infrastructure management.",
     "image": "https://miketoscano.com/img/blog/agentic-devops-infrastructure.png"
   },
