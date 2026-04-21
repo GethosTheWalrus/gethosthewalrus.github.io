@@ -91,6 +91,24 @@
       postElement.addEventListener('zero-md-rendered', () => {
         spinner.style.display = 'none';
         postElement.classList.add('fade-in');
+        
+        // Fix mermaid diagram heights to preserve aspect ratio
+        setTimeout(() => {
+          document.querySelectorAll('.mermaid svg').forEach(svg => {
+            const viewBox = svg.getAttribute('viewBox');
+            if (viewBox) {
+              const [width, height] = viewBox.split(' ').map(Number);
+              if (width && height) {
+                // Set height based on viewBox aspect ratio
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.display = 'block';
+              }
+            }
+          });
+        }, 100);
       });
 
       // Track event if valid post
@@ -259,13 +277,31 @@
                 user-select: none !important;
               }
 
+              /* MERMAID - Full width AND full height preservation */
+              .mermaid {
+                width: 100% !important;
+                max-width: none !important;
+                display: block !important;
+                margin: 0 auto !important;
+              }
+
               .mermaid svg {
                 pointer-events: all !important;
                 cursor: grab !important;
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100% !important;
+                display: block !important;
               }
-
               .mermaid svg:active {
                 cursor: grabbing !important;
+              }
+
+              /* Scale down diagrams that don't have pan/zoom */
+              .no-panzoom .mermaid svg {
+                max-width: 65% !important;
+                cursor: default !important;
+                margin: 0 auto !important;
               }
 
               /* Override any conflicting styles */
