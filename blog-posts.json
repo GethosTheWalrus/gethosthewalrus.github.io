@@ -3,7 +3,7 @@
     "slug": "threadbot-temporal",
     "title": "Agentic Chat Bot Backed By Temporal",
     "description": "A demonstration of a ChatGPT-like chatbot built using Temporal for orchestration of the agent loop and Dockerized MCP servers to extend its functionality without any code changes.",
-    "image": "https://miketoscano.com/img/blog/threadbot-temporal.png"
+    "image": "https://miketoscano.com/img/blog/threadbot-temporal-og.png"
   },
   {
     "slug": "agentic-devops-infrastructure",
