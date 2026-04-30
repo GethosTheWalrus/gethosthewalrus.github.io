@@ -1,7 +1,13 @@
 [
   {
+    "slug": "threadbot-temporal",
+    "title": "Agentic Chat Bot Backed By Temporal",
+    "description": "A demonstration of a ChatGPT-like chatbot built using Temporal for orchestration of the agent loop and Dockerized MCP servers to extend its functionality without any code changes.",
+    "image": "https://miketoscano.com/img/blog/threadbot-temporal.png"
+  },
+  {
     "slug": "agentic-devops-infrastructure",
-    "title": "Home Lab Administration Via Long Running Agents",
+    "title": "Home Lab Automation Using Long Running Agents",
     "description": "A deep dive into building an AI-powered DevOps platform on Temporal, Go, and the MCP featuring durable agent workflows, self-hosted LLMs via Ollama, RAG-backed memory, and human-in-the-loop approval gates for safe autonomous infrastructure management.",
     "image": "https://miketoscano.com/img/blog/agentic-devops-infrastructure.png"
   },
