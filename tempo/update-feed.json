@@ -1,9 +1,37 @@
 {
   "feed": {
     "version": "1.0",
-    "updated": "2026-01-27T00:00:00Z"
+    "updated": "2026-06-26T00:00:00Z"
   },
   "updates": [
+    {
+      "version": {
+        "major": 1,
+        "minor": 1,
+        "build": 0
+      },
+      "title": "Codec support, standalone activities, and cleaner task queues",
+      "description": "This update focuses on three improvements: codec server support for encrypted Temporal payloads, read-only standalone activity browsing, and a cleaner mobile-friendly Task Queues search experience.",
+      "notes": [
+        "Added codec settings and codec server decoding for encrypted workflow, activity, query, memo, and standalone activity payloads",
+        "Added a Standalone Activities section with list, count, pagination, and detail screens scoped to standalone activity fields",
+        "Improved the Task Queues screen with a responsive search card, clearer Workflow/Activity selector, and better mobile button layout"
+      ],
+      "date": "2026-06-26T00:00:00Z"
+    },
+    {
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "build": 1
+      },
+      "title": "Tempo 1.0.1 - Namespace dropdown fix",
+      "description": "This update fixes a bug from the initial App Store release that prevented the namespaces dropdown from working as expected.",
+      "notes": [
+        "Fixed a bug preventing the namespaces dropdown from working as expected"
+      ],
+      "date": "2026-03-13T00:00:00Z"
+    },
     {
       "version": {
         "major": 1,
