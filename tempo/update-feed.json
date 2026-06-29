@@ -1,7 +1,7 @@
 {
   "feed": {
     "version": "1.0",
-    "updated": "2026-06-26T00:00:00Z"
+    "updated": "2026-06-29T00:00:00Z"
   },
   "updates": [
     {
@@ -10,11 +10,14 @@
         "minor": 1,
         "build": 0
       },
-      "title": "Codec support, standalone activities, and cleaner task queues",
-      "description": "This update focuses on three improvements: codec server support for encrypted Temporal payloads, read-only standalone activity browsing, and a cleaner mobile-friendly Task Queues search experience.",
+      "title": "Codec support, standalone activities, Tempo Web, and workflow payloads",
+      "description": "This update adds codec server support for encrypted Temporal payloads, read-only standalone activity browsing, a deployable Tempo Web experience, and clearer workflow payload visibility.",
       "notes": [
         "Added codec settings and codec server decoding for encrypted workflow, activity, query, memo, and standalone activity payloads",
         "Added a Standalone Activities section with list, count, pagination, and detail screens scoped to standalone activity fields",
+        "Added Tempo Web deployment support with Kubernetes manifests, Argo CD GitOps deployment, and a browser-compatible gRPC-Web proxy",
+        "Added workflow input and workflow output payloads to the workflow details Summary tab",
+        "Improved timeline navigation on web so mouse wheel scrolling works with the horizontal timeline",
         "Improved the Task Queues screen with a responsive search card, clearer Workflow/Activity selector, and better mobile button layout"
       ],
       "date": "2026-06-26T00:00:00Z"
