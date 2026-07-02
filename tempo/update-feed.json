@@ -1,7 +1,7 @@
 {
   "feed": {
     "version": "1.0",
-    "updated": "2026-06-29T00:00:00Z"
+    "updated": "2026-07-02T00:00:00Z"
   },
   "updates": [
     {
@@ -15,8 +15,11 @@
       "notes": [
         "Added codec settings and codec server decoding for encrypted workflow, activity, query, memo, and standalone activity payloads",
         "Added a Standalone Activities section with list, count, pagination, and detail screens scoped to standalone activity fields",
+        "Added demo-mode seed data for standalone activities, including inputs, outcomes, heartbeat details, failures, retry policy, and metadata",
         "Added Tempo Web deployment support with Kubernetes manifests, Argo CD GitOps deployment, and a browser-compatible gRPC-Web proxy",
         "Added workflow input and workflow output payloads to the workflow details Summary tab",
+        "Added platform icon links for the App Store, Android APK, and Linux download in update notifications and update screens",
+        "Fixed the Home button so it dismisses active bottom sheets before navigating back to Workflows",
         "Improved timeline navigation on web so mouse wheel scrolling works with the horizontal timeline",
         "Improved the Task Queues screen with a responsive search card, clearer Workflow/Activity selector, and better mobile button layout"
       ],
