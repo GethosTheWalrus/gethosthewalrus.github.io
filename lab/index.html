@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Explore Mike Toscano's self-hosted homelab: Proxmox, mixed-architecture Kubernetes, GitOps, storage, observability, and private AI infrastructure.">
+    <title>Mike Toscano | Homelab</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="cf643791-8062-46fd-a72d-ea7b042f3f51"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <main class="terminal-shell">
+        <header class="window-bar">
+            <div class="window-controls" aria-hidden="true">
+                <span class="control close"></span>
+                <span class="control minimize"></span>
+                <span class="control maximize"></span>
+            </div>
+            <div class="window-title">MIKE TOSCANO — HOMELAB</div>
+            <a class="home-link" href="../" aria-label="Return to main site">~/home</a>
+        </header>
+
+        <nav class="tab-bar" aria-label="Lab sections">
+            <a class="tab" href="../?tab=home"><div class="innertab">About Mike</div></a>
+            <a class="tab" href="../?tab=blog"><div class="innertab">Blog</div></a>
+            <a class="tab" href="../?tab=apps"><div class="innertab">Apps</div></a>
+            <a class="tab active" href="./" aria-current="page"><div class="innertab">Lab</div></a>
+        </nav>
+
+        <div class="terminal-body" id="top">
+            <section class="hero" aria-labelledby="lab-title">
+                <p class="command-line"><span class="prompt">mike@homelab:~$</span> <span class="command">kubectl get nodes -o wide &amp;&amp; pvesh get /cluster/resources --type vm</span><span class="cursor" aria-hidden="true"></span></p>
+                <div class="console-header">
+                    <div>
+                        <p class="eyebrow">INTERACTIVE INFRASTRUCTURE MAP</p>
+                        <h1 id="lab-title">Overview Of Mike's Home Lab</h1>
+                        <p class="hero-copy">I use this lab to build and operate self-hosted applications, test Kubernetes and GitOps workflows across x86 and ARM hardware, run private AI models, and manage the storage, networking, automation, and observability that support them.</p>
+                    </div>
+                    <div class="snapshot-meta">
+                        <div><span>snapshot</span><strong>2026-09-25</strong></div>
+                        <div><span>source</span><strong>live inventory</strong></div>
+                        <div><span>kubernetes</span><strong class="status-ok"><i></i>9 / 9 ready</strong></div>
+                        <div><span>proxmox</span><strong>15 / 17 running</strong></div>
+                        <div><span>gitops</span><strong>18 Argo CD apps</strong></div>
+                        <div><span>architectures</span><strong>amd64 + arm64</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="explorer" id="topology" aria-labelledby="topology-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="command-line"><span class="prompt">mike@homelab:~$</span> <span class="command">cat infrastructure/topology.mmd</span></p>
+                        <h2 id="topology-title">System topology</h2>
+                    </div>
+                    <p class="hint"><span class="pulse-dot"></span>Select a node to inspect it</p>
+                </div>
+
+                <div class="filters" role="group" aria-label="Select topology view">
+                    <button class="filter active" data-view="physical">Physical</button>
+                    <button class="filter" data-view="proxmox">Proxmox</button>
+                    <button class="filter" data-view="kubernetes">Kubernetes</button>
+                    <button class="filter" data-view="workloads">K8s workloads</button>
+                    <button class="filter" data-view="storage">Storage paths</button>
+                </div>
+
+                <div class="explorer-layout">
+                    <div class="map-wrap">
+                        <div class="map" id="topology-map" aria-label="Interactive diagram of the homelab">
+                            <svg class="connections" id="connections" aria-hidden="true"></svg>
+                            <div id="map-zones"></div>
+                            <div id="map-nodes"></div>
+                        </div>
+                    </div>
+
+                    <aside class="detail-panel" aria-live="polite">
+                        <div class="detail-topline"><span id="detail-kind">ORCHESTRATION</span><span id="detail-status">● ACTIVE</span></div>
+                        <h3 id="detail-title">Kubernetes</h3>
+                        <p id="detail-description">Nine Kubernetes nodes span four Proxmox VMs and five Raspberry Pis. Control-plane roles exist on both amd64 and arm64 nodes.</p>
+                        <dl class="detail-specs" id="detail-specs"></dl>
+                        <div class="detail-section">
+                            <h4>Contains / connects</h4>
+                            <ul id="detail-responsibilities"></ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4>Technologies</h4>
+                            <div class="tags" id="detail-tags"></div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+
+
+
+
+
+
+            <footer>
+                <p><span class="prompt">mike@homelab:~$</span> <span class="cursor idle" aria-hidden="true"></span></p>
+                <p>Architecture snapshot · Built from live, sanitized inventory</p>
+                <a href="../">← Return to miketoscano.com</a>
+            </footer>
+        </div>
+    </main>
+</body>
+</html>
