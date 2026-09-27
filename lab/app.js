@@ -199,7 +199,6 @@ function showDetails(id) {
     document.querySelector("#detail-status").classList.toggle("stopped", item.status === "stopped");
     const specs = document.querySelector("#detail-specs");
     specs.replaceChildren(...item.specs.map(([key, value]) => el("div", [el("dt", key), el("dd", value)])));
-    document.querySelector("#detail-responsibilities").replaceChildren(...item.connections.map(text => el("li", text)));
     document.querySelector("#detail-tags").replaceChildren(...item.tags.map(text => el("span", text)));
     drawConnections();
 }

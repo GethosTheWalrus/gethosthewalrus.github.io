@@ -13,7 +13,7 @@ body {
     background-color: #202020;
     width: 100%;
     margin: 0;
-    padding-top: 25px;
+    padding: 25px 18px 50px;
     min-height: 100vh;
     color-scheme: dark;
 }
@@ -76,7 +76,7 @@ progress {
 }
 #bar {
     text-align: center;
-    width: 750px;
+    width: min(1180px, 100%);
     height: 25px;
     /* background-color: #DAD9D9; */
     background-color: #303030;
@@ -86,16 +86,14 @@ progress {
     float: none;
     /* border-radius: 5px; */
     border-radius: 10px 10px 0 0;
-    max-width: 90%;
 }
 #tabbar {
-    width: 750px;
+    width: min(1180px, 100%);
     height: 35px;
     margin: 0 auto;
     font-family: monospace;
     /* padding: auto; */
     float: none;
-    max-width: 90%;
     display: flex;
 }
 .tab {
@@ -168,14 +166,13 @@ progress {
 }
 .screen {
     /* background-color: #33485E; */
-    background-color: #404040;
-    width: 748px;
+    background-color: #3b3b3b;
+    width: min(1180px, 100%);
     min-height: 573px;
     /* border-radius: 2%; */
     border-radius: 0 0 10px 10px;
     margin: 0 auto;
     padding: 1px;
-    max-width: 90%;
     margin-bottom: 25px;
 }
 .screen:not(.active) {

@@ -19,7 +19,6 @@
                 <span class="control maximize"></span>
             </div>
             <div class="window-title">MIKE TOSCANO — HOMELAB</div>
-            <a class="home-link" href="../" aria-label="Return to main site">~/home</a>
         </header>
 
         <nav class="tab-bar" aria-label="Lab sections">
@@ -31,7 +30,7 @@
 
         <div class="terminal-body" id="top">
             <section class="hero" aria-labelledby="lab-title">
-                <p class="command-line"><span class="prompt">mike@homelab:~$</span> <span class="command">kubectl get nodes -o wide &amp;&amp; pvesh get /cluster/resources --type vm</span><span class="cursor" aria-hidden="true"></span></p>
+                <p class="command-line"><span class="prompt">root@miketoscano.com/lab:~$</span> <span>kubectl get nodes -o wide &amp;&amp; pvesh get /cluster/resources --type vm</span></p>
                 <div class="console-header">
                     <div>
                         <p class="eyebrow">INTERACTIVE INFRASTRUCTURE MAP</p>
@@ -52,7 +51,7 @@
             <section class="explorer" id="topology" aria-labelledby="topology-title">
                 <div class="section-heading">
                     <div>
-                        <p class="command-line"><span class="prompt">mike@homelab:~$</span> <span class="command">cat infrastructure/topology.mmd</span></p>
+                        <p class="command-line"><span class="prompt">root@miketoscano.com/lab:~$</span> <span class="command">cat infrastructure/topology.mmd</span></p>
                         <h2 id="topology-title">System topology</h2>
                     </div>
                     <p class="hint"><span class="pulse-dot"></span>Select a node to inspect it</p>
@@ -81,27 +80,14 @@
                         <p id="detail-description">Nine Kubernetes nodes span four Proxmox VMs and five Raspberry Pis. Control-plane roles exist on both amd64 and arm64 nodes.</p>
                         <dl class="detail-specs" id="detail-specs"></dl>
                         <div class="detail-section">
-                            <h4>Contains / connects</h4>
-                            <ul id="detail-responsibilities"></ul>
-                        </div>
-                        <div class="detail-section">
                             <h4>Technologies</h4>
                             <div class="tags" id="detail-tags"></div>
                         </div>
                     </aside>
                 </div>
             </section>
-
-
-
-
-
-
-
             <footer>
-                <p><span class="prompt">mike@homelab:~$</span> <span class="cursor idle" aria-hidden="true"></span></p>
-                <p>Architecture snapshot · Built from live, sanitized inventory</p>
-                <a href="../">← Return to miketoscano.com</a>
+                <p><span class="prompt">root@miketoscano.com/lab:~$</span> <span class="cursor idle" aria-hidden="true"></span></p>
             </footer>
         </div>
     </main>
